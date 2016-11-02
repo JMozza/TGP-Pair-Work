@@ -1,5 +1,12 @@
 function love.load()
 
+  --menuBackground = love.graphics.newImage()
+  --optionsBackground = love.graphics.newImage()
+  --halloweenBackground = love.graphics.newImage()
+  --xmasBackground = love.graphics.newImage()
+  --pauseBackground = love.graphics.newImage()
+  --resultsBackground = love.graphics.newImage()
+  
   blockHalLayer1_7 = love.graphics.newImage("sprites/orange_layer1_hal.png")
   blockHalLayer2_6 = love.graphics.newImage("sprites/purple_layer2_hal.png")
   blockHalLayer3_5 = love.graphics.newImage("sprites/green_layer3_hal.png")
@@ -13,6 +20,9 @@ function love.load()
   
   paddleP1 = love.graphics.newImage("sprites/paddle_top.png")
   paddleP2 = love.graphics.newImage("sprites/paddle_bottom.png")
+  
+  --ballP1 = love.graphics.newImage("sprites/")
+  --ballP2 = love.graphics.newImage("sprites/")
   
   blockLayerX = 0
   blockLayerX2 = 72
@@ -33,24 +43,39 @@ function love.load()
   paddleP1Y = 40
   paddleP2Y = 588
   
-  gamestate = 1
+  gamestate = "halloweenMulti"
   
 end
 
 function love.draw() 
-
-  if gamestate == 1 then
+  if gamestate == "halloweenMulti" then
     halDraw()
-  elseif gamestate == 2 then
+  elseif gamestate == "xmasMulti" then
     xmasDraw()
+  elseif gamestate == "halloweenSingle" then
+    halDraw()
+  elseif gamestate == "xmasSingle" then
+    xmasDraw()
+  elseif gamestate == "menu" then
+    menuDraw()
+  elseif gamestate == "options" then
+    optionsDraw()
+  elseif gamestate == "pause" then
+    pauseDraw()
+  elseif gamestate == "results" then
+    resultsDraw()
   end  
 end
 
 function love.update(dt) 
   if love.keyboard.isDown("up") then
-    gamestate = 1
+    gamestate = "halloweenMulti"
   elseif love.keyboard.isDown("down")then
-    gamestate = 2
+    gamestate = "xmasMulti"
+  elseif love.keyboard.isDown("s")then
+    gamestate = "halloweenSingle"
+  elseif love.keyboard.isDown("w")then
+    gamestate = "xmasSingle"
   end  
   
   controls()
@@ -61,6 +86,30 @@ function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
          x2 < x1+w1 and
          y1 < y2+h2 and
          y2 < y1+h1
+end
+
+function menuDraw()
+  --love.graphics.draw(menuBackground,,)
+end
+
+function modeSelectDraw()
+  --love.graphics.draw(modeSelectBackground,,)
+end
+
+function levelSelectDraw()
+  --love.graphics.draw(levelSelectBackground,,)
+end
+
+function optionsDraw()
+  --love.graphics.draw(optionsBackground,,)
+end
+
+function pauseDraw()
+  --love.graphics.draw(pauseBackground,,)
+end
+
+function resultsDraw()
+  --love.graphics.draw(results1Background,,)
 end
 
 function xmasDraw()
@@ -156,28 +205,83 @@ function halDraw()
   love.graphics.draw(paddleP1, paddleP1X, paddleP1Y)
   love.graphics.draw(paddleP2, paddleP2X, paddleP2Y)
 end
+
 function controls()
-  if love.keyboard.isDown("left") then
-    paddleP1X = paddleP1X - 1.5
-  elseif love.keyboard.isDown("right") then
-    paddleP1X = paddleP1X + 1.5
+  if gamestate == "halloweenMulti" then
+    if love.keyboard.isDown("left") then
+      paddleP1X = paddleP1X - 1.5
+    elseif love.keyboard.isDown("right") then
+      paddleP1X = paddleP1X + 1.5
+    end
+  
+    if love.keyboard.isDown("a") then
+      paddleP2X = paddleP2X - 1.5
+    elseif love.keyboard.isDown("d") then
+      paddleP2X = paddleP2X + 1.5
+    end
+  
+    if paddleP1X == 0 then
+      paddleP1X = paddleP1X + 1.5
+    elseif paddleP1X == 270 then
+      paddleP1X = paddleP1X - 1.5
+    end
+  
+    if paddleP2X == 0 then
+      paddleP2X = paddleP2X + 1.5
+    elseif paddleP2X == 270 then
+      paddleP2X = paddleP2X - 1.5
+    end
   end
   
-  if love.keyboard.isDown("a") then
-    paddleP2X = paddleP2X - 1.5
-  elseif love.keyboard.isDown("d") then
-    paddleP2X = paddleP2X + 1.5
+  if gamestate == "halloweenSingle" then
+    if love.keyboard.isDown("left") then
+      paddleP2X = paddleP2X - 1.5
+    elseif love.keyboard.isDown("right") then
+      paddleP2X = paddleP2X + 1.5
+    end
+  
+    if paddleP2X == 0 then
+      paddleP2X = paddleP2X + 1.5
+    elseif paddleP2X == 270 then
+      paddleP2X = paddleP2X - 1.5
+    end
   end
   
-  if paddleP1X == 0 then
-    paddleP1X = paddleP1X + 1.5
-  elseif paddleP1X == 270 then
-    paddleP1X = paddleP1X - 1.5
+  if gamestate == "xmasMulti" then
+    if love.keyboard.isDown("left") then
+      paddleP1X = paddleP1X - 1.5
+    elseif love.keyboard.isDown("right") then
+      paddleP1X = paddleP1X + 1.5
+    end
+    if love.keyboard.isDown("a") then
+      paddleP2X = paddleP2X - 1.5
+    elseif love.keyboard.isDown("d") then
+      paddleP2X = paddleP2X + 1.5
+    end
+    
+    if paddleP1X == 0 then
+      paddleP1X = paddleP1X + 1.5
+    elseif paddleP1X == 270 then
+      paddleP1X = paddleP1X - 1.5
+    end
+    if paddleP2X == 0 then
+      paddleP2X = paddleP2X + 1.5
+    elseif paddleP2X == 270 then
+      paddleP2X = paddleP2X - 1.5
+    end
   end
   
-  if paddleP2X == 0 then
-    paddleP2X = paddleP2X + 1.5
-  elseif paddleP2X == 270 then
-    paddleP2X = paddleP2X - 1.5
+  if gamestate == "xmasSingle" then
+    if love.keyboard.isDown("left") then
+      paddleP2X = paddleP2X - 1.5
+    elseif love.keyboard.isDown("right") then
+      paddleP2X = paddleP2X + 1.5
+    end
+    
+    if paddleP2X == 0 then
+      paddleP2X = paddleP2X + 1.5
+    elseif paddleP2X == 270 then
+      paddleP2X = paddleP2X - 1.5
+    end
   end
 end
