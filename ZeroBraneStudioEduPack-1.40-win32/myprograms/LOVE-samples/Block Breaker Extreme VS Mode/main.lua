@@ -1,11 +1,24 @@
+require "menu"
+require "omenu"
+
 function love.load()
 
-  --menuBackground = love.graphics.newImage()
-  --optionsBackground = love.graphics.newImage()
-  --halloweenBackground = love.graphics.newImage()
-  --xmasBackground = love.graphics.newImage()
-  --pauseBackground = love.graphics.newImage()
-  --resultsBackground = love.graphics.newImage()
+  menuBackground = love.graphics.newImage("sprites/bg.jpg")
+  menubgQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  modeSelectBackground = love.graphics.newImage("sprites/bg.jpg")
+  modeSelectQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  levelSelectBackground = love.graphics.newImage("sprites/bg.jpg")
+  levelSelectQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  optionsBackground = love.graphics.newImage("sprites/bg.jpg")
+  optionsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  halloweenBackground = love.graphics.newImage("sprites/bg.jpg")
+  halloweenQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  xmasBackground = love.graphics.newImage("sprites/bg.jpg")
+  xmasQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  pauseBackground = love.graphics.newImage("sprites/bg.jpg")
+  pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  resultsBackground = love.graphics.newImage("sprites/bg.jpg")
+  resultsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   
   blockHalLayer1_7 = love.graphics.newImage("sprites/orange_layer1_hal.png")
   blockHalLayer2_6 = love.graphics.newImage("sprites/purple_layer2_hal.png")
@@ -23,6 +36,10 @@ function love.load()
   
   --ballP1 = love.graphics.newImage("sprites/")
   --ballP2 = love.graphics.newImage("sprites/")
+  
+  medium = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 20)
+  love.graphics.setFont(medium)
+  love.graphics.setColor(1,1,1)
   
   blockLayerX = 0
   blockLayerX2 = 72
@@ -43,13 +60,23 @@ function love.load()
   paddleP1Y = 40
   paddleP2Y = 588
   
-  gamestate = "halloweenMulti"
+  gamestate = "menu"
+  
+  --Menu--
+  button_spawn(140,250,"Start", "start")
+  button_spawn(144,300, "Options", "options")
+  button_spawn(144,350, "Quit", "quit")
+  obutton_spawn(144,50, "Back", "back")
   
 end
 
 function love.draw() 
   if gamestate == "halloweenMulti" then
     halDraw()
+  elseif gamestate == "modeSelect" then
+    xmasDraw()
+  elseif gamestate == "levelSelect" then
+    xmasDraw()
   elseif gamestate == "xmasMulti" then
     xmasDraw()
   elseif gamestate == "halloweenSingle" then
@@ -68,6 +95,9 @@ function love.draw()
 end
 
 function love.update(dt) 
+  mousex = love.mouse.getX()
+  mousey = love.mouse.getY()
+    
   if love.keyboard.isDown("up") then
     gamestate = "halloweenMulti"
   elseif love.keyboard.isDown("down")then
@@ -76,7 +106,7 @@ function love.update(dt)
     gamestate = "halloweenSingle"
   elseif love.keyboard.isDown("w")then
     gamestate = "xmasSingle"
-  end  
+  end
   
   controls()
 end
@@ -89,27 +119,29 @@ function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
 end
 
 function menuDraw()
-  --love.graphics.draw(menuBackground,,)
+  love.graphics.draw(menuBackground, menubgQuad, 0, 0)
+  button_draw()
 end
 
 function modeSelectDraw()
-  --love.graphics.draw(modeSelectBackground,,)
+  love.graphics.draw(modeSelectBackground, modeSelectQuad, 0, 0)
 end
 
 function levelSelectDraw()
-  --love.graphics.draw(levelSelectBackground,,)
+  love.graphics.draw(levelSelectBackground, levelSelectQuad, 0, 0)
 end
 
 function optionsDraw()
-  --love.graphics.draw(optionsBackground,,)
+  love.graphics.draw(optionsBackground, optionsQuad, 0, 0)
+  obutton_draw()
 end
 
 function pauseDraw()
-  --love.graphics.draw(pauseBackground,,)
+  love.graphics.draw(pauseBackground, pauseQuad, 0, 0)
 end
 
 function resultsDraw()
-  --love.graphics.draw(results1Background,,)
+  love.graphics.draw(resultsBackground, resultsQuad, 0, 0)
 end
 
 function xmasDraw()
@@ -204,6 +236,14 @@ function halDraw()
 
   love.graphics.draw(paddleP1, paddleP1X, paddleP1Y)
   love.graphics.draw(paddleP2, paddleP2X, paddleP2Y)
+end
+
+function love.mousepressed(x,y)
+    if gamestate == "menu" then
+      button_click(x,y)
+    elseif gamestate == "options" then
+      button_click(x,y)
+    end
 end
 
 function controls()
