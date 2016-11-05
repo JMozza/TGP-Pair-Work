@@ -1,0 +1,38 @@
+diff a/ZeroBraneStudioEduPack-1.40-win32/myprograms/LOVE-samples/Block Breaker Extreme VS Mode/main.lua b/ZeroBraneStudioEduPack-1.40-win32/myprograms/LOVE-samples/Block Breaker Extreme VS Mode/main.lua	(rejected hunks)
+@@ -75,15 +75,35 @@
+ function love.update(dt) 
+   if love.keyboard.isDown("up") then
+     gamestate = "halloweenMulti"
++    paddleP1X = 135
++    paddleP2X = 135
++    paddleP1Y = 40
++    paddleP2Y = 588
+   elseif love.keyboard.isDown("down")then
+     gamestate = "xmasMulti"
++    paddleP1X = 135
++    paddleP2X = 135
++    paddleP1Y = 40
++    paddleP2Y = 588
+   elseif love.keyboard.isDown("s")then
+     gamestate = "halloweenSingle"
++    paddleP1X = 135
++    paddleP2X = 135
++    paddleP1Y = 40
++    paddleP2Y = 588    
+   elseif love.keyboard.isDown("w")then
+     gamestate = "xmasSingle"
++    paddleP1X = 135
++    paddleP2X = 135
++    paddleP1Y = 40
++    paddleP2Y = 588
+   end  
+   
+-  controls()
++  if (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
++    control.multiContol()
++  elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
++    singleControl()
++  end
+ end
+ 
+ function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
