@@ -1,5 +1,6 @@
 require "menu"
 require "omenu"
+require "controls"
 
 function love.load()
 
@@ -11,10 +12,12 @@ function love.load()
   levelSelectQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   optionsBackground = love.graphics.newImage("sprites/bg.jpg")
   optionsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  halloweenBackground = love.graphics.newImage("sprites/bg.jpg")
-  halloweenQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  xmasBackground = love.graphics.newImage("sprites/bg.jpg")
-  xmasQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  
+  xmasBackground = love.graphics.newImage("sprites/xmas_background.png")
+  xmasBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  halBackground = love.graphics.newImage("sprites/Hal_Background.png")
+  halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+
   pauseBackground = love.graphics.newImage("sprites/bg.jpg")
   pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   resultsBackground = love.graphics.newImage("sprites/bg.jpg")
@@ -33,11 +36,6 @@ function love.load()
   
   paddleP1 = love.graphics.newImage("sprites/paddle_top.png")
   paddleP2 = love.graphics.newImage("sprites/paddle_bottom.png")
-  
-  xmasBackground = love.graphics.newImage("sprites/xmas_background.png")
-  xmasBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  halBackground = love.graphics.newImage("sprites/Hal_Background.png")
-  halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   
   --ballP1 = love.graphics.newImage("sprites/")
   --ballP2 = love.graphics.newImage("sprites/")
@@ -102,7 +100,6 @@ end
 function love.update(dt) 
   mousex = love.mouse.getX()
   mousey = love.mouse.getY()
-  controls()
     
   if love.keyboard.isDown("up") then
     gamestate = "halloweenMulti"
@@ -129,7 +126,12 @@ function love.update(dt)
     paddleP1Y = 40
     paddleP2Y = 588
   end  
-
+  
+  if (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
+    multiControls()
+  elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
+    singleControls()
+  end
 end
 
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
@@ -269,45 +271,5 @@ function love.mousepressed(x,y)
     elseif gamestate == "options" then
       button_click(x,y)
     end
-end
-
-function controls()
-
-    if love.keyboard.isDown("left") then
-      paddleP1X = paddleP1X - 1.5
-    elseif love.keyboard.isDown("right") then
-      paddleP1X = paddleP1X + 1.5
-    end
-  
-    if love.keyboard.isDown("a") then
-      paddleP2X = paddleP2X - 1.5
-    elseif love.keyboard.isDown("d") then
-      paddleP2X = paddleP2X + 1.5
-    end
-  
-    if paddleP1X == 0 then
-      paddleP1X = paddleP1X + 1.5
-    elseif paddleP1X == 270 then
-      paddleP1X = paddleP1X - 1.5
-    end
-  
-    if paddleP2X == 0 then
-      paddleP2X = paddleP2X + 1.5
-    elseif paddleP2X == 270 then
-      paddleP2X = paddleP2X - 1.5
-    end
-
-  
-  if love.keyboard.isDown("left") then
-    paddleP2X = paddleP2X - 1.5
-  elseif love.keyboard.isDown("right") then
-    paddleP2X = paddleP2X + 1.5
-  end
-  
-  if paddleP2X == 0 then
-    paddleP2X = paddleP2X + 1.5
-  elseif paddleP2X == 270 then
-    paddleP2X = paddleP2X - 1.5
-  end
 end
 
