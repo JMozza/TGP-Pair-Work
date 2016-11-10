@@ -1,15 +1,20 @@
 require "menu"
 require "omenu"
+require "mmenu"
+require "single"
+require "multi"
 
 function love.load()
 
-  menuBackground = love.graphics.newImage("sprites/bg.jpg")
+  menuBackground = love.graphics.newImage("sprites/menu.png")
   menubgQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  modeSelectBackground = love.graphics.newImage("sprites/bg.jpg")
+  modeSelectBackground = love.graphics.newImage("sprites/modeselect.png")
   modeSelectQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  levelSelectBackground = love.graphics.newImage("sprites/bg.jpg")
-  levelSelectQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  optionsBackground = love.graphics.newImage("sprites/bg.jpg")
+  levelSelectSingleBackground = love.graphics.newImage("sprites/levelselect.png")
+  levelSelectSingleQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  levelSelectMultiBackground = love.graphics.newImage("sprites/levelselect.png")
+  levelSelectMultiQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  optionsBackground = love.graphics.newImage("sprites/options.png")
   optionsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   halloweenBackground = love.graphics.newImage("sprites/bg.jpg")
   halloweenQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
@@ -66,7 +71,16 @@ function love.load()
   button_spawn(140,250,"Start", "start")
   button_spawn(144,300, "Options", "options")
   button_spawn(144,350, "Quit", "quit")
-  obutton_spawn(144,50, "Back", "back")
+  obutton_spawn(50,50, "Back", "back")
+  mbutton_spawn(140,250,"Single Player", "single")
+  mbutton_spawn(140,280,"Multi Player", "multi")
+  mbutton_spawn(140,310,"Back", "mback")
+  singleButton_spawn(140,250,"Halloween", "halloweenSingle")
+  singleButton_spawn(140,280,"Xmas", "xmasSingle")
+  singleButton_spawn(140,310,"Back", "singleBack")
+  multiButton_spawn(140,250,"Halloween", "halloweenMulti")
+  multiButton_spawn(140,280,"Xmas", "xmasMulti")
+  multiButton_spawn(140,310,"Back", "multiBack")
   
 end
 
@@ -74,9 +88,11 @@ function love.draw()
   if gamestate == "halloweenMulti" then
     halDraw()
   elseif gamestate == "modeSelect" then
-    xmasDraw()
-  elseif gamestate == "levelSelect" then
-    xmasDraw()
+    modeSelectDraw()
+  elseif gamestate == "levelSelectSingle" then
+    levelSelectSingleDraw()
+  elseif gamestate == "levelSelectMulti" then
+    levelSelectMultiDraw()
   elseif gamestate == "xmasMulti" then
     xmasDraw()
   elseif gamestate == "halloweenSingle" then
@@ -97,16 +113,6 @@ end
 function love.update(dt) 
   mousex = love.mouse.getX()
   mousey = love.mouse.getY()
-    
-  if love.keyboard.isDown("up") then
-    gamestate = "halloweenMulti"
-  elseif love.keyboard.isDown("down")then
-    gamestate = "xmasMulti"
-  elseif love.keyboard.isDown("s")then
-    gamestate = "halloweenSingle"
-  elseif love.keyboard.isDown("w")then
-    gamestate = "xmasSingle"
-  end
   
   controls()
 end
@@ -125,10 +131,17 @@ end
 
 function modeSelectDraw()
   love.graphics.draw(modeSelectBackground, modeSelectQuad, 0, 0)
+  mbutton_draw()
 end
 
-function levelSelectDraw()
-  love.graphics.draw(levelSelectBackground, levelSelectQuad, 0, 0)
+function levelSelectSingleDraw()
+  love.graphics.draw(levelSelectSingleBackground, levelSelectSingleQuad, 0, 0)
+  singleButton_draw()
+end
+
+function levelSelectMultiDraw()
+  love.graphics.draw(levelSelectMultiBackground, levelSelectMultiQuad, 0, 0)
+  multiButton_draw()
 end
 
 function optionsDraw()
@@ -242,7 +255,13 @@ function love.mousepressed(x,y)
     if gamestate == "menu" then
       button_click(x,y)
     elseif gamestate == "options" then
-      button_click(x,y)
+      obutton_click(x,y)
+    elseif gamestate == "modeSelect" then
+      mbutton_click(x,y)
+    elseif gamestate == "levelSelectSingle" then
+      singleButton_click(x,y)
+    elseif gamestate == "levelSelectMulti" then
+      multiButton_click(x,y)
     end
 end
 

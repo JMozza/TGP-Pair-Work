@@ -18,7 +18,7 @@ function button_click(x,y)
         y > v.y and
         y < v.y + medium:getHeight() then
             if v.id == "start" then
-              gamestate = "halloweenMulti"
+              gamestate = "modeSelect"
             end
             if v.id == "options" then
               gamestate = "options"
