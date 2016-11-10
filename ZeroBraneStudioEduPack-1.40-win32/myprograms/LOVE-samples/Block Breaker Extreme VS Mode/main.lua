@@ -3,6 +3,9 @@ require "omenu"
 require "mmenu"
 require "single"
 require "multi"
+require "controls"
+require "level_1"
+require "level_2"
 
 function love.load()
 
@@ -16,10 +19,10 @@ function love.load()
   levelSelectMultiQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   optionsBackground = love.graphics.newImage("sprites/options.png")
   optionsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  halloweenBackground = love.graphics.newImage("sprites/bg.jpg")
-  halloweenQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  xmasBackground = love.graphics.newImage("sprites/bg.jpg")
-  xmasQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  xmasBackground = love.graphics.newImage("sprites/xmas_background.png")
+  xmasBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  halBackground = love.graphics.newImage("sprites/Hal_Background.png")
+  halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   pauseBackground = love.graphics.newImage("sprites/bg.jpg")
   pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   resultsBackground = love.graphics.newImage("sprites/bg.jpg")
@@ -114,7 +117,37 @@ function love.update(dt)
   mousex = love.mouse.getX()
   mousey = love.mouse.getY()
   
-  controls()
+    if love.keyboard.isDown("up") then
+    gamestate = "halloweenMulti"
+    paddleP1X = 135
+    paddleP2X = 135
+    paddleP1Y = 40
+    paddleP2Y = 588
+  elseif love.keyboard.isDown("down")then
+    gamestate = "xmasMulti"
+    paddleP1X = 135
+    paddleP2X = 135
+    paddleP1Y = 40
+    paddleP2Y = 588
+  elseif love.keyboard.isDown("s")then
+    gamestate = "halloweenSingle"
+    paddleP1X = 135
+    paddleP2X = 135
+    paddleP1Y = 40
+    paddleP2Y = 588    
+  elseif love.keyboard.isDown("w")then
+    gamestate = "xmasSingle"
+    paddleP1X = 135
+    paddleP2X = 135
+    paddleP1Y = 40
+    paddleP2Y = 588
+  end 
+  
+  if (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
+    multiControls()
+  elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
+    singleControls()
+  end
 end
 
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
@@ -155,100 +188,6 @@ end
 
 function resultsDraw()
   love.graphics.draw(resultsBackground, resultsQuad, 0, 0)
-end
-
-function xmasDraw()
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX, blockLayer1Y)
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX2, blockLayer1Y)
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX3, blockLayer1Y)
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX4, blockLayer1Y)
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX5, blockLayer1Y)
-  
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX, blockLayer2Y)
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX2, blockLayer2Y)
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX3, blockLayer2Y)
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX4, blockLayer2Y)
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX5, blockLayer2Y)
-  
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX, blockLayer3Y)
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX2, blockLayer3Y)
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX3, blockLayer3Y)
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX4, blockLayer3Y)
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX5, blockLayer3Y)
-  
-  love.graphics.draw(blockHalLayer4, blockLayerX, blockLayer4Y)
-  love.graphics.draw(blockHalLayer4S, blockLayerX2, blockLayer4Y)
-  love.graphics.draw(blockHalLayer4, blockLayerX3, blockLayer4Y)
-  love.graphics.draw(blockHalLayer4S, blockLayerX4, blockLayer4Y)
-  love.graphics.draw(blockHalLayer4, blockLayerX5, blockLayer4Y)
-  
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX + 72, blockLayer5Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX2 + 72, blockLayer5Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX3 + 72, blockLayer5Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX4 + 72, blockLayer5Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer3_5, blockLayerX5 + 72, blockLayer5Y, math.rad(180))
-  
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX + 72, blockLayer6Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX2 + 72, blockLayer6Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX3 + 72, blockLayer6Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX4 + 72, blockLayer6Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer2_6, blockLayerX5 + 72, blockLayer6Y, math.rad(180))
-  
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX + 72, blockLayer7Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX2 + 72, blockLayer7Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX3 + 72, blockLayer7Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX4 + 72, blockLayer7Y, math.rad(180))
-  love.graphics.draw(blockXmasLayer1_7, blockLayerX5 + 72, blockLayer7Y, math.rad(180))
-  
-  love.graphics.draw(paddleP1, paddleP1X, paddleP1Y)
-  love.graphics.draw(paddleP2, paddleP2X, paddleP2Y)
-end
-
-function halDraw()  
-  love.graphics.draw(blockHalLayer1_7, blockLayerX, blockLayer1Y)
-  love.graphics.draw(blockHalLayer1_7, blockLayerX2, blockLayer1Y)
-  love.graphics.draw(blockHalLayer1_7, blockLayerX3, blockLayer1Y)
-  love.graphics.draw(blockHalLayer1_7, blockLayerX4, blockLayer1Y)
-  love.graphics.draw(blockHalLayer1_7, blockLayerX5, blockLayer1Y)
-  
-  love.graphics.draw(blockHalLayer2_6, blockLayerX, blockLayer2Y)
-  love.graphics.draw(blockHalLayer2_6, blockLayerX2, blockLayer2Y)
-  love.graphics.draw(blockHalLayer2_6, blockLayerX3, blockLayer2Y)
-  love.graphics.draw(blockHalLayer2_6, blockLayerX4, blockLayer2Y)
-  love.graphics.draw(blockHalLayer2_6, blockLayerX5, blockLayer2Y)
-  
-  love.graphics.draw(blockHalLayer3_5, blockLayerX, blockLayer3Y)
-  love.graphics.draw(blockHalLayer3_5, blockLayerX2, blockLayer3Y)
-  love.graphics.draw(blockHalLayer3_5, blockLayerX3, blockLayer3Y)
-  love.graphics.draw(blockHalLayer3_5, blockLayerX4, blockLayer3Y)
-  love.graphics.draw(blockHalLayer3_5, blockLayerX5, blockLayer3Y)
-  
-  love.graphics.draw(blockHalLayer4, blockLayerX, blockLayer4Y)
-  love.graphics.draw(blockHalLayer4S, blockLayerX2, blockLayer4Y)
-  love.graphics.draw(blockHalLayer4, blockLayerX3, blockLayer4Y)
-  love.graphics.draw(blockHalLayer4S, blockLayerX4, blockLayer4Y)
-  love.graphics.draw(blockHalLayer4, blockLayerX5, blockLayer4Y)
-  
-  love.graphics.draw(blockHalLayer3_5, blockLayerX + 72, blockLayer5Y, math.rad(180))
-  love.graphics.draw(blockHalLayer3_5, blockLayerX2 + 72, blockLayer5Y, math.rad(180))
-  love.graphics.draw(blockHalLayer3_5, blockLayerX3 + 72, blockLayer5Y, math.rad(180))
-  love.graphics.draw(blockHalLayer3_5, blockLayerX4 + 72, blockLayer5Y, math.rad(180))
-  love.graphics.draw(blockHalLayer3_5, blockLayerX5 + 72, blockLayer5Y, math.rad(180))
-  
-  love.graphics.draw(blockHalLayer2_6, blockLayerX + 72, blockLayer6Y, math.rad(180))
-  love.graphics.draw(blockHalLayer2_6, blockLayerX2 + 72, blockLayer6Y, math.rad(180))
-  love.graphics.draw(blockHalLayer2_6, blockLayerX3 + 72, blockLayer6Y, math.rad(180))
-  love.graphics.draw(blockHalLayer2_6, blockLayerX4 + 72, blockLayer6Y, math.rad(180))
-  love.graphics.draw(blockHalLayer2_6, blockLayerX5 + 72, blockLayer6Y, math.rad(180))
-  
-  love.graphics.draw(blockHalLayer1_7, blockLayerX + 72, blockLayer7Y, math.rad(180))
-  love.graphics.draw(blockHalLayer1_7, blockLayerX2 + 72, blockLayer7Y, math.rad(180))
-  love.graphics.draw(blockHalLayer1_7, blockLayerX3 + 72, blockLayer7Y, math.rad(180))
-  love.graphics.draw(blockHalLayer1_7, blockLayerX4 + 72, blockLayer7Y, math.rad(180))
-  love.graphics.draw(blockHalLayer1_7, blockLayerX5 + 72, blockLayer7Y, math.rad(180))  
-
-  love.graphics.draw(paddleP1, paddleP1X, paddleP1Y)
-  love.graphics.draw(paddleP2, paddleP2X, paddleP2Y)
 end
 
 function love.mousepressed(x,y)
