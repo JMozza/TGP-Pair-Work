@@ -6,6 +6,12 @@ end
 
 function button_draw()
   for i,v in ipairs(button) do
+    if v.mouseovertext == true then
+      love.graphics.setFont(big)
+    end
+    if v.mouseovertext == false then
+      love.graphics.setFont(medium)
+    end
     love.graphics.print(v.text,v.x,v.y)
   end
     love.graphics.setColor(255,255,255)
@@ -28,4 +34,17 @@ function button_click(x,y)
             end
         end            
     end
+end
+
+function button_check()
+  for i,v in ipairs(button) do
+    if mousex > v.x and
+    mousex < v.x + medium:getWidth(v.text) and
+    mousey > v.y and
+    mousey < v.y + medium:getHeight() then
+      v.mouseovertext = true
+    else
+      v.mouseovertext = false
+    end
+  end
 end

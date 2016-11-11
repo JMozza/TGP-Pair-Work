@@ -1,23 +1,23 @@
-function xmasLoad()
-  level1BlockLayerX = 0
-  level1BlockLayerX2 = 72
-  level1BlockLayerX3 = 144
-  level1BlockLayerX4 = 216
-  level1BlockLayerX5 = 288
+--function xmasLoad()
+  --level1BlockLayerX = 0
+  --level1BlockLayerX2 = 72
+  --level1BlockLayerX3 = 144
+  --level1BlockLayerX4 = 216
+  --level1BlockLayerX5 = 288
   
-  level1BlockLayer1Y = 246.5
-  level1BlockLayer2Y = 267.5
-  level1BlockLayer3Y = 288.5
-  level1BlockLayer4Y = 309.5
-  level1BlockLayer5Y = 351.5
-  level1BlockLayer6Y = 372.5
-  level1BlockLayer7Y = 393.5
+  --level1BlockLayer1Y = 246.5
+  --level1BlockLayer2Y = 267.5
+  --level1BlockLayer3Y = 288.5
+  --level1BlockLayer4Y = 309.5
+  --level1BlockLayer5Y = 351.5
+  --level1BlockLayer6Y = 372.5
+  --level1BlockLayer7Y = 393.5
   
-  paddleP1X = 135
-  paddleP2X = 135
-  paddleP1Y = 40
-  paddleP2Y = 588
-end
+  --paddleP1X = 135
+  --paddleP2X = 135
+  --paddleP1Y = 40
+  --paddleP2Y = 588
+--end
 
 function xmasDraw()
   love.graphics.draw(xmasBackground, xmasBackgroundQuad, 0, 0)
