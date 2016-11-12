@@ -9,22 +9,20 @@ require "level_2"
 
 function love.load()
 
-  menuBackground = love.graphics.newImage("sprites/menu.png")
-  menubgQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  modeSelectBackground = love.graphics.newImage("sprites/modeselect.png")
-  modeSelectQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  levelSelectSingleBackground = love.graphics.newImage("sprites/levelselect.png")
-  levelSelectSingleQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  levelSelectMultiBackground = love.graphics.newImage("sprites/levelselect.png")
-  levelSelectMultiQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  optionsBackground = love.graphics.newImage("sprites/options.png")
-  optionsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  menuBackground = love.graphics.newImage("sprites/Main_Menu.png")
+  menubgQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
+  modeSelectBackground = love.graphics.newImage("sprites/Mode_Select.png")
+  modeSelectQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
+  levelSelectBackground = love.graphics.newImage("sprites/Level_Select.png")
+  levelSelectQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
+  optionsBackground = love.graphics.newImage("sprites/Options.png")
+  optionsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   xmasBackground = love.graphics.newImage("sprites/xmas_background.png")
-  xmasBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  xmasBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   halBackground = love.graphics.newImage("sprites/Hal_Background.png")
-  halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   pauseBackground = love.graphics.newImage("sprites/bg.jpg")
-  pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   resultsBackground = love.graphics.newImage("sprites/bg.jpg")
   resultsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   
@@ -69,7 +67,7 @@ function love.load()
   paddleP1Y = 40
   paddleP2Y = 588
   
-   level2BlockX1 = 0
+  level2BlockX1 = 0
   level2BlockX2 = 72
   level2BlockX3 = 144
   level2BlockX4 = 216
@@ -97,19 +95,19 @@ function love.load()
   gamestate = "menu"
   
   --Menus--
-  button_spawn(140,250,"Start", "start")
-  button_spawn(144,300, "Options", "options")
-  button_spawn(144,350, "Quit", "quit")
-  obutton_spawn(50,50, "Back", "back")
-  mbutton_spawn(140,250,"Single Player", "single")
-  mbutton_spawn(140,280,"Multi Player", "multi")
-  mbutton_spawn(140,310,"Back", "mback")
-  singleButton_spawn(140,250,"Halloween", "halloweenSingle")
-  singleButton_spawn(140,280,"Xmas", "xmasSingle")
-  singleButton_spawn(140,310,"Back", "singleBack")
-  multiButton_spawn(140,250,"Halloween", "halloweenMulti")
-  multiButton_spawn(140,280,"Xmas", "xmasMulti")
-  multiButton_spawn(140,310,"Back", "multiBack")
+  button_spawn(140,350,"Start", "start")
+  button_spawn(140,400,"Options", "options")
+  button_spawn(140,450,"Quit", "quit")
+  obutton_spawn(50,300,"Back", "back")
+  mbutton_spawn(110,350,"Single Player", "single")
+  mbutton_spawn(110,400,"Multi Player", "multi")
+  mbutton_spawn(110,450,"Back", "mback")
+  singleButton_spawn(110,350,"Halloween", "halloweenSingle")
+  singleButton_spawn(110,400,"Xmas", "xmasSingle")
+  singleButton_spawn(110,450,"Back", "singleBack")
+  multiButton_spawn(110,350,"Halloween", "halloweenMulti")
+  multiButton_spawn(110,400,"Xmas", "xmasMulti")
+  multiButton_spawn(110,450,"Back", "multiBack")
   
   if (gamestate == "xmasSingle" or gamestate == "xmasMulti") then
     xmasLoad()
@@ -212,12 +210,12 @@ function modeSelectDraw()
 end
 
 function levelSelectSingleDraw()
-  love.graphics.draw(levelSelectSingleBackground, levelSelectSingleQuad, 0, 0)
+  love.graphics.draw(levelSelectBackground, levelSelectQuad, 0, 0)
   singleButton_draw()
 end
 
 function levelSelectMultiDraw()
-  love.graphics.draw(levelSelectMultiBackground, levelSelectMultiQuad, 0, 0)
+  love.graphics.draw(levelSelectBackground, levelSelectQuad, 0, 0)
   multiButton_draw()
 end
 
