@@ -45,4 +45,7 @@ function xmasDraw()
   
   love.graphics.draw(paddleP1, paddleP1X, paddleP1Y)
   love.graphics.draw(paddleP2, paddleP2X, paddleP2Y)
+  
+  love.graphics.draw(ball1, ballL1P1X, ballL1P1Y)
+  love.graphics.draw(ball1, ballL1P2X, ballL1P2Y)
 end

@@ -21,9 +21,9 @@ function love.load()
   xmasBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   halBackground = love.graphics.newImage("sprites/Hal_Background.png")
   halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
-  pauseBackground = love.graphics.newImage("sprites/bg.jpg")
+  pauseBackground = love.graphics.newImage("sprites/pause.png")
   pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
-  resultsBackground = love.graphics.newImage("sprites/bg.jpg")
+  resultsBackground = love.graphics.newImage("sprites/results.png")
   resultsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   
   blockHalLayer1_7 = love.graphics.newImage("sprites/orange_layer1_hal.png")
@@ -40,8 +40,8 @@ function love.load()
   paddleP1 = love.graphics.newImage("sprites/paddle_top.png")
   paddleP2 = love.graphics.newImage("sprites/paddle_bottom.png")
   
-  --ballP1 = love.graphics.newImage("sprites/")
-  --ballP2 = love.graphics.newImage("sprites/")
+  ball1 = love.graphics.newImage("sprites/ball_xmas.png")
+  ball2 = love.graphics.newImage("sprites/ball_hal.png")
   
   medium = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 20)
   big = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 25)
@@ -67,6 +67,12 @@ function love.load()
   paddleP1Y = 40
   paddleP2Y = 588
   
+  ballL1P1X = paddleP1X + 35
+  ballL1P2X = paddleP2X + 35
+  ballL1P1Y = 60
+  ballL1P2Y = 560
+  ballL2Speed = 100
+  
   level2BlockX1 = 0
   level2BlockX2 = 72
   level2BlockX3 = 144
@@ -86,11 +92,14 @@ function love.load()
   level2BlockLayer6Y = 372.5
   level2BlockLayer7Y = 393.5
   
-  paddleP1X = 135
-  paddleP2X = 135
-  paddleP1Y = 40
-  paddleP2Y = 588
+  ballL2P1X = 135
+  ballL2P2X = 135
+  ballL2P1Y = 60
+  ballL2P2Y = 560
+  ballL2Speed = 100
   -----------------
+  
+  --paused = "false"
   
   gamestate = "menu"
   
@@ -117,9 +126,6 @@ function love.load()
 end
 
 function love.update(dt) 
-  mousex = love.mouse.getX()
-  mousey = love.mouse.getY()
-  
   --get rid of after bug fixing, useful for swithcing modes atm
   --if love.keyboard.isDown("up") then
     --gamestate = "halloweenMulti"
@@ -147,6 +153,13 @@ function love.update(dt)
     --paddleP2Y = 588
   --end
   
+  --if paused then
+    --return
+  --end
+  
+  mousex = love.mouse.getX()
+  mousey = love.mouse.getY()
+  
   if gamestate == "menu" then
     button_check()
   elseif gamestate == "modeSelect" then
@@ -161,12 +174,18 @@ function love.update(dt)
   
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
     singleControls()
+    map_collide()
   elseif (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
     multiControls()
+    map_collide()
   end
 end
 
 function love.draw() 
+  --if paused then
+    --pauseDraw()
+  --end
+  
   if gamestate == "halloweenMulti" then
     halDraw()
   elseif gamestate == "modeSelect" then
@@ -185,11 +204,11 @@ function love.draw()
     menuDraw()
   elseif gamestate == "options" then
     optionsDraw()
-  elseif gamestate == "pause" then
+  elseif gamestate == "paused" then
     pauseDraw()
   elseif gamestate == "results" then
     resultsDraw()
-  end  
+  end 
 end
 
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
@@ -245,3 +264,42 @@ function love.mousepressed(x,y)
       multiButton_click(x,y)
     end
 end
+
+function map_collide()
+  if ballL1P1X < 0 or ballL1P1X > 700 then
+    
+  end
+  if ballL1P1Y < -50 or ballL1P1Y > 700 then
+    gamestate = "results"
+  end
+  if ballL1P2X < 0 or ballL1P2X > 700 then
+    
+  end
+  if ballL1P2Y < -50 or ballL1P2Y > 700 then
+    gamestate = "results"
+  end
+  if ballL2P1Y < 0 or ballL2P1X > 700 then
+    
+  end
+  if ballL2P1Y < -50 or ballL2P1Y > 700 then
+    gamestate = "results"
+  end
+  if ballL2P2X < 0 or ballL2P2X > 700 then
+    
+  end
+  if ballL2P2Y < -50 or ballL2P2Y > 700 then
+    gamestate = "results"
+  end
+end
+
+--function love.focus(f)
+	--if not f then
+		--paused = true;
+	--end
+--end
+
+--function love.keyPressed(key)
+	--if key == "escape" then
+		--paused = not paused; 
+	--end
+--end
