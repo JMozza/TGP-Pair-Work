@@ -6,9 +6,13 @@ require "multi"
 require "controls"
 require "level_1"
 require "level_2"
+require "pause"
+require "resume"
 
 function love.load()
 
+  pauseBackground = love.graphics.newImage("sprites/Paused.png")
+  pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   menuBackground = love.graphics.newImage("sprites/Main_Menu.png")
   menubgQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   modeSelectBackground = love.graphics.newImage("sprites/Mode_Select.png")
@@ -20,9 +24,7 @@ function love.load()
   xmasBackground = love.graphics.newImage("sprites/xmas_background.png")
   xmasBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   halBackground = love.graphics.newImage("sprites/Hal_Background.png")
-  halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
-  pauseBackground = love.graphics.newImage("sprites/pause.png")
-  pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
+  halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   resultsBackground = love.graphics.newImage("sprites/results.png")
   resultsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   
@@ -99,8 +101,7 @@ function love.load()
   ballL2Speed = 100
   -----------------
   
-  --paused = "false"
-  
+  paused = false
   gamestate = "menu"
   
   --Menus--
@@ -117,10 +118,12 @@ function love.load()
   multiButton_spawn(110,350,"Halloween", "halloweenMulti")
   multiButton_spawn(110,400,"Xmas", "xmasMulti")
   multiButton_spawn(110,450,"Back", "multiBack")
+  pausebutton_spawn(0, 0, "Paused", "paused")
+  resumebutton_spawn(140, 0, "Resume", "resume")
   
   if (gamestate == "xmasSingle" or gamestate == "xmasMulti") then
     xmasLoad()
-  elseif (gamestate == "halloweenSingle" or gamestate == "halloweenMulti") then
+  elseif (gamestate == "halloweenSingle" or gamestate == "halloweenMulti") then    
     halLoad()
   end
 end
@@ -153,10 +156,6 @@ function love.update(dt)
     --paddleP2Y = 588
   --end
   
-  --if paused then
-    --return
-  --end
-  
   mousex = love.mouse.getX()
   mousey = love.mouse.getY()
   
@@ -173,42 +172,56 @@ function love.update(dt)
   end
   
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
-    singleControls()
-    map_collide()
+    if (paused == false) then
+      singleControls()
+      map_collide()  
+      pausebutton_check()
+    elseif (paused == true) then
+      resumebutton_check()
+    end
   elseif (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
-    multiControls()
-    map_collide()
+    if (paused == true) then
+      multiControls()
+      map_collide()
+      pausebutton_check()
+    elseif (paused == true) then
+      resumebutton_check()
+    end
   end
 end
 
 function love.draw() 
-  --if paused then
-    --pauseDraw()
-  --end
   
-  if gamestate == "halloweenMulti" then
-    halDraw()
-  elseif gamestate == "modeSelect" then
-    modeSelectDraw()
-  elseif gamestate == "levelSelectSingle" then
-    levelSelectSingleDraw()
-  elseif gamestate == "levelSelectMulti" then
-    levelSelectMultiDraw()
-  elseif gamestate == "xmasMulti" then
-    xmasDraw()
-  elseif gamestate == "halloweenSingle" then
-    halDraw()
-  elseif gamestate == "xmasSingle" then
-    xmasDraw()
-  elseif gamestate == "menu" then
-    menuDraw()
-  elseif gamestate == "options" then
-    optionsDraw()
-  elseif gamestate == "paused" then
-    pauseDraw()
-  elseif gamestate == "results" then
-    resultsDraw()
-  end 
+  if(paused == true) then
+    love.graphics.draw(pauseBackground, pauseQuad, 0, 0)
+    resumebutton_draw()
+  elseif(paused == false) then    
+    if gamestate == "halloweenMulti" then
+      halDraw()
+      pausebutton_draw()
+    elseif gamestate == "levelSelectSingle" then
+      levelSelectSingleDraw()
+    elseif gamestate == "levelSelectMulti" then
+      levelSelectMultiDraw()
+    elseif gamestate == "xmasMulti" then
+      xmasDraw()
+      pausebutton_draw()
+    elseif gamestate == "halloweenSingle" then
+      halDraw()
+      pausebutton_draw()
+    elseif gamestate == "xmasSingle" then
+      xmasDraw()
+      pausebutton_draw()
+    elseif gamestate == "modeSelect" then
+      modeSelectDraw()
+    elseif gamestate == "menu" then
+      menuDraw()
+    elseif gamestate == "options" then
+      optionsDraw()
+    elseif gamestate == "results" then
+      resultsDraw()
+    end 
+  end
 end
 
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
@@ -243,10 +256,6 @@ function optionsDraw()
   obutton_draw()
 end
 
-function pauseDraw()
-  love.graphics.draw(pauseBackground, pauseQuad, 0, 0)
-end
-
 function resultsDraw()
   love.graphics.draw(resultsBackground, resultsQuad, 0, 0)
 end
@@ -262,6 +271,9 @@ function love.mousepressed(x,y)
       singleButton_click(x,y)
     elseif gamestate == "levelSelectMulti" then
       multiButton_click(x,y)
+    elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle" or gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
+    pausebutton_click(x,y)
+    resumebutton_click(x,y)
     end
 end
 
