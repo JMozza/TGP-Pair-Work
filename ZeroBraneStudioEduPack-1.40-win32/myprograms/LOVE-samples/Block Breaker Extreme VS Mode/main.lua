@@ -180,7 +180,7 @@ function love.update(dt)
       resumebutton_check()
     end
   elseif (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
-    if (paused == true) then
+    if (paused == false) then
       multiControls()
       map_collide()
       pausebutton_check()
