@@ -303,15 +303,3 @@ function map_collide()
     gamestate = "results"
   end
 end
-
---function love.focus(f)
-	--if not f then
-		--paused = true;
-	--end
---end
-
---function love.keyPressed(key)
-	--if key == "escape" then
-		--paused = not paused; 
-	--end
---end
