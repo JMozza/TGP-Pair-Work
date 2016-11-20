@@ -50,6 +50,14 @@ function love.load()
   love.graphics.setColor(1,1,1)
   
   ------------------------
+  menuClick = love.audio.newSource("sounds/Menu_Click.wav", "static")
+  levelStart = love.audio.newSource("sounds/Level_Start.wav", "static")
+  blockBounce = love.audio.newSource("sounds/Brick_Bounce.wav", "static")
+  paddleBounce = love.audio.newSource("sounds/Paddle_Bounce.mp3", "static")
+  winnerSound = love.audio.newSource("sounds/Winner.mp3", "static")
+  backgroundSound = love.audio.newSource("sounds/Background.mp3")
+  
+  ------------------------
   level1BlockLayerX = 0
   level1BlockLayerX2 = 72
   level1BlockLayerX3 = 144
@@ -108,6 +116,7 @@ function love.load()
   button_spawn(140,350,"Start", "start")
   button_spawn(140,400,"Options", "options")
   button_spawn(140,450,"Quit", "quit")
+  button_spawn(0,0, "Mute", "mute")
   obutton_spawn(50,300,"Back", "back")
   mbutton_spawn(110,350,"Single Player", "single")
   mbutton_spawn(110,400,"Multi Player", "multi")
@@ -172,6 +181,7 @@ function love.update(dt)
   end
   
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
+    backgroundSound:play()
     if (paused == false) then
       singleControls()
       map_collide()  
@@ -180,6 +190,7 @@ function love.update(dt)
       resumebutton_check()
     end
   elseif (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
+    backgroundSound:play()
     if (paused == false) then
       multiControls()
       map_collide()
@@ -220,6 +231,8 @@ function love.draw()
       optionsDraw()
     elseif gamestate == "results" then
       resultsDraw()
+      
+      --winnerSound:setVolume(0.0)
     end 
   end
 end
@@ -283,24 +296,28 @@ function map_collide()
   end
   if ballL1P1Y < -50 or ballL1P1Y > 700 then
     gamestate = "results"
+    winnerSound:play()
   end
   if ballL1P2X < 0 or ballL1P2X > 700 then
     
   end
   if ballL1P2Y < -50 or ballL1P2Y > 700 then
     gamestate = "results"
+    winnerSound:play()
   end
   if ballL2P1Y < 0 or ballL2P1X > 700 then
     
   end
   if ballL2P1Y < -50 or ballL2P1Y > 700 then
     gamestate = "results"
+    winnerSound:play()
   end
   if ballL2P2X < 0 or ballL2P2X > 700 then
     
   end
   if ballL2P2Y < -50 or ballL2P2Y > 700 then
     gamestate = "results"
+    winnerSound:play()
   end
 end
 

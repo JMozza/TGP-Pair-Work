@@ -25,12 +25,15 @@ function singleButton_click(x,y)
         y < v.y + medium:getHeight() then
             if v.id == "halloweenSingle" then
               gamestate = "halloweenSingle"
+              menuClick:play()
             end
             if v.id == "xmasSingle" then
               gamestate = "xmasSingle"
+              menuClick:play()
             end
             if v.id == "singleBack" then
               gamestate = "modeSelect"
+              menuClick:play()
             end
         end            
     end

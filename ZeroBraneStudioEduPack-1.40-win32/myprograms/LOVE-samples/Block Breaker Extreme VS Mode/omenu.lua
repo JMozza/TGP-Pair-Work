@@ -25,6 +25,7 @@ function obutton_click(x,y)
         y < v.y + medium:getHeight() then
             if v.id == "back" then
               gamestate = "menu"
+              menuClick:play()
             end
         end            
     end
