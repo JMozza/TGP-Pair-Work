@@ -25,6 +25,7 @@ function resumebutton_click(x,y)
         y < v.y + medium:getHeight() then
             if v.id == "resume" then
               paused = false
+              menuClick:play()
             end
         end            
     end

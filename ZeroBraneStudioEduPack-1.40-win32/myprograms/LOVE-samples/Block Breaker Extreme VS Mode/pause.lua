@@ -25,6 +25,7 @@ function pausebutton_click(x,y)
         y < v.y + medium:getHeight() then
             if v.id == "paused" then
               paused = true
+              menuClick:play()
             end
         end            
     end

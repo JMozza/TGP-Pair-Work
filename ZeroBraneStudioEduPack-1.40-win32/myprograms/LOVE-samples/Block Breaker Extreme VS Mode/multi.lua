@@ -25,12 +25,15 @@ function multiButton_click(x,y)
         y < v.y + medium:getHeight() then
             if v.id == "halloweenMulti" then
               gamestate = "halloweenMulti"
+              menuClick:play()
             end
             if v.id == "xmasMulti" then
               gamestate = "xmasMulti"
+              menuClick:play()
             end
             if v.id == "multiBack" then
               gamestate = "modeSelect"
+              menuClick:play()
             end
         end            
     end

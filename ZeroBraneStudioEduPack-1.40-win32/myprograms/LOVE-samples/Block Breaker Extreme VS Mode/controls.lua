@@ -23,9 +23,9 @@ function multiControls()
     paddleP2X = paddleP2X - 1.5
   end
   
-  if love.keyboard.isDown("i") then
+  if love.keyboard.isDown("k") then
     ballL1P1Y = ballL1P1Y + 1.5
-  elseif love.keyboard.isDown("k") then
+  elseif love.keyboard.isDown("i") then
     ballL1P1Y = ballL1P1Y - 1.5
   elseif love.keyboard.isDown("j") then
     ballL1P1X = ballL1P1X - 1.5

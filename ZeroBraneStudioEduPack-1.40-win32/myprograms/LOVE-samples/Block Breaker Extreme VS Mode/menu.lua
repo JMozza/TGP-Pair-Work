@@ -22,15 +22,26 @@ function button_click(x,y)
         if x > v.x and
         x < v.x + medium:getWidth(v.text) and
         y > v.y and
-        y < v.y + medium:getHeight() then
+        y < v.y + medium:getHeight() then            
             if v.id == "start" then
               gamestate = "modeSelect"
+              menuClick:play()
             end
             if v.id == "options" then
               gamestate = "options"
+              menuClick:play()
             end
             if v.id == "quit" then
                 love.event.push("quit")
+                menuClick:play()
+            end
+            if v.id == "mute" then
+              menuClick:setVolume(0.0)
+              levelStart:setVolume(0.0)
+              blockBounce:setVolume(0.0)
+              paddleBounce:setVolume(0.0)
+              winnerSound:setVolume(0.0)
+              backgroundSound:setVolume(0.0)                
             end
         end            
     end
