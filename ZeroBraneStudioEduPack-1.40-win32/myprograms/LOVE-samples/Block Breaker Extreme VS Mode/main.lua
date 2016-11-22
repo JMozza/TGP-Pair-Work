@@ -8,6 +8,7 @@ require "level_1"
 require "level_2"
 require "pause"
 require "resume"
+require "test"
 
 function love.load()
 
@@ -109,11 +110,86 @@ function love.load()
   ballL2Speed = 100
   -----------------
   
+  ----------------Test----------------------
+  love.physics.setMeter(64) --the height of a meter our worlds will be 64px
+  world = love.physics.newWorld(0, 0*64, true) --create a world for the bodies to exist in with horizontal gravity of 0 and vertical gravity of 9.81
+  world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+  
+  ballobjects = {} -- table to hold all ball objects
+  staticobjects = {} -- table to hold all static objects
+  movableobjects = {} -- table to hold all movable objects
+ 
+  --let's create the ground
+  staticobjects.bottom= {}
+  staticobjects.bottom.body = love.physics.newBody(world, 360/2, 635) --remember, the shape (the rectangle we create next) anchors to the body from its center, so we have to move it to (650/2, 650-50/2)
+  staticobjects.bottom.shape = love.physics.newRectangleShape(650, 10) --make a rectangle with a width of 650 and a height of 50
+  staticobjects.bottom.fixture = love.physics.newFixture(staticobjects.bottom.body, staticobjects.bottom.shape); --attach shape to body
+  staticobjects.bottom.fixture:setUserData("Bottom")
+ 
+  staticobjects.left= {}
+  staticobjects.left.body = love.physics.newBody(world, 5, 640-50/2) --remember, the shape (the rectangle we create next) anchors to the body from its center
+  staticobjects.left.shape = love.physics.newRectangleShape(10, 1250) --make a rectangle with a width of 650 and a height of 50
+  staticobjects.left.fixture = love.physics.newFixture(staticobjects.left.body, staticobjects.left.shape); --attach shape to body
+  staticobjects.left.fixture:setUserData("Left")
+ 
+  staticobjects.right= {}
+  staticobjects.right.body = love.physics.newBody(world, 355, 640-50/2) --remember, the shape (the rectangle we create next) anchors to the body from its center
+  staticobjects.right.shape = love.physics.newRectangleShape(10, 1250) --make a rectangle with a width of 650 and a height of 50
+  staticobjects.right.fixture = love.physics.newFixture(staticobjects.right.body, staticobjects.right.shape); --attach shape to body
+  staticobjects.right.fixture:setUserData("Right")
+ 
+  staticobjects.top= {}
+  staticobjects.top.body = love.physics.newBody(world, 360/2, 10/2) --remember, the shape (the rectangle we create next) anchors to the body from its center
+  staticobjects.top.shape = love.physics.newRectangleShape(650, 10) --make a rectangle with a width of 650 and a height of 50
+  staticobjects.top.fixture = love.physics.newFixture(staticobjects.top.body, staticobjects.top.shape); --attach shape to body
+  staticobjects.top.fixture:setUserData("Top")
+  
+  movableobjects.paddle1= {}
+  movableobjects.paddle1.body = love.physics.newBody(world, 360/2, 610) --remember, the shape (the rectangle we create next) anchors to the body from its center
+  movableobjects.paddle1.shape = love.physics.newRectangleShape(100, 15) --make a rectangle with a width of 650 and a height of 50
+  movableobjects.paddle1.fixture = love.physics.newFixture(movableobjects.paddle1.body, movableobjects.paddle1.shape); --attach shape to body
+  movableobjects.paddle1.fixture:setUserData("Paddle1")
+  
+  movableobjects.paddle2= {}
+  movableobjects.paddle2.body = love.physics.newBody(world, 360/2, 30) --remember, the shape (the rectangle we create next) anchors to the body from its center
+  movableobjects.paddle2.shape = love.physics.newRectangleShape(100, 15) --make a rectangle with a width of 650 and a height of 50
+  movableobjects.paddle2.fixture = love.physics.newFixture(movableobjects.paddle2.body, movableobjects.paddle2.shape); --attach shape to body
+  movableobjects.paddle2.fixture:setUserData("Paddle2")
+  
+  --create first ball
+  ballobjects.ball1 = {}
+  ballobjects.ball1.body = love.physics.newBody(world, 360/2, 60, "dynamic") --place the body in the center of the world and make it dynamic, so it can move around
+  ballobjects.ball1.body:setMass(20)
+  ballobjects.ball1.shape = love.physics.newCircleShape(20) --the ball's shape has a radius of 20
+  ballobjects.ball1.fixture = love.physics.newFixture(ballobjects.ball1.body, ballobjects.ball1.shape, 1) -- Attach fixture to body and give it a density of 1.
+  ballobjects.ball1.fixture:setRestitution(1.0) --let the ball bounce
+  ballobjects.ball1.fixture:setUserData("Ball1")
+  ballobjects.ball1.body:setLinearDamping(0)
+  
+  --create second ball
+  ballobjects.ball2 = {}
+  ballobjects.ball2.body = love.physics.newBody(world, 360/2, 580, "dynamic") --place the body in the center of the world and make it dynamic, so it can move around
+  ballobjects.ball2.body:setMass(20)
+  ballobjects.ball2.shape = love.physics.newCircleShape(20) --the ball's shape has a radius of 20
+  ballobjects.ball2.fixture = love.physics.newFixture(ballobjects.ball2.body, ballobjects.ball2.shape, 1) -- Attach fixture to body and give it a density of 1.
+  ballobjects.ball2.fixture:setRestitution(1.0) --let the ball bounce
+  ballobjects.ball2.fixture:setUserData("Ball2")
+  ballobjects.ball2.body:setLinearDamping(0)
+  
+  text       = ""   -- we'll use this to put info text on the screen later
+  persisting = 0    -- we'll use this to store the state of repeated callback calls
+  
+  --initial graphics setup
+  love.graphics.setBackgroundColor(104, 136, 248) --set the background color to a nice blue
+  love.window.setMode(360, 640) --set the window dimensions to 650 by 650
+  -----------------Test--------------------
+  
   paused = false
   gamestate = "menu"
   
   --Menus--
   button_spawn(140,350,"Start", "start")
+  button_spawn(140,500,"Test", "test")
   button_spawn(140,400,"Options", "options")
   button_spawn(140,450,"Quit", "quit")
   button_spawn(0,0, "Mute", "mute")
@@ -130,11 +206,13 @@ function love.load()
   pausebutton_spawn(0, 0, "Paused", "paused")
   resumebutton_spawn(140, 0, "Resume", "resume")
   
-  if (gamestate == "xmasSingle" or gamestate == "xmasMulti") then
-    xmasLoad()
-  elseif (gamestate == "halloweenSingle" or gamestate == "halloweenMulti") then    
-    halLoad()
-  end
+  --if (gamestate == "xmasSingle" or gamestate == "xmasMulti") then
+    --xmasLoad()
+  --elseif (gamestate == "halloweenSingle" or gamestate == "halloweenMulti") then    
+    --halLoad()
+  --elseif (gamestate == "test") then    
+    --testLoad()
+  --end
 end
 
 function love.update(dt) 
@@ -178,8 +256,12 @@ function love.update(dt)
     singleButton_check()
   elseif gamestate == "levelSelectMulti" then
     multiButton_check()
+  elseif gamestate == "test" then
+    world:update(dt) --this puts the world into motion
+    testControls()
   end
-  
+
+
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
     backgroundSound:play()
     if (paused == false) then
@@ -231,8 +313,9 @@ function love.draw()
       optionsDraw()
     elseif gamestate == "results" then
       resultsDraw()
-      
       --winnerSound:setVolume(0.0)
+    elseif gamestate == "test" then
+      testDraw()
     end 
   end
 end
@@ -288,6 +371,23 @@ function love.mousepressed(x,y)
     pausebutton_click(x,y)
     resumebutton_click(x,y)
     end
+end
+
+function beginContact(a, b, coll)
+    x,y = coll:getNormal()
+    text = text.."\n"..a:getUserData().." colliding with "..b:getUserData().." with a vector normal of: "..x..", "..y
+end
+
+function preSolve(a, b, coll)
+    if persisting == 0 then    -- only say when they first start touching
+        text = text.."\n"..a:getUserData().." touching "..b:getUserData()
+    elseif persisting < 20 then    -- then just start counting
+        text = text.." "..persisting
+    end
+    persisting = persisting + 1    -- keep track of how many updates they've been touching for
+end
+
+function postSolve(a, b, coll, normalimpulse, tangentimpulse)
 end
 
 function map_collide()
