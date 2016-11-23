@@ -57,7 +57,6 @@ function love.load()
   paddleBounce = love.audio.newSource("sounds/Paddle_Bounce.mp3", "static")
   winnerSound = love.audio.newSource("sounds/Winner.mp3", "static")
   backgroundSound = love.audio.newSource("sounds/Background.mp3")
-  
   ------------------------
   level1BlockLayerX = 0
   level1BlockLayerX2 = 72
@@ -121,58 +120,58 @@ function love.load()
  
   --let's create the ground
   staticobjects.bottom= {}
-  staticobjects.bottom.body = love.physics.newBody(world, 360/2, 635) --remember, the shape (the rectangle we create next) anchors to the body from its center, so we have to move it to (650/2, 650-50/2)
-  staticobjects.bottom.shape = love.physics.newRectangleShape(650, 10) --make a rectangle with a width of 650 and a height of 50
+  staticobjects.bottom.body = love.physics.newBody(world, 360/2, 635) --the shape anchors to the body from its center
+  staticobjects.bottom.shape = love.physics.newRectangleShape(650, 10) --rectangle with a width of 650 and a height of 50
   staticobjects.bottom.fixture = love.physics.newFixture(staticobjects.bottom.body, staticobjects.bottom.shape); --attach shape to body
   staticobjects.bottom.fixture:setUserData("Bottom")
  
   staticobjects.left= {}
-  staticobjects.left.body = love.physics.newBody(world, 5, 640-50/2) --remember, the shape (the rectangle we create next) anchors to the body from its center
-  staticobjects.left.shape = love.physics.newRectangleShape(10, 1250) --make a rectangle with a width of 650 and a height of 50
+  staticobjects.left.body = love.physics.newBody(world, 5, 640-50/2) --the shape anchors to the body from its center
+  staticobjects.left.shape = love.physics.newRectangleShape(10, 1250) --rectangle with a width of 650 and a height of 50
   staticobjects.left.fixture = love.physics.newFixture(staticobjects.left.body, staticobjects.left.shape); --attach shape to body
   staticobjects.left.fixture:setUserData("Left")
  
   staticobjects.right= {}
-  staticobjects.right.body = love.physics.newBody(world, 355, 640-50/2) --remember, the shape (the rectangle we create next) anchors to the body from its center
-  staticobjects.right.shape = love.physics.newRectangleShape(10, 1250) --make a rectangle with a width of 650 and a height of 50
+  staticobjects.right.body = love.physics.newBody(world, 355, 640-50/2) --the shape anchors to the body from its center
+  staticobjects.right.shape = love.physics.newRectangleShape(10, 1250) --rectangle with a width of 650 and a height of 50
   staticobjects.right.fixture = love.physics.newFixture(staticobjects.right.body, staticobjects.right.shape); --attach shape to body
   staticobjects.right.fixture:setUserData("Right")
  
   staticobjects.top= {}
-  staticobjects.top.body = love.physics.newBody(world, 360/2, 10/2) --remember, the shape (the rectangle we create next) anchors to the body from its center
-  staticobjects.top.shape = love.physics.newRectangleShape(650, 10) --make a rectangle with a width of 650 and a height of 50
+  staticobjects.top.body = love.physics.newBody(world, 360/2, 10/2) --the shape anchors to the body from its center
+  staticobjects.top.shape = love.physics.newRectangleShape(650, 10) --rectangle with a width of 650 and a height of 50
   staticobjects.top.fixture = love.physics.newFixture(staticobjects.top.body, staticobjects.top.shape); --attach shape to body
   staticobjects.top.fixture:setUserData("Top")
   
   movableobjects.paddle1= {}
-  movableobjects.paddle1.body = love.physics.newBody(world, 360/2, 610) --remember, the shape (the rectangle we create next) anchors to the body from its center
-  movableobjects.paddle1.shape = love.physics.newRectangleShape(100, 15) --make a rectangle with a width of 650 and a height of 50
+  movableobjects.paddle1.body = love.physics.newBody(world, 360/2, 610) --the shape anchors to the body from its center
+  movableobjects.paddle1.shape = love.physics.newRectangleShape(100, 15) --rectangle with a width of 650 and a height of 50
   movableobjects.paddle1.fixture = love.physics.newFixture(movableobjects.paddle1.body, movableobjects.paddle1.shape); --attach shape to body
   movableobjects.paddle1.fixture:setUserData("Paddle1")
   
   movableobjects.paddle2= {}
-  movableobjects.paddle2.body = love.physics.newBody(world, 360/2, 30) --remember, the shape (the rectangle we create next) anchors to the body from its center
-  movableobjects.paddle2.shape = love.physics.newRectangleShape(100, 15) --make a rectangle with a width of 650 and a height of 50
+  movableobjects.paddle2.body = love.physics.newBody(world, 360/2, 30) --the shape anchors to the body from its center
+  movableobjects.paddle2.shape = love.physics.newRectangleShape(100, 15) --rectangle with a width of 650 and a height of 50
   movableobjects.paddle2.fixture = love.physics.newFixture(movableobjects.paddle2.body, movableobjects.paddle2.shape); --attach shape to body
   movableobjects.paddle2.fixture:setUserData("Paddle2")
   
   --create first ball
   ballobjects.ball1 = {}
   ballobjects.ball1.body = love.physics.newBody(world, 360/2, 60, "dynamic") --place the body in the center of the world and make it dynamic, so it can move around
-  ballobjects.ball1.body:setMass(20)
+  ballobjects.ball1.body:setMass(0)
   ballobjects.ball1.shape = love.physics.newCircleShape(20) --the ball's shape has a radius of 20
   ballobjects.ball1.fixture = love.physics.newFixture(ballobjects.ball1.body, ballobjects.ball1.shape, 1) -- Attach fixture to body and give it a density of 1.
-  ballobjects.ball1.fixture:setRestitution(1.0) --let the ball bounce
+  ballobjects.ball1.fixture:setRestitution(1.0) --ball bounce
   ballobjects.ball1.fixture:setUserData("Ball1")
   ballobjects.ball1.body:setLinearDamping(0)
   
   --create second ball
   ballobjects.ball2 = {}
   ballobjects.ball2.body = love.physics.newBody(world, 360/2, 580, "dynamic") --place the body in the center of the world and make it dynamic, so it can move around
-  ballobjects.ball2.body:setMass(20)
+  ballobjects.ball2.body:setMass(0)
   ballobjects.ball2.shape = love.physics.newCircleShape(20) --the ball's shape has a radius of 20
   ballobjects.ball2.fixture = love.physics.newFixture(ballobjects.ball2.body, ballobjects.ball2.shape, 1) -- Attach fixture to body and give it a density of 1.
-  ballobjects.ball2.fixture:setRestitution(1.0) --let the ball bounce
+  ballobjects.ball2.fixture:setRestitution(1.0) --lets the ball bounce
   ballobjects.ball2.fixture:setUserData("Ball2")
   ballobjects.ball2.body:setLinearDamping(0)
   
@@ -257,10 +256,9 @@ function love.update(dt)
   elseif gamestate == "levelSelectMulti" then
     multiButton_check()
   elseif gamestate == "test" then
-    world:update(dt) --this puts the world into motion
+    world:update(dt) --Adds physics to world
     testControls()
   end
-
 
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
     backgroundSound:play()
@@ -391,31 +389,48 @@ function postSolve(a, b, coll, normalimpulse, tangentimpulse)
 end
 
 function map_collide()
-  if ballL1P1X < 0 or ballL1P1X > 700 then
-    
-  end
-  if ballL1P1Y < -50 or ballL1P1Y > 700 then
+  if ballL1P1X < 0 then      
+    ballL1P1X = ballL1P1X + 1.5        
+  elseif ballL1P1X > 340 then
+    ballL1P1X = ballL1P1X - 1.5
+  elseif ballL1P1Y < 0 then 
+    gamestate = "results"
+    winnerSound:play()
+  elseif ballL1P1Y > 620 then
+    gamestate = "results"
+    winnerSound:play()
+
+  elseif ballL2P1X < 0 then
+    ballL1P1X = ballL1P1X + 1.5
+  elseif ballL2P1X > 340 then
+    ballL1P1X = ballL1P1X - 1.5
+  elseif ballL2P1Y < 0 then
+    gamestate = "results"
+    winnerSound:play()
+  elseif ballL2P1Y > 620 then
     gamestate = "results"
     winnerSound:play()
   end
-  if ballL1P2X < 0 or ballL1P2X > 700 then
-    
-  end
-  if ballL1P2Y < -50 or ballL1P2Y > 700 then
+  
+  if ballL1P2X < 0 then
+    ballL1P2X = ballL1P2X + 1.5
+  elseif ballL1P2X > 340 then
+    ballL1P2X = ballL1P2X - 1.5
+  elseif ballL1P2Y < 0 then
     gamestate = "results"
     winnerSound:play()
-  end
-  if ballL2P1Y < 0 or ballL2P1X > 700 then
-    
-  end
-  if ballL2P1Y < -50 or ballL2P1Y > 700 then
+  elseif ballL1P2Y > 620 then 
     gamestate = "results"
     winnerSound:play()
-  end
-  if ballL2P2X < 0 or ballL2P2X > 700 then
     
-  end
-  if ballL2P2Y < -50 or ballL2P2Y > 700 then
+  elseif ballL2P2X < 0 then
+    ballL1P2X = ballL1P2X + 1.5
+  elseif ballL2P2X > 340 then
+    ballL1P2X = ballL1P2X - 1.5
+  elseif ballL2P2Y < 0 then
+    gamestate = "results"
+    winnerSound:play()
+  elseif ballL2P2Y > 620 then
     gamestate = "results"
     winnerSound:play()
   end

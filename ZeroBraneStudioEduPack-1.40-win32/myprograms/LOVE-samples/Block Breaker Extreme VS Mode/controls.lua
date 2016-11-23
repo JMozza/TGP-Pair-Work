@@ -33,6 +33,16 @@ function multiControls()
     ballL1P1X = ballL1P1X + 1.5
   end
   
+  if love.keyboard.isDown("g") then
+    ballL1P2Y = ballL1P2Y + 1.5
+  elseif love.keyboard.isDown("t") then
+    ballL1P2Y = ballL1P2Y - 1.5
+  elseif love.keyboard.isDown("f") then
+    ballL1P2X = ballL1P2X - 1.5
+  elseif love.keyboard.isDown("h") then
+    ballL1P2X = ballL1P2X + 1.5
+  end
+  
   if love.keyboard.isDown("escape") then
     gamestate = "paused"
   end
@@ -43,6 +53,16 @@ function singleControls()
     paddleP2X = paddleP2X - 1.5
   elseif love.keyboard.isDown("right") then
     paddleP2X = paddleP2X + 1.5
+  end
+  
+  if love.keyboard.isDown("k") then
+    ballL1P1Y = ballL1P1Y + 1.5
+  elseif love.keyboard.isDown("i") then
+    ballL1P1Y = ballL1P1Y - 1.5
+  elseif love.keyboard.isDown("j") then
+    ballL1P1X = ballL1P1X - 1.5
+  elseif love.keyboard.isDown("l") then
+    ballL1P1X = ballL1P1X + 1.5
   end
   
   if paddleP2X == 0 then
