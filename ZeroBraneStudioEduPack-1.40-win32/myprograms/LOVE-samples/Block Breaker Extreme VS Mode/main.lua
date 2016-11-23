@@ -290,20 +290,20 @@ function love.draw()
     resumebutton_draw()
   elseif(paused == false) then    
     if gamestate == "halloweenMulti" then
-      halDraw()
+      xmasDraw()
       pausebutton_draw()
     elseif gamestate == "levelSelectSingle" then
       levelSelectSingleDraw()
     elseif gamestate == "levelSelectMulti" then
       levelSelectMultiDraw()
     elseif gamestate == "xmasMulti" then
-      xmasDraw()
-      pausebutton_draw()
-    elseif gamestate == "halloweenSingle" then
       halDraw()
       pausebutton_draw()
+    elseif gamestate == "halloweenSingle" then
+      xmasDraw()      
+      pausebutton_draw()
     elseif gamestate == "xmasSingle" then
-      xmasDraw()
+      halDraw()
       pausebutton_draw()
     elseif gamestate == "modeSelect" then
       modeSelectDraw()
