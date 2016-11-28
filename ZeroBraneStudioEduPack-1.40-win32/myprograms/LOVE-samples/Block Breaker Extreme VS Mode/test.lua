@@ -95,7 +95,7 @@ function testDraw()
   love.graphics.polygon("fill", staticobjects.right.body:getWorldPoints(staticobjects.right.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
   love.graphics.polygon("fill", movableobjects.paddle1.body:getWorldPoints(movableobjects.paddle1.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
   love.graphics.polygon("fill", movableobjects.paddle2.body:getWorldPoints(movableobjects.paddle2.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
- 
+
   love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
   love.graphics.circle("fill", ballobjects.ball1.body:getX(), ballobjects.ball1.body:getY(), ballobjects.ball1.shape:getRadius())
   love.graphics.circle("fill", ballobjects.ball2.body:getX(), ballobjects.ball2.body:getY(), ballobjects.ball2.shape:getRadius())

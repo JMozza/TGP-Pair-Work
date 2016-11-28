@@ -107,6 +107,11 @@ function love.load()
   ballL2P1Y = 60
   ballL2P2Y = 560
   ballL2Speed = 100
+  
+  currentPostionBall1 = 0
+  lastPostionBall1 = 0
+  
+  time = 0
   -----------------
   
   ----------------Test----------------------
@@ -174,6 +179,8 @@ function love.load()
   ballobjects.ball2.fixture:setRestitution(1.0) --lets the ball bounce
   ballobjects.ball2.fixture:setUserData("Ball2")
   ballobjects.ball2.body:setLinearDamping(0)
+
+  
   
   text       = ""   -- we'll use this to put info text on the screen later
   persisting = 0    -- we'll use this to store the state of repeated callback calls
@@ -259,6 +266,25 @@ function love.update(dt)
     world:update(dt) --Adds physics to world
     testControls()
   end
+  
+  time = time + 1
+  
+  currentPostionBall1 = ballobjects.ball1.body.getY
+  
+  if time > 600 and time < 630 then
+    --if currentPostionBall1 >= lastPostionBall1 then
+      --ballobjects.ball1.body:applyForce(400, -800)
+    --elseif currentPostionBall1 <= lastPostionBall1 then
+  ballobjects.ball1.body:applyForce(400, 800)
+  ballobjects.ball2.body:applyForce(400, -800)
+    --end
+  end
+  
+  if time > 630 then
+    time = 0
+  end
+  
+  lastPostionBall1 = currentPostionBall1
 
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
     backgroundSound:play()
@@ -433,5 +459,7 @@ function map_collide()
   elseif ballL2P2Y > 620 then
     gamestate = "results"
     winnerSound:play()
-  end
+  end  
 end
+
+--https://github.com/AndyWarrior/Pong/blob/master/main.lua
