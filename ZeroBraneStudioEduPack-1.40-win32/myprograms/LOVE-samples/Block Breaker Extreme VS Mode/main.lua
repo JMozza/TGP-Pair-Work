@@ -11,7 +11,7 @@ require "resume"
 require "test"
 
 function love.load()
-
+  
   pauseBackground = love.graphics.newImage("sprites/Paused.png")
   pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   menuBackground = love.graphics.newImage("sprites/Main_Menu.png")
@@ -57,6 +57,10 @@ function love.load()
   paddleBounce = love.audio.newSource("sounds/Paddle_Bounce.mp3", "static")
   winnerSound = love.audio.newSource("sounds/Winner.mp3", "static")
   backgroundSound = love.audio.newSource("sounds/Background.mp3")
+  ------------------------
+  
+  angle = 0
+  
   ------------------------
   level1BlockLayerX = 0
   level1BlockLayerX2 = 72
@@ -180,7 +184,8 @@ function love.load()
   ballobjects.ball2.fixture:setUserData("Ball2")
   ballobjects.ball2.body:setLinearDamping(0)
 
-  
+  speed = 50
+  angle = 0
   
   text       = ""   -- we'll use this to put info text on the screen later
   persisting = 0    -- we'll use this to store the state of repeated callback calls
@@ -252,6 +257,13 @@ function love.update(dt)
   mousex = love.mouse.getX()
   mousey = love.mouse.getY()
   
+  --look at tomorrow
+  --angle = math.angle(paddleP1X, paddleP1Y, ballL1P1X, ballL1P1Y)
+  --dx = math.cos(angle) * (dt * speed)
+  --dy = math.sin(angle) * (dt * speed)
+  --paddleP1X = paddleP1X + dx
+  --paddleP1Y = paddleP1Y + dy
+
   if gamestate == "menu" then
     button_check()
   elseif gamestate == "modeSelect" then
@@ -305,6 +317,43 @@ function love.update(dt)
       resumebutton_check()
     end
   end
+  
+  if gamestate == "playingHal" then
+    if (paused == false) then
+    ballL1P1X = ballL1P1X + (dt * speed)
+    ballL1P1Y = ballL1P1Y + (dt * speed)
+    ballL1P2X = ballL1P2X - (dt * speed)
+    ballL1P2Y = ballL1P2Y - (dt * speed)
+    pausebutton_check()
+    singleControls()
+    map_collide()
+    elseif (paused == true) then
+      resumebutton_check()
+    end
+  end
+  
+  if gamestate == "playingXmas" then
+    if (paused == false) then
+    ballL1P1X = ballL1P1X + (dt * speed)
+    ballL1P1Y = ballL1P1Y + (dt * speed)
+    ballL1P2X = ballL1P2X - (dt * speed)
+    ballL1P2Y = ballL1P2Y - (dt * speed)
+    pausebutton_check()
+    singleControls()
+    map_collide() 
+    elseif (paused == true) then
+      resumebutton_check()
+    end
+  end
+end
+
+function love.keypressed(space)
+    --start balls moving
+  if gamestate == "xmasSingle" then
+    gamestate = "playingXmas"
+  elseif gamestate == "halloweenSingle" then
+    gamestate = "playingHal"
+  end
 end
 
 function love.draw() 
@@ -321,6 +370,12 @@ function love.draw()
     elseif gamestate == "levelSelectMulti" then
       levelSelectMultiDraw()
     elseif gamestate == "xmasMulti" then
+      halDraw()
+      pausebutton_draw()
+    elseif gamestate == "playingHal" then
+      xmasDraw()
+      pausebutton_draw()
+    elseif gamestate == "playingXmas" then
       halDraw()
       pausebutton_draw()
     elseif gamestate == "halloweenSingle" then
@@ -459,7 +514,9 @@ function map_collide()
   elseif ballL2P2Y > 620 then
     gamestate = "results"
     winnerSound:play()
-  end  
+  end
+  
+  
 end
 
 --https://github.com/AndyWarrior/Pong/blob/master/main.lua
