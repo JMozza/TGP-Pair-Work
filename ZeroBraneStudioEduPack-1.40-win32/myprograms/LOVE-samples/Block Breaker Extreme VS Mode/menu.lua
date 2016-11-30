@@ -38,6 +38,9 @@ function button_click(x,y)
             if v.id == "test" then
                 gamestate = "test"
             end
+            if v.id == "test2" then
+                gamestate = "test2"
+            end
             if v.id == "mute" then
               menuClick:setVolume(0.0)
               levelStart:setVolume(0.0)

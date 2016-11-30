@@ -9,8 +9,12 @@ require "level_2"
 require "pause"
 require "resume"
 require "test"
+require "test2"
 
 function love.load()
+  
+  height = love.graphics.getHeight()
+  width = love.graphics.getWidth()
   
   pauseBackground = love.graphics.newImage("sprites/Paused.png")
   pauseQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
@@ -239,6 +243,72 @@ function love.load()
   love.window.setMode(360, 640) --set the window dimensions to 650 by 650
   -----------------Test--------------------
   
+  -----------------Test2-------------------
+  -- PLAYER 1 SETUP
+  player = {}
+    player.width = 70
+    player.height = 20
+    player.x = width/2 - player.width/2
+    player.y = height - player.height
+    player.speed = 400
+    player.lives = 5
+    player.points = 0
+
+  
+  -- PLAYER 1 SETUP
+  player2 = {}
+
+    player2.width = 70
+    player2.height = 20
+    player2.x = width/2 - player2.width/2
+    player2.y = (height - player2.height) - 590
+    player2.speed = 400
+    player2.lives = 5
+    player2.points = 0
+
+
+  -- BLOCKS
+  blocks = {}
+  blocks.draw = {}
+
+  -- LOAD BLOCKS
+  column = 0; row = 1
+    while 5 >= row do
+      block = {}
+      block.width = width/10 - 5
+      block.height = 20
+      block.x = column * (block.width + 5)
+      block.y = (row * (block.height + 5)) + 220
+      table.insert(blocks.draw, block)
+      column = column + 1
+      if column == 10 then column = 0; row = row + 1 end
+    end
+
+
+  -- BALL
+  ball = {}
+
+    ball.radius = 5
+    ball.x = width/2
+    ball.y = player.y - 200
+    ball.speed = 200
+    ball.direction = "d"
+    ball.cooldown = 200
+
+
+  -- CHECK TOP FOR BOUNCE
+  function topbounce()
+    if ball.direction == "ull" then ball.direction = "dll"
+    elseif ball.direction == "ul" then ball.direction = "dl"
+    elseif ball.direction == "uul" then ball.direction = "ddl"
+    elseif ball.direction == "u" then ball.direction = "d"
+    elseif ball.direction == "uur" then ball.direction = "ddr"
+    elseif ball.direction == "ur" then ball.direction = "dr"
+    elseif ball.direction == "urr" then ball.direction = "drr"
+    end
+  end
+  -----------------Test2-------------------
+  
   paused = false
   gamestate = "menu"
   
@@ -260,6 +330,7 @@ function love.load()
   multiButton_spawn(110,450,"Back", "multiBack")
   pausebutton_spawn(0, 0, "Paused", "paused")
   resumebutton_spawn(140, 0, "Resume", "resume")
+  button_spawn(140,550, "Test2", "test2")
   
   --if (gamestate == "xmasSingle" or gamestate == "xmasMulti") then
     --xmasLoad()
@@ -271,6 +342,170 @@ function love.load()
 end
 
 function love.update(dt) 
+  
+  ------------------Test2Update--------------------
+  if ball.cooldown > 0 then 
+    ball.cooldown = ball.cooldown - 1 
+  end
+
+  -- Player 1 movement
+  if love.keyboard.isDown("right") and player.x <= (width - player.width) then
+    player.x = player.x + (dt * player.speed)
+  elseif love.keyboard.isDown("left") and player.x >= 0 then
+    player.x = player.x - (dt * player.speed)
+  elseif love.keyboard.isDown("r") then
+    ball.radius = 5
+    ball.x = width/2
+    ball.y = player.y - 200
+    ball.speed = 200
+    ball.direction = "d"
+    ball.cooldown = 200
+  end
+  
+  -- Player 2 movement
+  if love.keyboard.isDown("d") and player2.x <= (width - player2.width) then
+    player2.x = player2.x + (dt * player2.speed)
+  elseif love.keyboard.isDown("a") and player2.x >= 0 then
+    player2.x = player2.x - (dt * player2.speed) end
+
+  -- Hitbox for player 1
+  if ball.y >= player.y and ball.y <= height and ball.x >= player.x and
+    ball.x <= (player.x + player.width) then
+    if ball.x >= player.x and ball.x < (player.x + 10) then
+      ball.direction = "ull"
+    elseif ball.x >= (player.x + 10) and ball.x < (player.x + 20) then
+      ball.direction = "ul"
+    elseif ball.x >= (player.x + 20) and ball.x < (player.x + 30) then
+      ball.direction = "uul"
+    elseif ball.x >= (player.x + 30) and ball.x < (player.x + 40) then
+      ball.direction = "u"
+    elseif ball.x >= (player.x + 40) and ball.x < (player.x + 50) then
+      ball.direction = "uur"
+    elseif ball.x >= (player.x + 50) and ball.x < (player.x + 60) then
+      ball.direction = "ur"
+    elseif ball.x >= (player.x + 60) and ball.x < (player.x + 70) then
+      ball.direction = "urr"
+    end
+    --love.audio.play(bounce)
+  end
+  
+  -- Hitbox for player 2
+  if ball.y >= player2.y and ball.y <= height and ball.x >= player2.x and
+    ball.x <= (player2.x + player2.width) then
+    if ball.x >= player2.x and ball.x < (player2.x + 10) then
+      ball.direction = "ull"
+    elseif ball.x >= (player2.x + 10) and ball.x < (player2.x + 20) then
+      ball.direction = "ul"
+    elseif ball.x >= (player2.x + 20) and ball.x < (player2.x + 30) then
+      ball.direction = "uul"
+    elseif ball.x >= (player2.x + 30) and ball.x < (player2.x + 40) then
+      ball.direction = "u"
+    elseif ball.x >= (player2.x + 40) and ball.x < (player2.x + 50) then
+      ball.direction = "uur"
+    elseif ball.x >= (player2.x + 50) and ball.x < (player2.x + 60) then
+      ball.direction = "ur"
+    elseif ball.x >= (player2.x + 60) and ball.x < (player2.x + 70) then
+      ball.direction = "urr"
+    end
+    --love.audio.play(bounce)
+  end
+
+  -- Hitbox for blocks
+  for i,v in ipairs(blocks.draw) do
+    if ball.y <= (v.y + v.height) and ball.y >= v.y then
+      if ball.x <= (v.x + v.width) and ball.x >= v.x then
+        topbounce()
+        --love.audio.play(hit)
+        table.remove(blocks.draw, i)
+        player.points = player.points + 1
+      end
+    end
+  end
+
+  -- Bounces ball off walls
+  if (ball.x <= 0) or (ball.x >= width) then
+    if ball.direction == "uur" then ball.direction = "uul"
+    elseif ball.direction == "ur" then ball.direction = "ul"
+    elseif ball.direction == "urr" then ball.direction = "ull"
+    elseif ball.direction == "drr" then ball.direction = "dll"
+    elseif ball.direction == "dr" then ball.direction = "dl"
+    elseif ball.direction == "ddr" then ball.direction = "ddl"
+    elseif ball.direction == "ddl" then ball.direction = "ddr"
+    elseif ball.direction == "dl" then ball.direction = "dr"
+    elseif ball.direction == "dll" then ball.direction = "drr"
+    elseif ball.direction == "ull" then ball.direction = "urr"
+    elseif ball.direction == "ul" then ball.direction = "ur"
+    elseif ball.direction == "uul" then ball.direction = "uur"
+    end
+    --love.audio.play(bounce)
+  end
+
+  -- Bounce ball off ceiling
+  if ball.y <= 0 then topbounce() end
+
+  -- Move ball
+  if ball.cooldown == 0 then
+    if ball.direction == "u" then
+      ball.y = ball.y - 2 * (dt * ball.speed)
+    elseif ball.direction == "uur" then
+      ball.y = ball.y - 2 * (dt * ball.speed)
+      ball.x = ball.x + 1 * (dt * ball.speed)
+    elseif ball.direction == "ur" then
+      ball.y = ball.y - 2 * (dt * ball.speed)
+      ball.x = ball.x + 2 * (dt * ball.speed)
+    elseif ball.direction == "urr" then
+      ball.y = ball.y - 1 * (dt * ball.speed)
+      ball.x = ball.x + 2 * (dt * ball.speed)
+    elseif ball.direction == "drr" then
+      ball.y = ball.y + 1 * (dt * ball.speed)
+      ball.x = ball.x + 2 * (dt * ball.speed)
+    elseif ball.direction == "dr" then
+      ball.y = ball.y + 2 * (dt * ball.speed)
+      ball.x = ball.x + 2 * (dt * ball.speed)
+    elseif ball.direction == "ddr" then
+      ball.y = ball.y + 2 * (dt * ball.speed)
+      ball.x = ball.x + 1 * (dt * ball.speed)
+    elseif ball.direction == "d" then
+      ball.y = ball.y + 2 * (dt * ball.speed)
+    elseif ball.direction == "ddl" then
+      ball.y = ball.y + 2 * (dt * ball.speed)
+      ball.x = ball.x - 1 * (dt * ball.speed)
+    elseif ball.direction == "dl" then
+      ball.y = ball.y + 2 * (dt * ball.speed)
+      ball.x = ball.x - 2 * (dt * ball.speed)
+    elseif ball.direction == "dll" then
+      ball.y = ball.y + 1 * (dt * ball.speed)
+      ball.x = ball.x - 2 * (dt * ball.speed)
+    elseif ball.direction == "ull" then
+      ball.y = ball.y - 1 * (dt * ball.speed)
+      ball.x = ball.x - 2 * (dt * ball.speed)
+    elseif ball.direction == "ul" then
+      ball.y = ball.y - 2 * (dt * ball.speed)
+      ball.x = ball.x - 2 * (dt * ball.speed)
+    elseif ball.direction == "uul" then
+      ball.y = ball.y - 2 * (dt * ball.speed)
+      ball.x = ball.x - 1 * (dt * ball.speed)
+    end
+  end
+
+  if ball.y >= height then
+    --love.audio.play(loss)
+    player.lives = player.lives - 1; 
+    ball.radius = 5
+    ball.x = width/2
+    ball.y = player.y - 200
+    ball.speed = 200
+    ball.direction = "d"
+    ball.cooldown = 200
+  end
+
+  if player.lives < 0 then
+    love.graphics.print("GAME OVER", width/2, height/2)
+    love.load()
+  end
+  ------------------Test2Update--------------------
+  
+  
   --get rid of after bug fixing, useful for swithcing modes atm
   --if love.keyboard.isDown("up") then
     --gamestate = "halloweenMulti"
@@ -448,6 +683,8 @@ function love.draw()
       --winnerSound:setVolume(0.0)
     elseif gamestate == "test" then
       testDraw()
+    elseif gamestate == "test2" then
+      test2Draw()
     end 
   end
 end
