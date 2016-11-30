@@ -59,8 +59,6 @@ function love.load()
   backgroundSound = love.audio.newSource("sounds/Background.mp3")
   ------------------------
   
-  angle = 0
-  
   ------------------------
   level1BlockLayerX = 0
   level1BlockLayerX2 = 72
@@ -229,7 +227,8 @@ function love.load()
   ballobjects.ball2.fixture:setUserData("Ball2")
   ballobjects.ball2.body:setLinearDamping(0)
 
-  speed = 50
+  paddlespeed = 50
+  ballspeed = 80
   angle = 0
   
   text       = ""   -- we'll use this to put info text on the screen later
@@ -303,11 +302,20 @@ function love.update(dt)
   mousey = love.mouse.getY()
   
   --look at tomorrow
-  --angle = math.angle(paddleP1X, paddleP1Y, ballL1P1X, ballL1P1Y)
-  --dx = math.cos(angle) * (dt * speed)
-  --dy = math.sin(angle) * (dt * speed)
-  --paddleP1X = paddleP1X + dx
-  --paddleP1Y = paddleP1Y + dy
+  if gamestate == "playingHal" then
+    myAngle = math.angle(paddleP1X, paddleP1Y, ballL1P1X, ballL1P1Y)
+    --dx = math.cos(myAngle) * (dt * speed)
+    dx = math.cos(myAngle) * (dt * paddlespeed)
+    --paddleP1X = paddleP1X + dx
+    --paddleP1Y = paddleP1Y + (dx * 0)
+    if paddleP1X == 0 then
+      paddleP1X = paddleP1X + 1.5
+    elseif paddleP1X == 270 then
+      paddleP1X = paddleP1X - 1.5
+    elseif paddleP1X > 0 and paddleP1X < 270 then
+      paddleP1X = paddleP1X + dx
+    end
+  end
 
   if gamestate == "menu" then
     button_check()
@@ -365,10 +373,10 @@ function love.update(dt)
   
   if gamestate == "playingHal" then
     if (paused == false) then
-    ballL1P1X = ballL1P1X + (dt * speed)
-    ballL1P1Y = ballL1P1Y + (dt * speed)
-    ballL1P2X = ballL1P2X - (dt * speed)
-    ballL1P2Y = ballL1P2Y - (dt * speed)
+    ballL1P1X = ballL1P1X - (dt * ballspeed)
+    ballL1P1Y = ballL1P1Y + (dt * ballspeed)
+    ballL1P2X = ballL1P2X + (dt * ballspeed)
+    ballL1P2Y = ballL1P2Y - (dt * ballspeed)
     pausebutton_check()
     singleControls()
     map_collide()
@@ -379,10 +387,10 @@ function love.update(dt)
   
   if gamestate == "playingXmas" then
     if (paused == false) then
-    ballL1P1X = ballL1P1X + (dt * speed)
-    ballL1P1Y = ballL1P1Y + (dt * speed)
-    ballL1P2X = ballL1P2X - (dt * speed)
-    ballL1P2Y = ballL1P2Y - (dt * speed)
+    ballL1P1X = ballL1P1X + (dt * ballspeed)
+    ballL1P1Y = ballL1P1Y + (dt * ballspeed)
+    ballL1P2X = ballL1P2X - (dt * ballspeed)
+    ballL1P2Y = ballL1P2Y - (dt * ballspeed)
     pausebutton_check()
     singleControls()
     map_collide() 
@@ -560,8 +568,9 @@ function map_collide()
     gamestate = "results"
     winnerSound:play()
   end
-  
-  
+
 end
+
+function math.angle(x1,y1, x2,y2) return math.atan2(y2-y1, x2-x1) end
 
 --https://github.com/AndyWarrior/Pong/blob/master/main.lua
