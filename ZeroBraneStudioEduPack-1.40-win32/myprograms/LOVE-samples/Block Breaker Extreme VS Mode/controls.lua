@@ -82,11 +82,11 @@ function singleControls()
     ballL1P2X = ballL1P2X + 1.5
   end
   
-  --if paddleP2X == 0 then
-    --paddleP2X = paddleP2X + 1.5
-  --elseif paddleP2X == 270 then
-    --paddleP2X = paddleP2X - 1.5
-  --end
+  if paddleP2X == 0 then
+    paddleP2X = paddleP2X + 1.5
+  elseif paddleP2X == 270 then
+    paddleP2X = paddleP2X - 1.5
+  end
   
   if love.keyboard.isDown("escape") then
     gamestate = "paused"
