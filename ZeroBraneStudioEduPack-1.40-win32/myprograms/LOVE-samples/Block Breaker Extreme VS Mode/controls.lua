@@ -56,11 +56,11 @@ function singleControls()
   end
   
   --replace ai with angle tracker
-  if ballL1P1Y < ballL1P2Y then
-      paddleP1X = ballL1P1X - 35
-  elseif ballL1P2Y < ballL1P1Y then
-      paddleP1X = ballL1P2X - 35
-  end
+  --if ballL1P1Y < ballL1P2Y then
+      --paddleP1X = ballL1P1X - 35
+  --elseif ballL1P2Y < ballL1P1Y then
+      --paddleP1X = ballL1P2X - 35
+  --end
   
   if love.keyboard.isDown("k") then
     ballL1P1Y = ballL1P1Y + 1.5
@@ -82,11 +82,11 @@ function singleControls()
     ballL1P2X = ballL1P2X + 1.5
   end
   
-  if paddleP2X == 0 then
-    paddleP2X = paddleP2X + 1.5
-  elseif paddleP2X == 270 then
-    paddleP2X = paddleP2X - 1.5
-  end
+  --if paddleP2X == 0 then
+    --paddleP2X = paddleP2X + 1.5
+  --elseif paddleP2X == 270 then
+    --paddleP2X = paddleP2X - 1.5
+  --end
   
   if love.keyboard.isDown("escape") then
     gamestate = "paused"
