@@ -56,8 +56,8 @@
  
 function testControls()
   if love.keyboard.isDown("space") then --press the right arrow key to push the ball to the right
-    ballobjects.ball1.body:applyForce(400, 800)
-    ballobjects.ball2.body:applyForce(400, -800)
+    ballobjects.ball1.body:applyForce(200, 400)
+    ballobjects.ball2.body:applyForce(200, -400)
   end
   
   if love.keyboard.isDown("d") then
@@ -87,16 +87,56 @@ function testControls()
   end
 end
  
-function testDraw()
-  love.graphics.setColor(72, 160, 14) -- set the drawing color to green for the ground
-  love.graphics.polygon("fill", staticobjects.bottom.body:getWorldPoints(staticobjects.bottom.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
-  love.graphics.polygon("fill", staticobjects.top.body:getWorldPoints(staticobjects.top.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
-  love.graphics.polygon("fill", staticobjects.left.body:getWorldPoints(staticobjects.left.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
-  love.graphics.polygon("fill", staticobjects.right.body:getWorldPoints(staticobjects.right.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
-  love.graphics.polygon("fill", movableobjects.paddle1.body:getWorldPoints(movableobjects.paddle1.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
-  love.graphics.polygon("fill", movableobjects.paddle2.body:getWorldPoints(movableobjects.paddle2.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
+function testDraw()  
+  
+    for i=1,5 do
+    block[i] = love.graphics.draw(blockHalLayer1_7, level1BlockLayerX + (i-1)*72, level1BlockLayer1Y)
+  end
+  
+  for i=1,5 do
+    block[i] = love.graphics.draw(blockHalLayer2_6, level1BlockLayerX + (i-1)*72, level1BlockLayer2Y)
+  end
+    
+  for i=1,5 do
+    block[i] = love.graphics.draw(blockHalLayer3_5, level1BlockLayerX + (i-1)*72, level1BlockLayer3Y)
+  end
+  
+  for i=1,3 do
+    block[i] = love.graphics.draw(blockHalLayer4, level1BlockLayerX + (i-1)*144, level1BlockLayer4Y)
+  end
+    love.graphics.draw(blockHalLayer4S, level1BlockLayerX2, level1BlockLayer4Y)
+    love.graphics.draw(blockHalLayer4S, level1BlockLayerX4, level1BlockLayer4Y)
+  
+  for i=1,5 do
+    block[i] = love.graphics.draw(blockHalLayer3_5, level1BlockLayerX + 72 + (i-1)*72, level1BlockLayer5Y, math.rad(180))
+  end
+  
+  for i=1,5 do
+    block[i] = love.graphics.draw(blockHalLayer2_6, level1BlockLayerX + 72 + (i-1)*72, level1BlockLayer6Y, math.rad(180))
+  end
+  
+  for i=1,5 do
+    block[i] = love.graphics.draw(blockHalLayer1_7, level1BlockLayerX + 72 + (i-1)*72, level1BlockLayer7Y, math.rad(180))
+  end
+  
+  
+  --love.graphics.setColor(72, 160, 14) -- set the drawing color to green for the ground
+  love.graphics.polygon("line", staticobjects.bottom.body:getWorldPoints(staticobjects.bottom.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
+  love.graphics.polygon("line", staticobjects.top.body:getWorldPoints(staticobjects.top.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
+  love.graphics.polygon("line", staticobjects.left.body:getWorldPoints(staticobjects.left.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
+  love.graphics.polygon("line", staticobjects.right.body:getWorldPoints(staticobjects.right.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
+  love.graphics.polygon("line", movableobjects.paddle1.body:getWorldPoints(movableobjects.paddle1.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
+  love.graphics.polygon("line", movableobjects.paddle2.body:getWorldPoints(movableobjects.paddle2.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
 
-  love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
+  --love.graphics.draw(blockHalLayer1_7, staticobjects.block.body:getX(), staticobjects.block.body:getY())
+  love.graphics.polygon("line", staticobjects.block.body:getWorldPoints(staticobjects.block.shape:getPoints()))
+
+  love.graphics.polygon("line", staticobjects.block2.body:getWorldPoints(staticobjects.block2.shape:getPoints()))
+  love.graphics.polygon("line", staticobjects.block3.body:getWorldPoints(staticobjects.block3.shape:getPoints()))
+  love.graphics.polygon("line", staticobjects.block4.body:getWorldPoints(staticobjects.block4.shape:getPoints()))
+  love.graphics.polygon("line", staticobjects.block5.body:getWorldPoints(staticobjects.block5.shape:getPoints()))
+
+  --love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
   love.graphics.circle("fill", ballobjects.ball1.body:getX(), ballobjects.ball1.body:getY(), ballobjects.ball1.shape:getRadius())
   love.graphics.circle("fill", ballobjects.ball2.body:getX(), ballobjects.ball2.body:getY(), ballobjects.ball2.shape:getRadius())
   
@@ -104,5 +144,12 @@ function testDraw()
   love.graphics.polygon("line", movableobjects.paddle1.body:getWorldPoints(movableobjects.paddle1.shape:getPoints()))
   love.graphics.circle("line", ballobjects.ball2.body:getX(), ballobjects.ball2.body:getY(), ballobjects.ball2.shape:getRadius(), 20)
   love.graphics.polygon("line", movableobjects.paddle2.body:getWorldPoints(movableobjects.paddle2.shape:getPoints()))
+  
+  love.graphics.polygon("line", staticobjects.block.body:getWorldPoints(staticobjects.block.shape:getPoints()))
+  love.graphics.polygon("line", staticobjects.block2.body:getWorldPoints(staticobjects.block2.shape:getPoints()))
+  love.graphics.polygon("line", staticobjects.block3.body:getWorldPoints(staticobjects.block3.shape:getPoints()))
+  love.graphics.polygon("line", staticobjects.block4.body:getWorldPoints(staticobjects.block4.shape:getPoints()))
+  love.graphics.polygon("line", staticobjects.block5.body:getWorldPoints(staticobjects.block5.shape:getPoints()))
+  
   love.graphics.print(text, 10, 10)
 end

@@ -116,6 +116,21 @@ function love.load()
   lastPostionBall1 = 0
   
   time = 0
+  
+  newX = 36
+  newX2 = 108
+  newX3 = 180
+  newX4 = 252
+  newX5 = 324
+  
+  newY = 256
+  newY2 = 277
+  newY3 = 298
+  newY4 = 319
+  newY5 = 361
+  newY6 = 382
+  newY7 = 403
+  
   -----------------
   
   ----------------Test----------------------
@@ -151,6 +166,36 @@ function love.load()
   staticobjects.top.shape = love.physics.newRectangleShape(650, 10) --rectangle with a width of 650 and a height of 50
   staticobjects.top.fixture = love.physics.newFixture(staticobjects.top.body, staticobjects.top.shape); --attach shape to body
   staticobjects.top.fixture:setUserData("Top")
+   
+  staticobjects.block = {}
+  staticobjects.block.body = love.physics.newBody(world, newX, newY4 )
+  staticobjects.block.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block.fixture = love.physics.newFixture(staticobjects.block.body, staticobjects.block.shape);
+  staticobjects.block.fixture:setUserData("block1")
+  
+  staticobjects.block2 = {}
+  staticobjects.block2.body = love.physics.newBody(world, newX2, newY4)
+  staticobjects.block2.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block2.fixture = love.physics.newFixture(staticobjects.block2.body, staticobjects.block2.shape);
+  staticobjects.block2.fixture:setUserData("block2")
+  
+  staticobjects.block3 = {}
+  staticobjects.block3.body = love.physics.newBody(world, newX3, newY4)
+  staticobjects.block3.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block3.fixture = love.physics.newFixture(staticobjects.block3.body, staticobjects.block3.shape);
+  staticobjects.block3.fixture:setUserData("block3")
+  
+  staticobjects.block4 = {}
+  staticobjects.block4.body = love.physics.newBody(world, newX4, newY4)
+  staticobjects.block4.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block4.fixture = love.physics.newFixture(staticobjects.block4.body, staticobjects.block4.shape);
+  staticobjects.block4.fixture:setUserData("block4")
+  
+  staticobjects.block5 = {}
+  staticobjects.block5.body = love.physics.newBody(world, newX5, newY4)
+  staticobjects.block5.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block5.fixture = love.physics.newFixture(staticobjects.block5.body, staticobjects.block5.shape);
+  staticobjects.block5.fixture:setUserData("block5")
   
   movableobjects.paddle1= {}
   movableobjects.paddle1.body = love.physics.newBody(world, 360/2, 610) --the shape anchors to the body from its center
@@ -168,7 +213,7 @@ function love.load()
   ballobjects.ball1 = {}
   ballobjects.ball1.body = love.physics.newBody(world, 360/2, 60, "dynamic") --place the body in the center of the world and make it dynamic, so it can move around
   ballobjects.ball1.body:setMass(0)
-  ballobjects.ball1.shape = love.physics.newCircleShape(20) --the ball's shape has a radius of 20
+  ballobjects.ball1.shape = love.physics.newCircleShape(10) --the ball's shape has a radius of 20
   ballobjects.ball1.fixture = love.physics.newFixture(ballobjects.ball1.body, ballobjects.ball1.shape, 1) -- Attach fixture to body and give it a density of 1.
   ballobjects.ball1.fixture:setRestitution(1.0) --ball bounce
   ballobjects.ball1.fixture:setUserData("Ball1")
@@ -178,7 +223,7 @@ function love.load()
   ballobjects.ball2 = {}
   ballobjects.ball2.body = love.physics.newBody(world, 360/2, 580, "dynamic") --place the body in the center of the world and make it dynamic, so it can move around
   ballobjects.ball2.body:setMass(0)
-  ballobjects.ball2.shape = love.physics.newCircleShape(20) --the ball's shape has a radius of 20
+  ballobjects.ball2.shape = love.physics.newCircleShape(10) --the ball's shape has a radius of 20
   ballobjects.ball2.fixture = love.physics.newFixture(ballobjects.ball2.body, ballobjects.ball2.shape, 1) -- Attach fixture to body and give it a density of 1.
   ballobjects.ball2.fixture:setRestitution(1.0) --lets the ball bounce
   ballobjects.ball2.fixture:setUserData("Ball2")
