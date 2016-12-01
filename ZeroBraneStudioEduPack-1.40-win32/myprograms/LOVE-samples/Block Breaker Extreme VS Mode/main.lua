@@ -129,9 +129,9 @@ function love.load()
   newY2 = 277
   newY3 = 298
   newY4 = 319
-  newY5 = 361
-  newY6 = 382
-  newY7 = 403
+  newY5 = 340
+  newY6 = 361
+  newY7 = 382
   
   -----------------
   
@@ -168,37 +168,225 @@ function love.load()
   staticobjects.top.shape = love.physics.newRectangleShape(650, 10) --rectangle with a width of 650 and a height of 50
   staticobjects.top.fixture = love.physics.newFixture(staticobjects.top.body, staticobjects.top.shape); --attach shape to body
   staticobjects.top.fixture:setUserData("Top")
-   
+  
+  --layer 1
   staticobjects.block = {}
-  staticobjects.block.body = love.physics.newBody(world, newX, newY4 )
+  staticobjects.block.body = love.physics.newBody(world, newX, newY )
   staticobjects.block.shape = love.physics.newRectangleShape( 72, 21)
   staticobjects.block.fixture = love.physics.newFixture(staticobjects.block.body, staticobjects.block.shape);
-  staticobjects.block.fixture:setUserData("block1")
+  staticobjects.block.fixture:setUserData("block")
   
   staticobjects.block2 = {}
-  staticobjects.block2.body = love.physics.newBody(world, newX2, newY4)
+  staticobjects.block2.body = love.physics.newBody(world, newX2, newY)
   staticobjects.block2.shape = love.physics.newRectangleShape( 72, 21)
   staticobjects.block2.fixture = love.physics.newFixture(staticobjects.block2.body, staticobjects.block2.shape);
   staticobjects.block2.fixture:setUserData("block2")
   
   staticobjects.block3 = {}
-  staticobjects.block3.body = love.physics.newBody(world, newX3, newY4)
+  staticobjects.block3.body = love.physics.newBody(world, newX3, newY)
   staticobjects.block3.shape = love.physics.newRectangleShape( 72, 21)
   staticobjects.block3.fixture = love.physics.newFixture(staticobjects.block3.body, staticobjects.block3.shape);
   staticobjects.block3.fixture:setUserData("block3")
   
   staticobjects.block4 = {}
-  staticobjects.block4.body = love.physics.newBody(world, newX4, newY4)
+  staticobjects.block4.body = love.physics.newBody(world, newX4, newY)
   staticobjects.block4.shape = love.physics.newRectangleShape( 72, 21)
   staticobjects.block4.fixture = love.physics.newFixture(staticobjects.block4.body, staticobjects.block4.shape);
   staticobjects.block4.fixture:setUserData("block4")
   
   staticobjects.block5 = {}
-  staticobjects.block5.body = love.physics.newBody(world, newX5, newY4)
+  staticobjects.block5.body = love.physics.newBody(world, newX5, newY)
   staticobjects.block5.shape = love.physics.newRectangleShape( 72, 21)
   staticobjects.block5.fixture = love.physics.newFixture(staticobjects.block5.body, staticobjects.block5.shape);
   staticobjects.block5.fixture:setUserData("block5")
   
+  --layer2
+  staticobjects.block6 = {}
+  staticobjects.block6.body = love.physics.newBody(world, newX, newY2 )
+  staticobjects.block6.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block6.fixture = love.physics.newFixture(staticobjects.block6.body, staticobjects.block6.shape);
+  staticobjects.block6.fixture:setUserData("block6")
+  
+  staticobjects.block7 = {}
+  staticobjects.block7.body = love.physics.newBody(world, newX2, newY2)
+  staticobjects.block7.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block7.fixture = love.physics.newFixture(staticobjects.block7.body, staticobjects.block7.shape);
+  staticobjects.block7.fixture:setUserData("block7")
+  
+  staticobjects.block8 = {}
+  staticobjects.block8.body = love.physics.newBody(world, newX3, newY2)
+  staticobjects.block8.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block8.fixture = love.physics.newFixture(staticobjects.block8.body, staticobjects.block8.shape);
+  staticobjects.block8.fixture:setUserData("block8")
+  
+  staticobjects.block9 = {}
+  staticobjects.block9.body = love.physics.newBody(world, newX4, newY2)
+  staticobjects.block9.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block9.fixture = love.physics.newFixture(staticobjects.block9.body, staticobjects.block9.shape);
+  staticobjects.block9.fixture:setUserData("block9")
+  
+  staticobjects.block10 = {}
+  staticobjects.block10.body = love.physics.newBody(world, newX5, newY2)
+  staticobjects.block10.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block10.fixture = love.physics.newFixture(staticobjects.block10.body, staticobjects.block10.shape);
+  staticobjects.block10.fixture:setUserData("block10")
+  
+  --layer 3
+  staticobjects.block11 = {}
+  staticobjects.block11.body = love.physics.newBody(world, newX, newY3 )
+  staticobjects.block11.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block11.fixture = love.physics.newFixture(staticobjects.block11.body, staticobjects.block11.shape);
+  staticobjects.block11.fixture:setUserData("block11")
+  
+  staticobjects.block12 = {}
+  staticobjects.block12.body = love.physics.newBody(world, newX2, newY3)
+  staticobjects.block12.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block12.fixture = love.physics.newFixture(staticobjects.block12.body, staticobjects.block12.shape);
+  staticobjects.block12.fixture:setUserData("block12")
+  
+  staticobjects.block13 = {}
+  staticobjects.block13.body = love.physics.newBody(world, newX3, newY3)
+  staticobjects.block13.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block13.fixture = love.physics.newFixture(staticobjects.block13.body, staticobjects.block13.shape);
+  staticobjects.block13.fixture:setUserData("block13")
+  
+  staticobjects.block14 = {}
+  staticobjects.block14.body = love.physics.newBody(world, newX4, newY3)
+  staticobjects.block14.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block14.fixture = love.physics.newFixture(staticobjects.block14.body, staticobjects.block14.shape);
+  staticobjects.block14.fixture:setUserData("block14")
+  
+  staticobjects.block15 = {}
+  staticobjects.block15.body = love.physics.newBody(world, newX5, newY3)
+  staticobjects.block15.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block15.fixture = love.physics.newFixture(staticobjects.block15.body, staticobjects.block15.shape);
+  staticobjects.block15.fixture:setUserData("block15")
+  
+  --layer4
+  staticobjects.block16 = {}
+  staticobjects.block16.body = love.physics.newBody(world, newX, newY4)
+  staticobjects.block16.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block16.fixture = love.physics.newFixture(staticobjects.block16.body, staticobjects.block16.shape);
+  staticobjects.block16.fixture:setUserData("block16")
+  
+  staticobjects.block17 = {}
+  staticobjects.block17.body = love.physics.newBody(world, newX2, newY4)
+  staticobjects.block17.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block17.fixture = love.physics.newFixture(staticobjects.block17.body, staticobjects.block17.shape);
+  staticobjects.block17.fixture:setUserData("block17")
+  
+  staticobjects.block18 = {}
+  staticobjects.block18.body = love.physics.newBody(world, newX3, newY4)
+  staticobjects.block18.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block18.fixture = love.physics.newFixture(staticobjects.block18.body, staticobjects.block18.shape);
+  staticobjects.block18.fixture:setUserData("block18")
+  
+  staticobjects.block19 = {}
+  staticobjects.block19.body = love.physics.newBody(world, newX4, newY4)
+  staticobjects.block19.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block19.fixture = love.physics.newFixture(staticobjects.block19.body, staticobjects.block19.shape);
+  staticobjects.block19.fixture:setUserData("block19")
+  
+  staticobjects.block20 = {}
+  staticobjects.block20.body = love.physics.newBody(world, newX5, newY4)
+  staticobjects.block20.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block20.fixture = love.physics.newFixture(staticobjects.block20.body, staticobjects.block20.shape);
+  staticobjects.block20.fixture:setUserData("block20")
+  
+  --layer 5
+  staticobjects.block21 = {}
+  staticobjects.block21.body = love.physics.newBody(world, newX, newY5 )
+  staticobjects.block21.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block21.fixture = love.physics.newFixture(staticobjects.block21.body, staticobjects.block21.shape);
+  staticobjects.block21.fixture:setUserData("block21")
+  
+  staticobjects.block22 = {}
+  staticobjects.block22.body = love.physics.newBody(world, newX2, newY5)
+  staticobjects.block22.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block22.fixture = love.physics.newFixture(staticobjects.block22.body, staticobjects.block22.shape);
+  staticobjects.block22.fixture:setUserData("block22")
+  
+  staticobjects.block23 = {}
+  staticobjects.block23.body = love.physics.newBody(world, newX3, newY5)
+  staticobjects.block23.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block23.fixture = love.physics.newFixture(staticobjects.block23.body, staticobjects.block23.shape);
+  staticobjects.block23.fixture:setUserData("block23")
+  
+  staticobjects.block24 = {}
+  staticobjects.block24.body = love.physics.newBody(world, newX4, newY5)
+  staticobjects.block24.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block24.fixture = love.physics.newFixture(staticobjects.block24.body, staticobjects.block24.shape);
+  staticobjects.block24.fixture:setUserData("block24")
+  
+  staticobjects.block25 = {}
+  staticobjects.block25.body = love.physics.newBody(world, newX5, newY5)
+  staticobjects.block25.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block25.fixture = love.physics.newFixture(staticobjects.block25.body, staticobjects.block25.shape);
+  staticobjects.block25.fixture:setUserData("block25")
+  
+  --layer4
+  staticobjects.block26 = {}
+  staticobjects.block26.body = love.physics.newBody(world, newX, newY6)
+  staticobjects.block26.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block26.fixture = love.physics.newFixture(staticobjects.block26.body, staticobjects.block26.shape);
+  staticobjects.block26.fixture:setUserData("block26")
+  
+  staticobjects.block27 = {}
+  staticobjects.block27.body = love.physics.newBody(world, newX2, newY6)
+  staticobjects.block27.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block27.fixture = love.physics.newFixture(staticobjects.block27.body, staticobjects.block27.shape);
+  staticobjects.block27.fixture:setUserData("block27")
+  
+  staticobjects.block28 = {}
+  staticobjects.block28.body = love.physics.newBody(world, newX3, newY6)
+  staticobjects.block28.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block28.fixture = love.physics.newFixture(staticobjects.block28.body, staticobjects.block28.shape);
+  staticobjects.block28.fixture:setUserData("block28")
+  
+  staticobjects.block29 = {}
+  staticobjects.block29.body = love.physics.newBody(world, newX4, newY6)
+  staticobjects.block29.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block29.fixture = love.physics.newFixture(staticobjects.block29.body, staticobjects.block29.shape);
+  staticobjects.block29.fixture:setUserData("block29")
+  
+  staticobjects.block30 = {}
+  staticobjects.block30.body = love.physics.newBody(world, newX5, newY6)
+  staticobjects.block30.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block30.fixture = love.physics.newFixture(staticobjects.block30.body, staticobjects.block30.shape);
+  staticobjects.block30.fixture:setUserData("block30")
+  
+  --layer 5
+  staticobjects.block31 = {}
+  staticobjects.block31.body = love.physics.newBody(world, newX, newY7 )
+  staticobjects.block31.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block31.fixture = love.physics.newFixture(staticobjects.block31.body, staticobjects.block31.shape);
+  staticobjects.block31.fixture:setUserData("block31")
+  
+  staticobjects.block32 = {}
+  staticobjects.block32.body = love.physics.newBody(world, newX2, newY7)
+  staticobjects.block32.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block32.fixture = love.physics.newFixture(staticobjects.block32.body, staticobjects.block32.shape);
+  staticobjects.block32.fixture:setUserData("block32")
+  
+  staticobjects.block33 = {}
+  staticobjects.block33.body = love.physics.newBody(world, newX3, newY7)
+  staticobjects.block33.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block33.fixture = love.physics.newFixture(staticobjects.block33.body, staticobjects.block33.shape);
+  staticobjects.block33.fixture:setUserData("block33")
+  
+  staticobjects.block34 = {}
+  staticobjects.block34.body = love.physics.newBody(world, newX4, newY7)
+  staticobjects.block34.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block34.fixture = love.physics.newFixture(staticobjects.block34.body, staticobjects.block34.shape);
+  staticobjects.block34.fixture:setUserData("block34")
+  
+  staticobjects.block35 = {}
+  staticobjects.block35.body = love.physics.newBody(world, newX5, newY7)
+  staticobjects.block35.shape = love.physics.newRectangleShape( 72, 21)
+  staticobjects.block35.fixture = love.physics.newFixture(staticobjects.block35.body, staticobjects.block35.shape);
+  staticobjects.block35.fixture:setUserData("block35")
+  
+  --paddles
   movableobjects.paddle1= {}
   movableobjects.paddle1.body = love.physics.newBody(world, 360/2, 610) --the shape anchors to the body from its center
   movableobjects.paddle1.shape = love.physics.newRectangleShape(100, 15) --rectangle with a width of 650 and a height of 50
@@ -567,23 +755,6 @@ function love.update(dt)
     testControls()
   end
   
-  time = time + 1
-  
-  currentPostionBall1 = ballobjects.ball1.body.getY
-  
-  if time > 600 and time < 630 then
-    --if currentPostionBall1 >= lastPostionBall1 then
-      --ballobjects.ball1.body:applyForce(400, -800)
-    --elseif currentPostionBall1 <= lastPostionBall1 then
-  ballobjects.ball1.body:applyForce(400, 800)
-  ballobjects.ball2.body:applyForce(400, -800)
-    --end
-  end
-  
-  if time > 630 then
-    time = 0
-  end
-  
   lastPostionBall1 = currentPostionBall1
 
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
@@ -745,6 +916,15 @@ end
 function beginContact(a, b, coll)
     x,y = coll:getNormal()
     text = text.."\n"..a:getUserData().." colliding with "..b:getUserData().." with a vector normal of: "..x..", "..y
+    name = a:getUserData()
+    
+  if(name ~= "Paddle1" or name ~= "Paddle2" or name ~= "Bottom" or name ~= "Top" or name ~= "Left" or name ~= "Right") then
+    a:destroy()
+  end
+end
+
+function endContact(a,b,coll)
+
 end
 
 function preSolve(a, b, coll)
@@ -757,6 +937,7 @@ function preSolve(a, b, coll)
 end
 
 function postSolve(a, b, coll, normalimpulse, tangentimpulse)
+
 end
 
 function map_collide()
@@ -809,5 +990,3 @@ function map_collide()
 end
 
 function math.angle(x1,y1, x2,y2) return math.atan2(y2-y1, x2-x1) end
-
---https://github.com/AndyWarrior/Pong/blob/master/main.lua
