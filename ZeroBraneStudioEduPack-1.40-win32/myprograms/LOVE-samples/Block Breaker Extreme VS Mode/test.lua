@@ -189,8 +189,8 @@ function testDraw()
   love.graphics.draw(blocklayer7fliped, block35X, block35Y)
   
   --love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
-  love.graphics.circle("fill", ballobjects.ball1.body:getX(), ballobjects.ball1.body:getY(), ballobjects.ball1.shape:getRadius())
-  love.graphics.circle("fill", ballobjects.ball2.body:getX(), ballobjects.ball2.body:getY(), ballobjects.ball2.shape:getRadius())
+  love.graphics.draw(ball1, ballobjects.ball1.body:getX(), ballobjects.ball1.body:getY(),0 ,1 ,1 , ballBoundingSqurare/2, ballBoundingSqurare/2)
+  love.graphics.draw(ball1, ballobjects.ball2.body:getX(), ballobjects.ball2.body:getY(),0 ,1 ,1 , ballBoundingSqurare/2, ballBoundingSqurare/2)
   
   love.graphics.circle("line", ballobjects.ball1.body:getX(), ballobjects.ball1.body:getY(), ballobjects.ball1.shape:getRadius(), 20)
   love.graphics.polygon("line", movableobjects.paddle1.body:getWorldPoints(movableobjects.paddle1.shape:getPoints()))
