@@ -11,8 +11,8 @@ function test2Draw()
   love.graphics.setColor(255, 255, 255)
   love.graphics.rectangle("fill", player.x, player.y, player.width, player.height - 10)
   -- Draw player 2
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.rectangle("fill", player2.x, player2.y, player2.width, player2.height - 10)
+  --love.graphics.setColor(255, 255, 255)
+  --love.graphics.rectangle("fill", player2.x, player2.y, player2.width, player2.height - 10)
 
   -- Draw blocks
   love.graphics.setColor(255, 0, 0)
