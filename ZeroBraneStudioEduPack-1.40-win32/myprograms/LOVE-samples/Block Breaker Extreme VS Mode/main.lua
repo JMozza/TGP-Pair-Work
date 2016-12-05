@@ -557,16 +557,16 @@ function love.load()
     player.points = 0
 
   
-  -- PLAYER 1 SETUP
-  player2 = {}
+  -- PLAYER 2 SETUP
+  --player2 = {}
 
-    player2.width = 70
-    player2.height = 20
-    player2.x = width/2 - player2.width/2
-    player2.y = (height - player2.height) - 590
-    player2.speed = 400
-    player2.lives = 5
-    player2.points = 0
+    --player2.width = 70
+    --player2.height = 20
+    --player2.x = width/2 - player2.width/2
+    --player2.y = (height - player2.height) - 590
+    --player2.speed = 400
+    --player2.lives = 5
+    --player2.points = 0
 
 
   -- BLOCKS
@@ -580,7 +580,7 @@ function love.load()
       block.width = width/10 - 5
       block.height = 20
       block.x = column * (block.width + 5)
-      block.y = (row * (block.height + 5)) + 220
+      block.y = (row * (block.height + 5))
       table.insert(blocks.draw, block)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -665,10 +665,10 @@ function love.update(dt)
   end
   
   -- Player 2 movement
-  if love.keyboard.isDown("d") and player2.x <= (width - player2.width) then
-    player2.x = player2.x + (dt * player2.speed)
-  elseif love.keyboard.isDown("a") and player2.x >= 0 then
-    player2.x = player2.x - (dt * player2.speed) end
+  --if love.keyboard.isDown("d") and player2.x <= (width - player2.width) then
+    --player2.x = player2.x + (dt * player2.speed)
+  --elseif love.keyboard.isDown("a") and player2.x >= 0 then
+    --player2.x = player2.x - (dt * player2.speed) end
 
   -- Hitbox for player 1
   if ball.y >= player.y and ball.y <= height and ball.x >= player.x and
@@ -692,25 +692,25 @@ function love.update(dt)
   end
   
   -- Hitbox for player 2
-  if ball.y >= player2.y and ball.y <= height and ball.x >= player2.x and
-    ball.x <= (player2.x + player2.width) then
-    if ball.x >= player2.x and ball.x < (player2.x + 10) then
-      ball.direction = "ull"
-    elseif ball.x >= (player2.x + 10) and ball.x < (player2.x + 20) then
-      ball.direction = "ul"
-    elseif ball.x >= (player2.x + 20) and ball.x < (player2.x + 30) then
-      ball.direction = "uul"
-    elseif ball.x >= (player2.x + 30) and ball.x < (player2.x + 40) then
-      ball.direction = "u"
-    elseif ball.x >= (player2.x + 40) and ball.x < (player2.x + 50) then
-      ball.direction = "uur"
-    elseif ball.x >= (player2.x + 50) and ball.x < (player2.x + 60) then
-      ball.direction = "ur"
-    elseif ball.x >= (player2.x + 60) and ball.x < (player2.x + 70) then
-      ball.direction = "urr"
-    end
+  --if ball.y >= player2.y and ball.y <= height and ball.x >= player2.x and
+    --ball.x <= (player2.x + player2.width) then
+    --if ball.x >= player2.x and ball.x < (player2.x + 10) then
+      --ball.direction = "ull"
+    --elseif ball.x >= (player2.x + 10) and ball.x < (player2.x + 20) then
+      --ball.direction = "ul"
+    --elseif ball.x >= (player2.x + 20) and ball.x < (player2.x + 30) then
+      --ball.direction = "uul"
+    --elseif ball.x >= (player2.x + 30) and ball.x < (player2.x + 40) then
+      --ball.direction = "u"
+    --elseif ball.x >= (player2.x + 40) and ball.x < (player2.x + 50) then
+      --ball.direction = "uur"
+    --elseif ball.x >= (player2.x + 50) and ball.x < (player2.x + 60) then
+      --ball.direction = "ur"
+    --elseif ball.x >= (player2.x + 60) and ball.x < (player2.x + 70) then
+      --ball.direction = "urr"
+    --end
     --love.audio.play(bounce)
-  end
+  --end
 
   -- Hitbox for blocks
   for i,v in ipairs(blocks.draw) do
