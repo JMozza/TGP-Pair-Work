@@ -53,6 +53,27 @@
   --love.graphics.setBackgroundColor(104, 136, 248) --set the background color to a nice blue
   --love.window.setMode(360, 640) --set the window dimensions to 650 by 650
 --end
+function testDestoryed()
+  
+  if (staticobjects.block.body:getUserData() == "null") then
+    staticobjects.block.body:setX(500)
+  end
+  if (staticobjects.block2.body:getUserData() == "null") then
+    staticobjects.block2.body:setX(500)
+  end
+  if (staticobjects.block3.body:getUserData() == "null") then
+    staticobjects.block3.body:setX(500)
+  end
+  if (staticobjects.block4.body:getUserData() == "null") then
+    staticobjects.block4.body:setX(500)
+  end
+  if (staticobjects.block5.body:getUserData() == "null") then
+    staticobjects.block5.body:setX(500)
+  end
+  
+end
+
+
  
 function testControls()
   if love.keyboard.isDown("space") then --press the right arrow key to push the ball to the right
@@ -88,105 +109,56 @@ function testControls()
 end
  
 function testDraw()    
-    love.graphics.polygon("line", staticobjects.bottom.body:getWorldPoints(staticobjects.bottom.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
+  love.graphics.polygon("line", staticobjects.bottom.body:getWorldPoints(staticobjects.bottom.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
   love.graphics.polygon("line", staticobjects.top.body:getWorldPoints(staticobjects.top.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
   love.graphics.polygon("line", staticobjects.left.body:getWorldPoints(staticobjects.left.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
   love.graphics.polygon("line", staticobjects.right.body:getWorldPoints(staticobjects.right.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
   love.graphics.polygon("line", movableobjects.paddle1.body:getWorldPoints(movableobjects.paddle1.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
   love.graphics.polygon("line", movableobjects.paddle2.body:getWorldPoints(movableobjects.paddle2.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
 
-  --layer1
-  love.graphics.polygon("line", staticobjects.block.body:getWorldPoints(staticobjects.block.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block2.body:getWorldPoints(staticobjects.block2.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block3.body:getWorldPoints(staticobjects.block3.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block4.body:getWorldPoints(staticobjects.block4.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block5.body:getWorldPoints(staticobjects.block5.shape:getPoints()))
+  love.graphics.draw(halBackground, halBackgroundQuad, 0, 0)
   
-  --layer2
-  love.graphics.polygon("line", staticobjects.block6.body:getWorldPoints(staticobjects.block6.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block7.body:getWorldPoints(staticobjects.block7.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block8.body:getWorldPoints(staticobjects.block8.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block9.body:getWorldPoints(staticobjects.block9.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block10.body:getWorldPoints(staticobjects.block10.shape:getPoints()))
+  love.graphics.draw(blockHalLayer1_7, staticobjects.block.body:getX()-36, staticobjects.block.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer1_7, staticobjects.block2.body:getX()-36, staticobjects.block2.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer1_7, staticobjects.block3.body:getX()-36, staticobjects.block3.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer1_7, staticobjects.block4.body:getX()-36, staticobjects.block4.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer1_7, staticobjects.block5.body:getX()-36, staticobjects.block5.body:getY()-10.5)
   
-  --layer3
-  love.graphics.polygon("line", staticobjects.block11.body:getWorldPoints(staticobjects.block11.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block12.body:getWorldPoints(staticobjects.block12.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block13.body:getWorldPoints(staticobjects.block13.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block14.body:getWorldPoints(staticobjects.block14.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block15.body:getWorldPoints(staticobjects.block15.shape:getPoints()))
+  love.graphics.draw(blockHalLayer2_6, staticobjects.block6.body:getX()-36, staticobjects.block6.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer2_6, staticobjects.block7.body:getX()-36, staticobjects.block7.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer2_6, staticobjects.block8.body:getX()-36, staticobjects.block8.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer2_6, staticobjects.block9.body:getX()-36, staticobjects.block9.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer2_6, staticobjects.block10.body:getX()-36, staticobjects.block10.body:getY()-10.5)
+
+  love.graphics.draw(blockHalLayer3_5, staticobjects.block11.body:getX()-36, staticobjects.block11.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer3_5, staticobjects.block12.body:getX()-36, staticobjects.block12.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer3_5, staticobjects.block13.body:getX()-36, staticobjects.block13.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer3_5, staticobjects.block14.body:getX()-36, staticobjects.block14.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer3_5, staticobjects.block15.body:getX()-36, staticobjects.block15.body:getY()-10.5)
   
-  --layer4
-  love.graphics.polygon("line", staticobjects.block16.body:getWorldPoints(staticobjects.block16.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block17.body:getWorldPoints(staticobjects.block17.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block18.body:getWorldPoints(staticobjects.block18.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block19.body:getWorldPoints(staticobjects.block19.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block20.body:getWorldPoints(staticobjects.block20.shape:getPoints()))
+  love.graphics.draw(blockHalLayer4, staticobjects.block16.body:getX()-36, staticobjects.block16.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer4, staticobjects.block17.body:getX()-36, staticobjects.block17.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer4, staticobjects.block18.body:getX()-36, staticobjects.block18.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer4, staticobjects.block19.body:getX()-36, staticobjects.block19.body:getY()-10.5)
+  love.graphics.draw(blockHalLayer4, staticobjects.block20.body:getX()-36, staticobjects.block20.body:getY()-10.5)
+
+  love.graphics.draw(blocklayer5fliped, staticobjects.block21.body:getX()-36, staticobjects.block21.body:getY()-10.5)
+  love.graphics.draw(blocklayer5fliped, staticobjects.block22.body:getX()-36, staticobjects.block22.body:getY()-10.5)
+  love.graphics.draw(blocklayer5fliped, staticobjects.block23.body:getX()-36, staticobjects.block23.body:getY()-10.5)
+  love.graphics.draw(blocklayer5fliped, staticobjects.block24.body:getX()-36, staticobjects.block24.body:getY()-10.5)
+  love.graphics.draw(blocklayer5fliped, staticobjects.block25.body:getX()-36, staticobjects.block25.body:getY()-10.5)
   
-  --layer5
-  love.graphics.polygon("line", staticobjects.block21.body:getWorldPoints(staticobjects.block21.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block22.body:getWorldPoints(staticobjects.block22.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block23.body:getWorldPoints(staticobjects.block23.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block24.body:getWorldPoints(staticobjects.block24.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block25.body:getWorldPoints(staticobjects.block25.shape:getPoints()))
+  love.graphics.draw(blocklayer6fliped, staticobjects.block26.body:getX()-36, staticobjects.block26.body:getY()-10.5)
+  love.graphics.draw(blocklayer6fliped, staticobjects.block27.body:getX()-36, staticobjects.block27.body:getY()-10.5)
+  love.graphics.draw(blocklayer6fliped, staticobjects.block28.body:getX()-36, staticobjects.block28.body:getY()-10.5)
+  love.graphics.draw(blocklayer6fliped, staticobjects.block29.body:getX()-36, staticobjects.block29.body:getY()-10.5)
+  love.graphics.draw(blocklayer6fliped, staticobjects.block30.body:getX()-36, staticobjects.block30.body:getY()-10.5)
   
-  --layer6
-  love.graphics.polygon("line", staticobjects.block26.body:getWorldPoints(staticobjects.block26.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block27.body:getWorldPoints(staticobjects.block27.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block28.body:getWorldPoints(staticobjects.block28.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block29.body:getWorldPoints(staticobjects.block29.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block30.body:getWorldPoints(staticobjects.block30.shape:getPoints()))
-  
-  --layer7
-  love.graphics.polygon("line", staticobjects.block31.body:getWorldPoints(staticobjects.block31.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block32.body:getWorldPoints(staticobjects.block32.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block33.body:getWorldPoints(staticobjects.block33.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block34.body:getWorldPoints(staticobjects.block34.shape:getPoints()))
-  love.graphics.polygon("line", staticobjects.block35.body:getWorldPoints(staticobjects.block35.shape:getPoints()))
-  
-    love.graphics.draw(halBackground, halBackgroundQuad, 0, 0)
-  
-  love.graphics.draw(blockHalLayer1_7, block1X, block1Y)
-  love.graphics.draw(blockHalLayer1_7, block2X, block2Y)
-  love.graphics.draw(blockHalLayer1_7, block3X, block3Y)
-  love.graphics.draw(blockHalLayer1_7, block4X, block4Y)
-  love.graphics.draw(blockHalLayer1_7, block5X, block5Y)
-  
-  love.graphics.draw(blockHalLayer2_6, block6X, block6Y)
-  love.graphics.draw(blockHalLayer2_6, block7X, block7Y)
-  love.graphics.draw(blockHalLayer2_6, block8X, block8Y)
-  love.graphics.draw(blockHalLayer2_6, block9X, block9Y)
-  love.graphics.draw(blockHalLayer2_6, block10X, block10Y)
-  
-  love.graphics.draw(blockHalLayer3_5, block11X, block11Y)
-  love.graphics.draw(blockHalLayer3_5, block12X, block12Y)
-  love.graphics.draw(blockHalLayer3_5, block13X, block13Y)
-  love.graphics.draw(blockHalLayer3_5, block14X, block14Y)
-  love.graphics.draw(blockHalLayer3_5, block15X, block15Y)
-  
-  love.graphics.draw(blockHalLayer4, block16X, block16Y)
-  love.graphics.draw(blockHalLayer4, block17X, block17Y)
-  love.graphics.draw(blockHalLayer4, block18X, block18Y)
-  love.graphics.draw(blockHalLayer4, block19X, block19Y)
-  love.graphics.draw(blockHalLayer4, block20X, block20Y)
-  
-  love.graphics.draw(blocklayer5fliped, block21X, block21Y)
-  love.graphics.draw(blocklayer5fliped, block22X, block22Y)
-  love.graphics.draw(blocklayer5fliped, block23X, block23Y)
-  love.graphics.draw(blocklayer5fliped, block24X, block24Y)
-  love.graphics.draw(blocklayer5fliped, block25X, block25Y)
-  
-  love.graphics.draw(blocklayer6fliped, block26X, block26Y)
-  love.graphics.draw(blocklayer6fliped, block27X, block27Y)
-  love.graphics.draw(blocklayer6fliped, block28X, block28Y)
-  love.graphics.draw(blocklayer6fliped, block29X, block29Y)
-  love.graphics.draw(blocklayer6fliped, block30X, block30Y)
-  
-  love.graphics.draw(blocklayer7fliped, block31X, block31Y)
-  love.graphics.draw(blocklayer7fliped, block32X, block32Y)
-  love.graphics.draw(blocklayer7fliped, block33X, block33Y)
-  love.graphics.draw(blocklayer7fliped, block34X, block34Y)
-  love.graphics.draw(blocklayer7fliped, block35X, block35Y)
+  love.graphics.draw(blocklayer7fliped, staticobjects.block31.body:getX()-36, staticobjects.block31.body:getY()-10.5)
+  love.graphics.draw(blocklayer7fliped, staticobjects.block32.body:getX()-36, staticobjects.block32.body:getY()-10.5)
+  love.graphics.draw(blocklayer7fliped, staticobjects.block33.body:getX()-36, staticobjects.block33.body:getY()-10.5)
+  love.graphics.draw(blocklayer7fliped, staticobjects.block34.body:getX()-36, staticobjects.block34.body:getY()-10.5)
+  love.graphics.draw(blocklayer7fliped, staticobjects.block35.body:getX()-36, staticobjects.block35.body:getY()-10.5)
   
   --love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
   love.graphics.draw(ball1, ballobjects.ball1.body:getX(), ballobjects.ball1.body:getY(),0 ,1 ,1 , ballBoundingSqurare/2, ballBoundingSqurare/2)

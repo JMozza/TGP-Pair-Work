@@ -868,8 +868,9 @@ function love.update(dt)
   elseif gamestate == "test" then
     world:update(dt) --Adds physics to world
     testControls()
-    TestCollisionBall1()
-    TestCollisionBall2()
+    testDestoryed()
+    --TestCollisionBall1()
+    --TestCollisionBall2()
   end
   
   lastPostionBall1 = currentPostionBall1
@@ -978,41 +979,10 @@ function love.draw()
 end
 
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
-  --return x1 < x2+w2 and
-  --       x2 < x1+w1 and
-  --       y1 < y2+h2 and
-  --       y2 < y1+h1
-  
-  left1 = x1
-  left2 = x2
-  right1 = x1 + w1
-  right2 = x2 + w2
-  top1 = y1
-  top2 = y2
-  bottom1 = y1 + h1
-  bottom2 = y2 + h2
-  
-  if(bottom1<top2) then
-    return false
-  end
-  
-  if(top1>bottom2) then
-    return false
-  end
-  
-  if(right1<left2) then
-    return false
-  end
-  
-  if(left1>right2) then
-    return false
-  end
-  
-    if(top1<bottom2) then
-    return true
-  end
-  
-  return true
+  return x1 < x2+w2 and
+        x2 < x1+w1 and
+        y1 < y2+h2 and
+        y2 < y1+h1
 end
 
 function menuDraw()
@@ -1067,7 +1037,9 @@ function beginContact(a, b, coll)
     name = a:getUserData()
     
   if(name == "block") then
-    a:destroy()
+    b:setCategory(1)
+    a:setMask(1)
+    a:setUserData("null")
   end
 end
 
