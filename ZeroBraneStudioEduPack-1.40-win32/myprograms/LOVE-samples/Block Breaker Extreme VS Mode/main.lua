@@ -598,7 +598,7 @@ function love.load()
     ball.radius = 5
     ball.x = width/2
     ball.y = 540
-    ball.speed = 200
+    ball.speed = 100
     ball.direction = "d"
     ball.cooldown = 200
     
@@ -608,13 +608,13 @@ function love.load()
     ball2.radius = 5
     ball2.x = width/2
     ball2.y = 80
-    ball2.speed = 200
+    ball2.speed = 100
     ball2.direction = "d"
     ball2.cooldown = 200
 
 
   -- CHECK TOP FOR BOUNCE
-  function topbounce()
+  function bounce()
     if ball.direction == "ull" then ball.direction = "dll"
     elseif ball.direction == "ul" then ball.direction = "dl"
     elseif ball.direction == "uul" then ball.direction = "ddl"
@@ -625,7 +625,7 @@ function love.load()
     end
   end
   
-  function topbounce2()
+  function bounce2()
     if ball2.direction == "ull" then ball2.direction = "dll"
     elseif ball2.direction == "ul" then ball2.direction = "dl"
     elseif ball2.direction == "uul" then ball2.direction = "ddl"
@@ -689,7 +689,7 @@ function love.update(dt)
     ball.radius = 5
     ball.x = width/2
     ball.y = player.y - 200
-    ball.speed = 200
+    ball.speed = 100
     ball.direction = "d"
     ball.cooldown = 200
   end
@@ -790,7 +790,7 @@ function love.update(dt)
   for i,v in ipairs(blocks.draw) do
     if ball.y <= (v.y + v.height) and ball.y >= v.y then
       if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        topbounce()
+        bounce()
         --love.audio.play(hit)
         table.remove(blocks.draw, i)
         player.points = player.points + 1
@@ -801,7 +801,7 @@ function love.update(dt)
   for i,v in ipairs(blocks.draw) do
     if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
       if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        topbounce2()
+        bounce2()
         --love.audio.play(hit)
         table.remove(blocks.draw, i)
         player2.points = player2.points + 1
@@ -847,11 +847,11 @@ function love.update(dt)
   -- Bounce ball off ceiling
   if ball.y <= 0 or ball.y >= height then 
     --gamestate = "menu"
-    topbounce() 
+    bounce() 
   end
   if ball2.y <= 0 or ball2.y >= height then 
     --gamestate = "menu"
-    topbounce2() 
+    bounce2() 
   end
 
   -- Move ball
@@ -950,7 +950,7 @@ function love.update(dt)
     ball.radius = 5
     ball.x = width/2
     ball.y = player.y - 200
-    ball.speed = 200
+    ball.speed = 100
     ball.direction = "d"
     ball.cooldown = 200
   end
@@ -960,8 +960,8 @@ function love.update(dt)
     player2.lives = player2.lives - 1; 
     ball2.radius = 5
     ball2.x = width/2
-    ball2.y = player.y - 200
-    ball2.speed = 200
+    ball2.y = player2.y + 50
+    ball2.speed = 100
     ball2.direction = "d"
     ball2.cooldown = 200
   end
