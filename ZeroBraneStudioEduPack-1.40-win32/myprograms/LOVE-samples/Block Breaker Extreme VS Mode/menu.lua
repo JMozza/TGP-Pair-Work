@@ -35,9 +35,6 @@ function button_click(x,y)
                 love.event.push("quit")
                 menuClick:play()
             end
-            if v.id == "test" then
-                gamestate = "test"
-            end
             if v.id == "test2" then
                 gamestate = "test2"
             end
