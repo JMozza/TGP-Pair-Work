@@ -18,10 +18,32 @@ function test2Draw()
   love.graphics.rectangle("fill", player2.x, player2.y, player2.width, player2.height - 10)
 
   -- Draw blocks
-  love.graphics.setColor(255, 0, 0)
-  iter = 0
   for _,v in pairs(blocks.draw) do
-    love.graphics.rectangle("fill", v.x, v.y, v.width, v.height)
+    love.graphics.draw(blockHalLayer1_7, v.x, v.y)
+  end
+  
+  for _,v in pairs(blocks2.draw) do
+    love.graphics.draw(blockHalLayer2_6, v.x, v.y)
+  end
+  
+  for _,v in pairs(blocks3.draw) do
+    love.graphics.draw(blockHalLayer3_5, v.x, v.y)
+  end
+  
+  for _,v in pairs(blocks4.draw) do
+    love.graphics.draw(blockHalLayer4, v.x, v.y)
+  end
+  
+  for _,v in pairs(blocks5.draw) do
+    love.graphics.draw(blocklayer5fliped, v.x, v.y)
+  end
+  
+  for _,v in pairs(blocks6.draw) do
+    love.graphics.draw(blocklayer6fliped, v.x, v.y)
+  end
+  
+  for _,v in pairs(blocks7.draw) do
+    love.graphics.draw(blocklayer7fliped, v.x, v.y)
   end
 
   -- Draw ball 1

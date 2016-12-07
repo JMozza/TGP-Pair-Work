@@ -179,20 +179,103 @@ function love.load()
   -- BLOCKS
   blocks = {}
   blocks.draw = {}
+  blocks2 = {}
+  blocks2.draw = {}
+  blocks3 = {}
+  blocks3.draw = {}
+  blocks4 = {}
+  blocks4.draw = {}
+  blocks5 = {}
+  blocks5.draw = {}
+  blocks6 = {}
+  blocks6.draw = {}
+  blocks7 = {}
+  blocks7.draw = {}
 
   -- LOAD BLOCKS
   column = 0; row = 1
-    while 5 >= row do
+    while 1 >= row do
       block = {}
-      block.width = width/10 - 5
-      block.height = 20
-      block.x = column * (block.width + 5)
-      block.y = (row * (block.height + 5)) + 300
+      block.width = 72
+      block.height = 21
+      block.x = column * (block.width )
+      block.y = (row * (block.height )) + 300
       table.insert(blocks.draw, block)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
     end
+  
+  column = 0; row = 2
+    while 2 >= row do
+      block2 = {}
+      block2.width = 72
+      block2.height = 21
+      block2.x = column * (block2.width )
+      block2.y = (row * (block2.height )) + 300
+      table.insert(blocks2.draw, block2)
+      column = column + 1
+      if column == 10 then column = 0; row = row + 1 end
+    end
+    
+    column = 0; row = 3
+    while 3 >= row do
+      block3 = {}
+      block3.width = 72
+      block3.height = 21
+      block3.x = column * (block3.width )
+      block3.y = (row * (block3.height )) + 300
+      table.insert(blocks3.draw, block3)
+      column = column + 1
+      if column == 10 then column = 0; row = row + 1 end
+    end
+    
+    column = 0; row = 4
+    while 4 >= row do
+      block4 = {}
+      block4.width = 72
+      block4.height = 21
+      block4.x = column * (block4.width )
+      block4.y = (row * (block4.height )) + 300
+      table.insert(blocks4.draw, block4)
+      column = column + 1
+      if column == 10 then column = 0; row = row + 1 end
+    end
+    
+    column = 0; row = 5
+    while 5 >= row do
+      block5 = {}
+      block5.width = 72
+      block5.height = 21
+      block5.x = column * (block5.width )
+      block5.y = (row * (block5.height )) + 300
+      table.insert(blocks5.draw, block5)
+      column = column + 1
+      if column == 10 then column = 0; row = row + 1 end
+    end   
+    
+    column = 0; row = 6
+    while 6 >= row do
+      block6 = {}
+      block6.width = 72
+      block6.height = 21
+      block6.x = column * (block6.width )
+      block6.y = (row * (block6.height )) + 300
+      table.insert(blocks6.draw, block6)
+      column = column + 1
+      if column == 10 then column = 0; row = row + 1 end
+    end
 
+  column = 0; row = 7
+    while 7 >= row do
+      block7 = {}
+      block7.width = 72
+      block7.height = 21
+      block7.x = column * (block7.width )
+      block7.y = (row * (block7.height )) + 300
+      table.insert(blocks7.draw, block7)
+      column = column + 1
+      if column == 10 then column = 0; row = row + 1 end
+    end
 
   -- BALL
   ball = {}
@@ -405,6 +488,160 @@ function love.update(dt)
         bounce2()
         --love.audio.play(hit)
         table.remove(blocks.draw, i)
+        player2.points = player2.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks2.draw) do
+    if ball.y <= (v.y + v.height) and ball.y >= v.y then
+      if ball.x <= (v.x + v.width) and ball.x >= v.x then
+        bounce()
+        --love.audio.play(hit)
+        table.remove(blocks2.draw, i)
+        player.points = player.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks2.draw) do
+    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
+      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
+        bounce2()
+        --love.audio.play(hit)
+        table.remove(blocks2.draw, i)
+        player2.points = player2.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks3.draw) do
+    if ball.y <= (v.y + v.height) and ball.y >= v.y then
+      if ball.x <= (v.x + v.width) and ball.x >= v.x then
+        bounce()
+        --love.audio.play(hit)
+        table.remove(blocks3.draw, i)
+        player.points = player.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks3.draw) do
+    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
+      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
+        bounce2()
+        --love.audio.play(hit)
+        table.remove(blocks3.draw, i)
+        player2.points = player2.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks4.draw) do
+    if ball.y <= (v.y + v.height) and ball.y >= v.y then
+      if ball.x <= (v.x + v.width) and ball.x >= v.x then
+        bounce()
+        --love.audio.play(hit)
+        table.remove(blocks4.draw, i)
+        player.points = player.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks4.draw) do
+    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
+      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
+        bounce2()
+        --love.audio.play(hit)
+        table.remove(blocks4.draw, i)
+        player2.points = player2.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks5.draw) do
+    if ball.y <= (v.y + v.height) and ball.y >= v.y then
+      if ball.x <= (v.x + v.width) and ball.x >= v.x then
+        bounce()
+        --love.audio.play(hit)
+        table.remove(blocks5.draw, i)
+        player.points = player.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks5.draw) do
+    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
+      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
+        bounce2()
+        --love.audio.play(hit)
+        table.remove(blocks5.draw, i)
+        player2.points = player2.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks6.draw) do
+    if ball.y <= (v.y + v.height) and ball.y >= v.y then
+      if ball.x <= (v.x + v.width) and ball.x >= v.x then
+        bounce()
+        --love.audio.play(hit)
+        table.remove(blocks6.draw, i)
+        player.points = player.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks6.draw) do
+    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
+      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
+        bounce2()
+        --love.audio.play(hit)
+        table.remove(blocks6.draw, i)
+        player2.points = player2.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks7.draw) do
+    if ball.y <= (v.y + v.height) and ball.y >= v.y then
+      if ball.x <= (v.x + v.width) and ball.x >= v.x then
+        bounce()
+        --love.audio.play(hit)
+        table.remove(blocks7.draw, i)
+        player.points = player.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks7.draw) do
+    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
+      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
+        bounce2()
+        --love.audio.play(hit)
+        table.remove(blocks7.draw, i)
+        player2.points = player2.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks2.draw) do
+    if ball.y <= (v.y + v.height) and ball.y >= v.y then
+      if ball.x <= (v.x + v.width) and ball.x >= v.x then
+        bounce()
+        --love.audio.play(hit)
+        table.remove(blocks2.draw, i)
+        player.points = player.points + 1
+      end
+    end
+  end
+  
+  for i,v in ipairs(blocks2.draw) do
+    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
+      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
+        bounce2()
+        --love.audio.play(hit)
+        table.remove(blocks2.draw, i)
         player2.points = player2.points + 1
       end
     end
