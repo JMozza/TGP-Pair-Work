@@ -285,7 +285,6 @@ function love.load()
     ball.y = 540
     ball.speed = 100
     ball.direction = "d"
-    ball.cooldown = 200
     
     -- BALL2
   ball2 = {}
@@ -295,7 +294,6 @@ function love.load()
     ball2.y = 80
     ball2.speed = 100
     ball2.direction = "d"
-    ball2.cooldown = 200
   -----------------Test2-------------------
   
   paused = false
@@ -353,16 +351,10 @@ function bounce2()
 end
 
 function love.update(dt) 
-  
+  if love.keyboard.isDown("space") then
+    gamestate = "game"
+  end
   ------------------Test2Update--------------------
-  if ball.cooldown > 0 then 
-    ball.cooldown = ball.cooldown - 1 
-  end
-  
-  if ball2.cooldown > 0 then 
-    ball2.cooldown = ball2.cooldown - 1 
-  end
-
   -- Player 1 movement
   if love.keyboard.isDown("right") and player.x <= (width - player.width) then
     player.x = player.x + (dt * player.speed)
@@ -374,7 +366,6 @@ function love.update(dt)
     ball.y = player.y - 200
     ball.speed = 100
     ball.direction = "d"
-    ball.cooldown = 200
   end
   
   -- Player 2 movement
@@ -692,7 +683,7 @@ function love.update(dt)
   end
 
   -- Move ball
-  if ball.cooldown == 0 then
+  if gamestate == "game" then
     if ball.direction == "u" then
       ball.y = ball.y - 2 * (dt * ball.speed)
     elseif ball.direction == "uur" then
@@ -737,7 +728,7 @@ function love.update(dt)
   end
   
   -- Move ball
-  if ball2.cooldown == 0 then
+  if gamestate == "game" then
     if ball2.direction == "u" then
       ball2.y = ball.y - 2 * (dt * ball2.speed)
     elseif ball2.direction == "uur" then
@@ -789,7 +780,6 @@ function love.update(dt)
     ball.y = player.y - 200
     ball.speed = 100
     ball.direction = "d"
-    ball.cooldown = 200
   end
   
   if ball2.y >= height then
@@ -800,7 +790,6 @@ function love.update(dt)
     ball2.y = player2.y + 50
     ball2.speed = 100
     ball2.direction = "d"
-    ball2.cooldown = 200
   end
 
   if player.lives < 0 then
@@ -942,8 +931,10 @@ function love.draw()
     elseif gamestate == "results" then
       resultsDraw()
       --winnerSound:setVolume(0.0)
-    elseif gamestate == "test2" then
+    elseif gamestate == "pregame" then
       test2Draw()
+    elseif gamestate == "game" then
+      test2Draw2()
     end 
   end
 end

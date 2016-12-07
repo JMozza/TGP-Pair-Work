@@ -36,7 +36,7 @@ function button_click(x,y)
                 menuClick:play()
             end
             if v.id == "test2" then
-                gamestate = "test2"
+                gamestate = "pregame"
             end
             if v.id == "mute" then
               menuClick:setVolume(0.0)
