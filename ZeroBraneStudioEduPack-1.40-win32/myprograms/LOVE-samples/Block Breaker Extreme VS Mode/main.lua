@@ -296,30 +296,6 @@ function love.load()
     ball2.speed = 100
     ball2.direction = "d"
     ball2.cooldown = 200
-
-
-  -- CHECK TOP FOR BOUNCE
-  function bounce()
-    if ball.direction == "ull" then ball.direction = "dll"
-    elseif ball.direction == "ul" then ball.direction = "dl"
-    elseif ball.direction == "uul" then ball.direction = "ddl"
-    elseif ball.direction == "u" then ball.direction = "d"
-    elseif ball.direction == "uur" then ball.direction = "ddr"
-    elseif ball.direction == "ur" then ball.direction = "dr"
-    elseif ball.direction == "urr" then ball.direction = "drr"
-    end
-  end
-  
-  function bounce2()
-    if ball2.direction == "ull" then ball2.direction = "dll"
-    elseif ball2.direction == "ul" then ball2.direction = "dl"
-    elseif ball2.direction == "uul" then ball2.direction = "ddl"
-    elseif ball2.direction == "u" then ball2.direction = "d"
-    elseif ball2.direction == "uur" then ball2.direction = "ddr"
-    elseif ball2.direction == "ur" then ball2.direction = "dr"
-    elseif ball2.direction == "urr" then ball2.direction = "drr"
-    end
-  end
   -----------------Test2-------------------
   
   paused = false
@@ -351,6 +327,29 @@ function love.load()
   --elseif (gamestate == "test") then    
     --testLoad()
   --end
+end
+
+  -- CHECK TOP FOR BOUNCE
+function bounce()
+  if ball.direction == "ull" then ball.direction = "dll"
+  elseif ball.direction == "ul"   then ball.direction = "dl"
+  elseif ball.direction == "uul"  then ball.direction = "ddl"
+  elseif ball.direction == "u"    then ball.direction = "d"
+  elseif ball.direction == "uur"  then ball.direction = "ddr"
+  elseif ball.direction == "ur"   then ball.direction = "dr"
+  elseif ball.direction == "urr"  then ball.direction = "drr"
+  end
+end
+  
+function bounce2()
+  if ball2.direction == "dll"       then ball2.direction = "ull"
+  elseif ball2.direction == "dl"    then ball2.direction = "ul"
+  elseif ball2.direction == "ddl"   then ball2.direction = "uul"
+  elseif ball2.direction == "d"     then ball2.direction = "u"
+  elseif ball2.direction == "ddr"   then ball2.direction = "uur"
+  elseif ball2.direction == "dr"    then ball2.direction = "ur"
+  elseif ball2.direction == "drr"   then ball2.direction = "urr"
+  end
 end
 
 function love.update(dt) 
