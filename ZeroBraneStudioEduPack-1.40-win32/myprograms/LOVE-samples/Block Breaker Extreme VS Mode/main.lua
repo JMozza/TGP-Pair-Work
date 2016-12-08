@@ -274,7 +274,9 @@ function love.load()
       block7.y = (row * (block7.height )) + 300
       table.insert(blocks7.draw, block7)
       column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+      if column == 10 then 
+        column = 0; row = row + 1 
+      end
     end
 
   -- BALL
@@ -293,7 +295,7 @@ function love.load()
     ball2.x = width/2
     ball2.y = 80
     ball2.speed = 100
-    ball2.direction = "d"
+    ball2.direction = "d2"
   -----------------Test2-------------------
   
   paused = false
@@ -329,24 +331,38 @@ end
 
   -- CHECK TOP FOR BOUNCE
 function bounce()
-  if ball.direction == "ull" then ball.direction = "dll"
-  elseif ball.direction == "ul"   then ball.direction = "dl"
-  elseif ball.direction == "uul"  then ball.direction = "ddl"
-  elseif ball.direction == "u"    then ball.direction = "d"
-  elseif ball.direction == "uur"  then ball.direction = "ddr"
-  elseif ball.direction == "ur"   then ball.direction = "dr"
-  elseif ball.direction == "urr"  then ball.direction = "drr"
+  if ball.direction == "uur" then ball.direction = "uul"
+  elseif ball.direction == "ur" then ball.direction = "ul"
+  elseif ball.direction == "urr" then ball.direction = "ull"
+  elseif ball.direction == "drr" then ball.direction = "dll"
+  elseif ball.direction == "dr" then ball.direction = "dl"
+  elseif ball.direction == "ddr" then ball.direction = "ddl"
+  elseif ball.direction == "ddl" then ball.direction = "ddr"
+  elseif ball.direction == "dl" then ball.direction = "dr"
+  elseif ball.direction == "dll" then ball.direction = "drr"
+  elseif ball.direction == "ull" then ball.direction = "urr"
+  elseif ball.direction == "ul" then ball.direction = "ur"
+  elseif ball.direction == "uul" then ball.direction = "uur"
+  elseif ball.direction == "u" then ball.direction = "d"
+  elseif ball.direction == "d" then ball.direction = "u"
   end
 end
-  
+
 function bounce2()
-  if ball2.direction == "dll"       then ball2.direction = "ull"
-  elseif ball2.direction == "dl"    then ball2.direction = "ul"
-  elseif ball2.direction == "ddl"   then ball2.direction = "uul"
-  elseif ball2.direction == "d"     then ball2.direction = "u"
-  elseif ball2.direction == "ddr"   then ball2.direction = "uur"
-  elseif ball2.direction == "dr"    then ball2.direction = "ur"
-  elseif ball2.direction == "drr"   then ball2.direction = "urr"
+  if ball.direction == "uur2" then ball.direction = "uul2"
+  elseif ball.direction == "ur2" then ball.direction = "ul2"
+  elseif ball.direction == "urr2" then ball.direction = "ull2"
+  elseif ball.direction == "drr2" then ball.direction = "dll2"
+  elseif ball.direction == "dr2" then ball.direction = "dl2"
+  elseif ball.direction == "ddr2" then ball.direction = "ddl2"
+  elseif ball.direction == "ddl2" then ball.direction = "ddr2"
+  elseif ball.direction == "dl2" then ball.direction = "dr2"
+  elseif ball.direction == "dll2" then ball.direction = "drr2"
+  elseif ball.direction == "ull2" then ball.direction = "urr2"
+  elseif ball.direction == "ul2" then ball.direction = "ur2"
+  elseif ball.direction == "uul2" then ball.direction = "uur2"
+  elseif ball.direction == "u2" then ball.direction = "d2"
+  elseif ball.direction == "d2" then ball.direction = "u2"
   end
 end
 
@@ -360,12 +376,6 @@ function love.update(dt)
     player.x = player.x + (dt * player.speed)
   elseif love.keyboard.isDown("left") and player.x >= 0 then
     player.x = player.x - (dt * player.speed)
-  elseif love.keyboard.isDown("r") then
-    ball.radius = 5
-    ball.x = width/2
-    ball.y = player.y - 200
-    ball.speed = 100
-    ball.direction = "d"
   end
   
   -- Player 2 movement
@@ -376,7 +386,7 @@ function love.update(dt)
   end
     
     
-  -- Hitbox for player 1
+  -- Hitbox for player 1 ball 1
   if ball.y >= player.y and ball.y <= height and ball.x >= player.x and
     ball.x <= (player.x + player.width) then
     if ball.x >= player.x and ball.x < (player.x + 10) then
@@ -397,7 +407,7 @@ function love.update(dt)
     --love.audio.play(bounce)
   end
   
-  -- Hitbox for player 2
+  -- Hitbox for player 2 ball 1
   if ball.y <= player2.y and ball.y <= height and ball.x >= player2.x and
     ball.x <= (player2.x + player2.width) then
     if ball.x >= player2.x and ball.x < (player2.x + 10) then
@@ -422,19 +432,19 @@ function love.update(dt)
   if ball2.y >= player.y and ball2.y <= height and ball2.x >= player.x and
     ball2.x <= (player.x + player.width) then
     if ball2.x >= player.x and ball2.x < (player.x + 10) then
-      ball2.direction = "ull"
+      ball2.direction = "dll2"
     elseif ball2.x >= (player.x + 10) and ball2.x < (player.x + 20) then
-      ball2.direction = "ul"
+      ball2.direction = "dl2"
     elseif ball2.x >= (player.x + 20) and ball2.x < (player.x + 30) then
-      ball2.direction = "uul"
+      ball2.direction = "ddl2"
     elseif ball2.x >= (player.x + 30) and ball2.x < (player.x + 40) then
-      ball2.direction = "u"
+      ball2.direction = "d2"
     elseif ball2.x >= (player.x + 40) and ball2.x < (player.x + 50) then
-      ball2.direction = "uur"
+      ball2.direction = "ddr2"
     elseif ball2.x >= (player.x + 50) and ball2.x < (player.x + 60) then
-      ball2.direction = "ur"
+      ball2.direction = "dr2"
     elseif ball2.x >= (player.x + 60) and ball2.x < (player.x + 70) then
-      ball2.direction = "urr"
+      ball2.direction = "drr2"
     end
     --love.audio.play(bounce)
   end
@@ -443,19 +453,19 @@ function love.update(dt)
   if ball2.y <= player2.y and ball2.y <= height and ball2.x >= player2.x and
     ball2.x <= (player2.x + player2.width) then
     if ball2.x >= player2.x and ball2.x < (player2.x + 10) then
-      ball2.direction = "ddl"
+      ball2.direction = "uur2" -- change r to l
     elseif ball2.x >= (player2.x + 10) and ball2.x < (player2.x + 20) then
-      ball2.direction = "dl"
+      ball2.direction = "ur2"
     elseif ball2.x >= (player2.x + 20) and ball2.x < (player2.x + 30) then
-      ball2.direction = "dll"
+      ball2.direction = "urr2"
     elseif ball2.x >= (player2.x + 30) and ball2.x < (player2.x + 40) then
-      ball2.direction = "d"
+      ball2.direction = "u2"
     elseif ball2.x >= (player2.x + 40) and ball2.x < (player2.x + 50) then
-      ball2.direction = "ddr"
+      ball2.direction = "uul2"
     elseif ball2.x >= (player2.x + 50) and ball2.x < (player2.x + 60) then
-      ball2.direction = "dr"
+      ball2.direction = "ul2"
     elseif ball2.x >= (player2.x + 60) and ball2.x < (player2.x + 70) then
-      ball2.direction = "drr"
+      ball2.direction = "ull2"
     end
     --love.audio.play(bounce)
   end
@@ -478,7 +488,7 @@ function love.update(dt)
         bounce2()
         --love.audio.play(hit)
         table.remove(blocks.draw, i)
-        player2.points = player2.points + 1
+        player.points = player.points + 1
       end
     end
   end
@@ -656,18 +666,18 @@ function love.update(dt)
   end
   
   if (ball2.x <= 0) or (ball2.x >= width) then
-    if ball2.direction == "uur" then ball2.direction = "uul"
-    elseif ball2.direction == "ur" then ball2.direction = "ul"
-    elseif ball2.direction == "urr" then ball2.direction = "ull"
-    elseif ball2.direction == "drr" then ball2.direction = "dll"
-    elseif ball2.direction == "dr" then ball2.direction = "dl"
-    elseif ball2.direction == "ddr" then ball2.direction = "ddl"
-    elseif ball2.direction == "ddl" then ball2.direction = "ddr"
-    elseif ball2.direction == "dl" then ball2.direction = "dr"
-    elseif ball2.direction == "dll" then ball2.direction = "drr"
-    elseif ball2.direction == "ull" then ball2.direction = "urr"
-    elseif ball2.direction == "ul" then ball2.direction = "ur"
-    elseif ball2.direction == "uul" then ball2.direction = "uur"
+    if ball2.direction == "uur2" then ball2.direction = "uul2"
+    elseif ball2.direction == "ur2" then ball2.direction = "ul2"
+    elseif ball2.direction == "urr2" then ball2.direction = "ull2"
+    elseif ball2.direction == "drr2" then ball2.direction = "dll2"
+    elseif ball2.direction == "dr2" then ball2.direction = "dl2"
+    elseif ball2.direction == "ddr2" then ball2.direction = "ddl2"
+    elseif ball2.direction == "ddl2" then ball2.direction = "ddr2"
+    elseif ball2.direction == "dl2" then ball2.direction = "dr2"
+    elseif ball2.direction == "dll2" then ball2.direction = "drr2"
+    elseif ball2.direction == "ull2" then ball2.direction = "urr2"
+    elseif ball2.direction == "ul2" then ball2.direction = "ur2"
+    elseif ball2.direction == "uul2" then ball2.direction = "uur2"
     end
     --love.audio.play(bounce)
   end
@@ -727,48 +737,48 @@ function love.update(dt)
     end
   end
   
-  -- Move ball
+  -- Move ball 2
   if gamestate == "game" then
-    if ball2.direction == "u" then
-      ball2.y = ball.y - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "uur" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 1 * (dt * ball2.speed)
-    elseif ball2.direction == "ur" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "urr" then
-      ball2.y = ball2.y - 1 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "drr" then
-      ball2.y = ball2.y + 1 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "dr" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ddr" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 1 * (dt * ball2.speed)
-    elseif ball2.direction == "d" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ddl" then
+    if ball2.direction == "u2" then
+      ball2.y = ball.y + 2 * (dt * ball2.speed)
+    elseif ball2.direction == "uur2" then
       ball2.y = ball2.y + 2 * (dt * ball2.speed)
       ball2.x = ball2.x - 1 * (dt * ball2.speed)
-    elseif ball2.direction == "dl" then
+    elseif ball2.direction == "ur2" then
       ball2.y = ball2.y + 2 * (dt * ball2.speed)
       ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "dll" then
+    elseif ball2.direction == "urr2" then
       ball2.y = ball2.y + 1 * (dt * ball2.speed)
       ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ull" then
+    elseif ball2.direction == "drr2" then
       ball2.y = ball2.y - 1 * (dt * ball2.speed)
       ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ul" then
+    elseif ball2.direction == "dr2" then
       ball2.y = ball2.y - 2 * (dt * ball2.speed)
       ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "uul" then
+    elseif ball2.direction == "ddr2" then
       ball2.y = ball2.y - 2 * (dt * ball2.speed)
       ball2.x = ball2.x - 1 * (dt * ball2.speed)
+    elseif ball2.direction == "d2" then
+      ball2.y = ball2.y - 2 * (dt * ball2.speed)
+    elseif ball2.direction == "ddl2" then
+      ball2.y = ball2.y - 2 * (dt * ball2.speed)
+      ball2.x = ball2.x + 1 * (dt * ball2.speed)
+    elseif ball2.direction == "dl2" then
+      ball2.y = ball2.y - 2 * (dt * ball2.speed)
+      ball2.x = ball2.x + 2 * (dt * ball2.speed)
+    elseif ball2.direction == "dll2" then
+      ball2.y = ball2.y - 1 * (dt * ball2.speed)
+      ball2.x = ball2.x + 2 * (dt * ball2.speed)
+    elseif ball2.direction == "ull2" then
+      ball2.y = ball2.y + 1 * (dt * ball2.speed)
+      ball2.x = ball2.x + 2 * (dt * ball2.speed)
+    elseif ball2.direction == "ul2" then
+      ball2.y = ball2.y + 2 * (dt * ball2.speed)
+      ball2.x = ball2.x + 2 * (dt * ball2.speed)
+    elseif ball2.direction == "uul2" then
+      ball2.y = ball2.y + 2 * (dt * ball2.speed)
+      ball2.x = ball2.x + 1 * (dt * ball2.speed)
     end
   end
 
@@ -777,7 +787,7 @@ function love.update(dt)
     player.lives = player.lives - 1; 
     ball.radius = 5
     ball.x = width/2
-    ball.y = player.y - 200
+    ball.y = 550
     ball.speed = 100
     ball.direction = "d"
   end
@@ -787,9 +797,9 @@ function love.update(dt)
     player2.lives = player2.lives - 1; 
     ball2.radius = 5
     ball2.x = width/2
-    ball2.y = player2.y + 50
+    ball2.y = 50
     ball2.speed = 100
-    ball2.direction = "d"
+    ball2.direction = "d2"
   end
 
   if player.lives < 0 then
