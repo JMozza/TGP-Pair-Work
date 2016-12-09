@@ -160,7 +160,7 @@ function love.load()
     player.x = width/2 - player.width/2
     player.y = 620
     player.speed = 400
-    player.lives = 5
+    player.lives = 50
     player.points = 0
 
   
@@ -172,7 +172,7 @@ function love.load()
     player2.x = width/2 - player2.width/2
     player2.y = 10
     player2.speed = 400
-    player2.lives = 5
+    player2.lives = 50
     player2.points = 0
 
 
@@ -285,7 +285,7 @@ function love.load()
     ball.radius = 5
     ball.x = width/2
     ball.y = 540
-    ball.speed = 100
+    ball.speed = 50
     ball.direction = "d"
     
     -- BALL2
@@ -294,7 +294,7 @@ function love.load()
     ball2.radius = 5
     ball2.x = width/2
     ball2.y = 80
-    ball2.speed = 100
+    ball2.speed = 50
     ball2.direction = "d2"
   -----------------Test2-------------------
   
@@ -331,38 +331,39 @@ end
 
   -- CHECK TOP FOR BOUNCE
 function bounce()
-  if ball.direction == "uur" then ball.direction = "uul"
-  elseif ball.direction == "ur" then ball.direction = "ul"
-  elseif ball.direction == "urr" then ball.direction = "ull"
-  elseif ball.direction == "drr" then ball.direction = "dll"
-  elseif ball.direction == "dr" then ball.direction = "dl"
-  elseif ball.direction == "ddr" then ball.direction = "ddl"
-  elseif ball.direction == "ddl" then ball.direction = "ddr"
-  elseif ball.direction == "dl" then ball.direction = "dr"
-  elseif ball.direction == "dll" then ball.direction = "drr"
-  elseif ball.direction == "ull" then ball.direction = "urr"
-  elseif ball.direction == "ul" then ball.direction = "ur"
-  elseif ball.direction == "uul" then ball.direction = "uur"
-  elseif ball.direction == "u" then ball.direction = "d"
-  elseif ball.direction == "d" then ball.direction = "u"
+  if ball.direction == "ull" then ball.direction = "dll"
+  elseif ball.direction == "ul"   then ball.direction = "dl"
+  elseif ball.direction == "uul"  then ball.direction = "ddl"
+  elseif ball.direction == "u"    then ball.direction = "d"
+  elseif ball.direction == "uur"  then ball.direction = "ddr"
+  elseif ball.direction == "ur"   then ball.direction = "dr"
+  elseif ball.direction == "urr"  then ball.direction = "drr"
+  elseif ball.direction == "dll"   then ball.direction = "ull"
+  elseif ball.direction == "dl"    then ball.direction = "ul"
+  elseif ball.direction == "ddl"   then ball.direction = "uul"
+  elseif ball.direction == "d"     then ball.direction = "u"
+  elseif ball.direction == "ddr"   then ball.direction = "uur"
+  elseif ball.direction == "dr"    then ball.direction = "ur"
+  elseif ball.direction == "drr"   then ball.direction = "urr"
   end
 end
 
 function bounce2()
-  if ball.direction == "uur2" then ball.direction = "uul2"
-  elseif ball.direction == "ur2" then ball.direction = "ul2"
-  elseif ball.direction == "urr2" then ball.direction = "ull2"
-  elseif ball.direction == "drr2" then ball.direction = "dll2"
-  elseif ball.direction == "dr2" then ball.direction = "dl2"
-  elseif ball.direction == "ddr2" then ball.direction = "ddl2"
-  elseif ball.direction == "ddl2" then ball.direction = "ddr2"
-  elseif ball.direction == "dl2" then ball.direction = "dr2"
-  elseif ball.direction == "dll2" then ball.direction = "drr2"
-  elseif ball.direction == "ull2" then ball.direction = "urr2"
-  elseif ball.direction == "ul2" then ball.direction = "ur2"
-  elseif ball.direction == "uul2" then ball.direction = "uur2"
-  elseif ball.direction == "u2" then ball.direction = "d2"
-  elseif ball.direction == "d2" then ball.direction = "u2"
+  if ball2.direction == "dll2"       then ball2.direction = "ull2"
+  elseif ball2.direction == "dl2"    then ball2.direction = "ul2"
+  elseif ball2.direction == "ddl2"   then ball2.direction = "uul2"
+  elseif ball2.direction == "d2"     then ball2.direction = "u2"
+  elseif ball2.direction == "ddr2"   then ball2.direction = "uur2"
+  elseif ball2.direction == "dr2"    then ball2.direction = "ur2"
+  elseif ball2.direction == "drr2"   then ball2.direction = "urr2"
+  
+  elseif ball2.direction == "ull2" then ball2.direction = "dll2"
+  elseif ball2.direction == "ul2"   then ball2.direction = "dl2"
+  elseif ball2.direction == "uul2"  then ball2.direction = "ddl2"
+  elseif ball2.direction == "u2"    then ball2.direction = "d2"
+  elseif ball2.direction == "uur2"  then ball2.direction = "ddr2"
+  elseif ball2.direction == "ur2"   then ball2.direction = "dr2"
+  elseif ball2.direction == "urr2"  then ball2.direction = "drr2"
   end
 end
 
@@ -396,7 +397,7 @@ function love.update(dt)
     elseif ball.x >= (player.x + 20) and ball.x < (player.x + 30) then
       ball.direction = "uul"
     elseif ball.x >= (player.x + 30) and ball.x < (player.x + 40) then
-      ball.direction = "u"
+      ball.direction = "ul"
     elseif ball.x >= (player.x + 40) and ball.x < (player.x + 50) then
       ball.direction = "uur"
     elseif ball.x >= (player.x + 50) and ball.x < (player.x + 60) then
@@ -417,7 +418,7 @@ function love.update(dt)
     elseif ball.x >= (player2.x + 20) and ball.x < (player2.x + 30) then
       ball.direction = "dll"
     elseif ball.x >= (player2.x + 30) and ball.x < (player2.x + 40) then
-      ball.direction = "d"
+      ball.direction = "dr"
     elseif ball.x >= (player2.x + 40) and ball.x < (player2.x + 50) then
       ball.direction = "ddr"
     elseif ball.x >= (player2.x + 50) and ball.x < (player2.x + 60) then
@@ -438,7 +439,7 @@ function love.update(dt)
     elseif ball2.x >= (player.x + 20) and ball2.x < (player.x + 30) then
       ball2.direction = "ddl2"
     elseif ball2.x >= (player.x + 30) and ball2.x < (player.x + 40) then
-      ball2.direction = "d2"
+      ball2.direction = "dl2"
     elseif ball2.x >= (player.x + 40) and ball2.x < (player.x + 50) then
       ball2.direction = "ddr2"
     elseif ball2.x >= (player.x + 50) and ball2.x < (player.x + 60) then
@@ -459,7 +460,7 @@ function love.update(dt)
     elseif ball2.x >= (player2.x + 20) and ball2.x < (player2.x + 30) then
       ball2.direction = "urr2"
     elseif ball2.x >= (player2.x + 30) and ball2.x < (player2.x + 40) then
-      ball2.direction = "u2"
+      ball2.direction = "ur2"
     elseif ball2.x >= (player2.x + 40) and ball2.x < (player2.x + 50) then
       ball2.direction = "uul2"
     elseif ball2.x >= (player2.x + 50) and ball2.x < (player2.x + 60) then
