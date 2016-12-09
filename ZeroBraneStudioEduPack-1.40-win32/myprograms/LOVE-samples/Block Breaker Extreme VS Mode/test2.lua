@@ -1,15 +1,19 @@
 function test2Draw()
+  love.graphics.draw(halBackground, halBackgroundQuad, 0, 0)
+  
   love.graphics.print("Get ready!", width/2, height/3)
 
   -- Points/Lives
+<<<<<<< HEAD
   love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
+=======
+  love.graphics.print("Points: " .. player.points, 10, height - 30)
+  love.graphics.print("Points: " .. player2.points, 10, height - 450)
+>>>>>>> 1e79de1a374199e91f51be73e09dc3cbf0d7b5d6
   
-  -- Draw player 1
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.rectangle("fill", player.x, player.y, player.width, player.height - 10)
-  -- Draw player 2
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.rectangle("fill", player2.x, player2.y, player2.width, player2.height - 10)
+  -- Draw Paddles
+  love.graphics.draw(paddleP1, player.x, player.y)
+  love.graphics.draw(paddleP2, player2.x, player2.y-12)
 
   -- Draw blocks
   for _,v in pairs(blocks.draw) do
@@ -40,25 +44,25 @@ function test2Draw()
     love.graphics.draw(blocklayer7fliped, v.x, v.y)
   end
 
-  -- Draw ball 1
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.circle("fill", ball.x, ball.y, ball.radius)
+  -- Draw Balls
+  love.graphics.draw(ball1texture, ball.x - 10, ball.y - 10)
+  love.graphics.draw(ball2texture, ball2.x - 10, ball2.y - 10)
   
-  -- Draw ball 2
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.circle("fill", ball2.x, ball2.y, ball2.radius)
 end
 
 function test2Draw2()
+  love.graphics.draw(halBackground, halBackgroundQuad, 0, 0)
   -- Points/Lives
+<<<<<<< HEAD
   love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
+=======
+  love.graphics.print("Points: " .. player.points, 10, height - 30)
+  love.graphics.print("Points: " .. player2.points, 10, height - 450)
+>>>>>>> 1e79de1a374199e91f51be73e09dc3cbf0d7b5d6
   
-  -- Draw player 1
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.rectangle("fill", player.x, player.y, player.width, player.height - 10)
-  -- Draw player 2
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.rectangle("fill", player2.x, player2.y, player2.width, player2.height - 10)
+  -- Draw Paddles
+  love.graphics.draw(paddleP1, player.x, player.y)
+  love.graphics.draw(paddleP2, player2.x, player2.y-12)
 
   -- Draw blocks
   for _,v in pairs(blocks.draw) do
@@ -88,12 +92,8 @@ function test2Draw2()
   for _,v in pairs(blocks7.draw) do
     love.graphics.draw(blocklayer7fliped, v.x, v.y)
   end
-
-  -- Draw ball 1
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.circle("fill", ball.x, ball.y, ball.radius)
   
-  -- Draw ball 2
-  love.graphics.setColor(255, 255, 255)
-  love.graphics.circle("fill", ball2.x, ball2.y, ball2.radius)
+  -- Draw Balls
+  love.graphics.draw(ball1texture, ball.x - 10, ball.y - 10)
+  love.graphics.draw(ball2texture, ball2.x - 10, ball2.y - 10)
 end

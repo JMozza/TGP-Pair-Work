@@ -49,8 +49,8 @@ function love.load()
   paddleP1 = love.graphics.newImage("sprites/paddle_top.png")
   paddleP2 = love.graphics.newImage("sprites/paddle_bottom.png")
   
-  ball1 = love.graphics.newImage("sprites/ball_xmas.png")
-  ball2 = love.graphics.newImage("sprites/ball_hal.png")
+  ball1texture = love.graphics.newImage("sprites/ball_xmas.png")
+  ball2texture = love.graphics.newImage("sprites/ball_hal.png")
   
   medium = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 20)
   big = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 25)
@@ -155,8 +155,8 @@ function love.load()
   -----------------Test2-------------------
   -- PLAYER 1 SETUP
   player = {}
-    player.width = 70
-    player.height = 20
+    player.width = 90
+    player.height = 12
     player.x = width/2 - player.width/2
     player.y = 620
     player.speed = 400
@@ -165,10 +165,10 @@ function love.load()
   
   -- PLAYER 2 SETUP
   player2 = {}
-    player2.width = 70
-    player2.height = 20
+    player2.width = 90
+    player2.height = 12
     player2.x = width/2 - player2.width/2
-    player2.y = 10
+    player2.y = 20
     player2.speed = 400
     player2.points = 0
 
@@ -279,7 +279,7 @@ function love.load()
   -- BALL
   ball = {}
 
-    ball.radius = 5
+    ball.radius = 10
     ball.x = width/2
     ball.y = 540
     ball.speed = 50
@@ -288,7 +288,7 @@ function love.load()
     -- BALL2
   ball2 = {}
 
-    ball2.radius = 5
+    ball2.radius = 10
     ball2.x = width/2
     ball2.y = 80
     ball2.speed = 50
