@@ -4,12 +4,7 @@ function test2Draw()
   love.graphics.print("Get ready!", width/2, height/3)
 
   -- Points/Lives
-<<<<<<< HEAD
   love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
-=======
-  love.graphics.print("Points: " .. player.points, 10, height - 30)
-  love.graphics.print("Points: " .. player2.points, 10, height - 450)
->>>>>>> 1e79de1a374199e91f51be73e09dc3cbf0d7b5d6
   
   -- Draw Paddles
   love.graphics.draw(paddleP1, player.x, player.y)
@@ -53,12 +48,7 @@ end
 function test2Draw2()
   love.graphics.draw(halBackground, halBackgroundQuad, 0, 0)
   -- Points/Lives
-<<<<<<< HEAD
   love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
-=======
-  love.graphics.print("Points: " .. player.points, 10, height - 30)
-  love.graphics.print("Points: " .. player2.points, 10, height - 450)
->>>>>>> 1e79de1a374199e91f51be73e09dc3cbf0d7b5d6
   
   -- Draw Paddles
   love.graphics.draw(paddleP1, player.x, player.y)
