@@ -160,19 +160,16 @@ function love.load()
     player.x = width/2 - player.width/2
     player.y = 620
     player.speed = 400
-    player.lives = 50
     player.points = 0
 
   
   -- PLAYER 2 SETUP
   player2 = {}
-
     player2.width = 70
     player2.height = 20
     player2.x = width/2 - player2.width/2
     player2.y = 10
     player2.speed = 400
-    player2.lives = 50
     player2.points = 0
 
 
@@ -373,19 +370,22 @@ function love.update(dt)
   end
   ------------------Test2Update--------------------
   -- Player 1 movement
-  if love.keyboard.isDown("right") and player.x <= (width - player.width) then
+  if love.keyboard.isDown("right") then
     player.x = player.x + (dt * player.speed)
-  elseif love.keyboard.isDown("left") and player.x >= 0 then
+  elseif love.keyboard.isDown("left") then
     player.x = player.x - (dt * player.speed)
   end
   
   -- Player 2 movement
-  if love.keyboard.isDown("d") and player2.x <= (width - player2.width) then
+  if love.keyboard.isDown("d") then
     player2.x = player2.x + (dt * player2.speed)
-  elseif love.keyboard.isDown("a") and player2.x >= 0 then
+  elseif love.keyboard.isDown("a") then
     player2.x = player2.x - (dt * player2.speed) 
   end
-    
+  
+  if love.keyboard.isDown("r") then
+    love.load()
+  end
     
   -- Hitbox for player 1 ball 1
   if ball.y >= player.y and ball.y <= height and ball.x >= player.x and
@@ -785,7 +785,6 @@ function love.update(dt)
 
   if ball.y >= height then
     --love.audio.play(loss)
-    player.lives = player.lives - 1; 
     ball.radius = 5
     ball.x = width/2
     ball.y = 550
@@ -795,43 +794,45 @@ function love.update(dt)
   
   if ball2.y >= height then
     --love.audio.play(loss)
-    player2.lives = player2.lives - 1; 
     ball2.radius = 5
     ball2.x = width/2
     ball2.y = 50
     ball2.speed = 100
     ball2.direction = "d2"
   end
-
-  if player.lives < 0 then
-    love.graphics.print("GAME OVER", width/2, height/2)
-    love.load()
+  
+  if player.x <= 0 then
+    player.x = player.x + (dt * player.speed)
+  elseif player.x + player.width >= width then
+    player.x = player.x - (dt * player.speed)
   end
   
-  if player2.lives < 0 then
-    love.graphics.print("GAME OVER", width/2, height/3)
-    love.load()
+  if player2.x <= 0 then
+    player2.x = player2.x + (dt * player.speed)
+  elseif player2.x + player.width >= width then
+    player2.x = player2.x - (dt * player.speed)
+  end
+  
+  if gamestate == "game" then
+    myAngle = math.angle(player2.x, player2.y, ball2.x, ball2.y)
+    --dx = math.cos(myAngle) * (dt * speed)
+    dx = math.cos(myAngle) * (dt * player2.speed)
+    --paddleP1X = paddleP1X + dx
+    --paddleP1Y = paddleP1Y + (dx * 0)
+    if player2.x >= 0 and player2.x <= width then
+      if ball2.x <= player2.x - player2.width/2 then
+        player2.x = player2.x - dx --* (dt * player2.speed)
+      elseif ball2.x >= player2.x - player2.width/2 then
+        player2.x = player2.x + dx --* (dt * player2.speed)
+      end
+    end
   end
   ------------------Test2Update--------------------
   
   mousex = love.mouse.getX()
   mousey = love.mouse.getY()
   
-  --look at tomorrow
-  if gamestate == "playingHal" then
-    myAngle = math.angle(paddleP1X, paddleP1Y, ballL1P1X, ballL1P1Y)
-    --dx = math.cos(myAngle) * (dt * speed)
-    dx = math.cos(myAngle) * (dt * paddlespeed)
-    --paddleP1X = paddleP1X + dx
-    --paddleP1Y = paddleP1Y + (dx * 0)
-    if paddleP1X == 0 then
-      paddleP1X = paddleP1X + 1.5
-    elseif paddleP1X == 270 then
-      paddleP1X = paddleP1X - 1.5
-    elseif paddleP1X > 0 and paddleP1X < 270 then
-      paddleP1X = paddleP1X + dx
-    end
-  end
+  
 
   if gamestate == "menu" then
     button_check()

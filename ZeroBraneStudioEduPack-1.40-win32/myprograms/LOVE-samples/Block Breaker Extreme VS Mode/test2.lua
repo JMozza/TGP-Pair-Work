@@ -2,10 +2,7 @@ function test2Draw()
   love.graphics.print("Get ready!", width/2, height/3)
 
   -- Points/Lives
-  love.graphics.print("Lives: " .. player.lives, 10, height - 50)
-  love.graphics.print("Points: " .. player.points, 10, height - 30)
-  love.graphics.print("Lives: " .. player2.lives, 10, height - 500)
-  love.graphics.print("Points: " .. player2.points, 10, height - 450)
+  love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
   
   -- Draw player 1
   love.graphics.setColor(255, 255, 255)
@@ -54,10 +51,7 @@ end
 
 function test2Draw2()
   -- Points/Lives
-  love.graphics.print("Lives: " .. player.lives, 10, height - 50)
-  love.graphics.print("Points: " .. player.points, 10, height - 30)
-  love.graphics.print("Lives: " .. player2.lives, 10, height - 500)
-  love.graphics.print("Points: " .. player2.points, 10, height - 450)
+  love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
   
   -- Draw player 1
   love.graphics.setColor(255, 255, 255)
