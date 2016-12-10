@@ -59,7 +59,7 @@ function love.load()
   big = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 25)
   love.graphics.setColor(1,1,1)
   
-  ------------------------
+  ----------Audio---------
   menuClick = love.audio.newSource("sounds/Menu_Click.wav", "static")
   levelStart = love.audio.newSource("sounds/Level_Start.wav", "static")
   blockBounce = love.audio.newSource("sounds/Brick_Bounce.wav", "static")
@@ -68,95 +68,7 @@ function love.load()
   backgroundSound = love.audio.newSource("sounds/Background.mp3")
   ------------------------
   
-  ------------------------
-  level1BlockLayerX = 0
-  level1BlockLayerX2 = 72
-  level1BlockLayerX3 = 144
-  level1BlockLayerX4 = 216
-  level1BlockLayerX5 = 288
-  
-  level1BlockLayer1Y = 246.5
-  level1BlockLayer2Y = 267.5
-  level1BlockLayer3Y = 288.5
-  level1BlockLayer4Y = 309.5
-  level1BlockLayer5Y = 351.5
-  level1BlockLayer6Y = 372.5
-  level1BlockLayer7Y = 393.5
-  
-  --paddles
-  paddleP1X = 135
-  paddleP2X = 135
-  paddleP1Y = 40
-  paddleP2Y = 588
-  
-  ballL1P1X = paddleP1X + 35
-  ballL1P2X = paddleP2X + 35
-  ballL1P1Y = 60
-  ballL1P2Y = 560
-  ballL2Speed = 100
-  ballL1P1Dir = "N"
-  ballL1P2Dir = "N"
-  
-  level2BlockX1 = 0
-  level2BlockX2 = 72
-  level2BlockX3 = 144
-  level2BlockX4 = 216
-  level2BlockX5 = 288
-  
-  level2BlockX6 = 36
-  level2BlockX7 = 108
-  level2BlockX8 = 180
-  level2BlockX9 = 252
-  
-  level2BlockLayer1Y = 246.5
-  level2BlockLayer2Y = 267.5
-  level2BlockLayer3Y = 288.5
-  level2BlockLayer4Y = 309.5
-  level2BlockLayer5Y = 351.5
-  level2BlockLayer6Y = 372.5
-  level2BlockLayer7Y = 393.5
-  
-  ballL2P1X = 135
-  ballL2P2X = 135
-  ballL2P1Y = 60
-  ballL2P2Y = 560
-  ballL2Speed = 100
-  ballL2P1Dir = "N"
-  ballL2P2Dir = "N"
-  
-  currentPostionBall1 = 0
-  lastPostionBall1 = 0
-  
-  time = 0
-  
-  newX = 36
-  newX2 = 108
-  newX3 = 180
-  newX4 = 252
-  newX5 = 324
-  
-  newY = 256
-  newY2 = 277
-  newY3 = 298
-  newY4 = 319
-  newY5 = 340
-  newY6 = 361
-  newY7 = 382
-  
-  paddlespeed = 50
-  ballspeed = 80
-  angle = 0
-  
-  text       = ""   -- we'll use this to put info text on the screen later
-  persisting = 0    -- we'll use this to store the state of repeated callback calls
-  
-  --initial graphics setup
-  love.graphics.setBackgroundColor(104, 136, 248) --set the background color to a nice blue
-  love.window.setMode(360, 640) --set the window dimensions to 650 by 650
-  -----------------Test--------------------
-  
-  -----------------Test2-------------------
-  -- PLAYER 1 SETUP
+  -- Player 1 Setup (Bottom)
   player = {}
     player.width = 90
     player.height = 12
@@ -165,8 +77,7 @@ function love.load()
     player.speed = 400
     player.points = 0
 
-  
-  -- PLAYER 2 SETUP
+  -- Player 2 Setup (Top)
   player2 = {}
     player2.width = 90
     player2.height = 12
@@ -175,8 +86,7 @@ function love.load()
     player2.speed = 400
     player2.points = 0
 
-
-  -- BLOCKS
+  -- Blocks
   blocks = {}
   blocks.draw = {}
   blocks2 = {}
@@ -192,7 +102,6 @@ function love.load()
   blocks7 = {}
   blocks7.draw = {}
 
-  -- LOAD BLOCKS
   column = 0; row = 1
     while 1 >= row do
       block = {}
@@ -217,7 +126,7 @@ function love.load()
       if column == 10 then column = 0; row = row + 1 end
     end
     
-    column = 0; row = 3
+  column = 0; row = 3
     while 3 >= row do
       block3 = {}
       block3.width = 72
@@ -229,7 +138,7 @@ function love.load()
       if column == 10 then column = 0; row = row + 1 end
     end
     
-    column = 0; row = 4
+  column = 0; row = 4
     while 4 >= row do
       block4 = {}
       block4.width = 72
@@ -241,7 +150,7 @@ function love.load()
       if column == 10 then column = 0; row = row + 1 end
     end
     
-    column = 0; row = 5
+  column = 0; row = 5
     while 5 >= row do
       block5 = {}
       block5.width = 72
@@ -253,7 +162,7 @@ function love.load()
       if column == 10 then column = 0; row = row + 1 end
     end   
     
-    column = 0; row = 6
+  column = 0; row = 6
     while 6 >= row do
       block6 = {}
       block6.width = 72
@@ -279,27 +188,25 @@ function love.load()
       end
     end
 
-  -- BALL
+  -- Ball 1 (Bottom)
   ball = {}
-
     ball.radius = 10
     ball.x = width/2
     ball.y = 540
     ball.speed = 50
     ball.direction = "d"
     
-    -- BALL2
+    -- Ball 2 (Top)
   ball2 = {}
-
     ball2.radius = 10
     ball2.x = width/2
     ball2.y = 80
     ball2.speed = 50
     ball2.direction = "d2"
-  -----------------Test2-------------------
   
   paused = false
   gamestate = "menu"
+  pregame = true
   
   --Menus--
   button_spawn(140,350,"Start", "start")
@@ -321,45 +228,36 @@ function love.load()
   button_spawn(140,550, "Test2", "test2")
   restartbutton_spawn(120, 440, "Restart", "restart")
   restartbutton_spawn(80, 470, "Return to Menu", "mainMenu")
-  
-  --if (gamestate == "xmasSingle" or gamestate == "xmasMulti") then
-    --xmasLoad()
-  --elseif (gamestate == "halloweenSingle" or gamestate == "halloweenMulti") then    
-    --halLoad()
-  --elseif (gamestate == "test") then    
-    --testLoad()
-  --end
 end
 
-  -- CHECK TOP FOR BOUNCE
+  -- Bounce
 function bounce()
-  if ball.direction == "ull" then ball.direction = "dll"
+  if ball.direction == "ull"      then ball.direction = "dll"
   elseif ball.direction == "ul"   then ball.direction = "dl"
   elseif ball.direction == "uul"  then ball.direction = "ddl"
   elseif ball.direction == "u"    then ball.direction = "d"
   elseif ball.direction == "uur"  then ball.direction = "ddr"
   elseif ball.direction == "ur"   then ball.direction = "dr"
   elseif ball.direction == "urr"  then ball.direction = "drr"
-  elseif ball.direction == "dll"   then ball.direction = "ull"
-  elseif ball.direction == "dl"    then ball.direction = "ul"
-  elseif ball.direction == "ddl"   then ball.direction = "uul"
-  elseif ball.direction == "d"     then ball.direction = "u"
-  elseif ball.direction == "ddr"   then ball.direction = "uur"
-  elseif ball.direction == "dr"    then ball.direction = "ur"
-  elseif ball.direction == "drr"   then ball.direction = "urr"
+  elseif ball.direction == "dll"  then ball.direction = "ull"
+  elseif ball.direction == "dl"   then ball.direction = "ul"
+  elseif ball.direction == "ddl"  then ball.direction = "uul"
+  elseif ball.direction == "d"    then ball.direction = "u"
+  elseif ball.direction == "ddr"  then ball.direction = "uur"
+  elseif ball.direction == "dr"   then ball.direction = "ur"
+  elseif ball.direction == "drr"  then ball.direction = "urr"
   end
 end
 
 function bounce2()
-  if ball2.direction == "dll2"       then ball2.direction = "ull2"
-  elseif ball2.direction == "dl2"    then ball2.direction = "ul2"
-  elseif ball2.direction == "ddl2"   then ball2.direction = "uul2"
-  elseif ball2.direction == "d2"     then ball2.direction = "u2"
-  elseif ball2.direction == "ddr2"   then ball2.direction = "uur2"
-  elseif ball2.direction == "dr2"    then ball2.direction = "ur2"
-  elseif ball2.direction == "drr2"   then ball2.direction = "urr2"
-  
-  elseif ball2.direction == "ull2" then ball2.direction = "dll2"
+  if ball2.direction == "dll2"      then ball2.direction = "ull2"
+  elseif ball2.direction == "dl2"   then ball2.direction = "ul2"
+  elseif ball2.direction == "ddl2"  then ball2.direction = "uul2"
+  elseif ball2.direction == "d2"    then ball2.direction = "u2"
+  elseif ball2.direction == "ddr2"  then ball2.direction = "uur2"
+  elseif ball2.direction == "dr2"   then ball2.direction = "ur2"
+  elseif ball2.direction == "drr2"  then ball2.direction = "urr2"
+  elseif ball2.direction == "ull2"  then ball2.direction = "dll2"
   elseif ball2.direction == "ul2"   then ball2.direction = "dl2"
   elseif ball2.direction == "uul2"  then ball2.direction = "ddl2"
   elseif ball2.direction == "u2"    then ball2.direction = "d2"
@@ -370,16 +268,10 @@ function bounce2()
 end
 
 function love.update(dt) 
-  if love.keyboard.isDown("space") then
-    gamestate = "game"
-     backgroundSound:play()
-  end
-  ------------------Test2Update--------------------
   
   if love.keyboard.isDown("r") then
     love.load()
   end
-  ------------------Test2Update--------------------
   
   mousex = love.mouse.getX()
   mousey = love.mouse.getY() 
@@ -398,47 +290,20 @@ function love.update(dt)
 
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
     backgroundSound:play()
-    if (paused == false) then
-      singleControls()
-      map_collide()  
+    if (paused == false) and (pregame == false) then
+      test2Update(dt)
       pausebutton_check()
     elseif (paused == true) then
       resumebutton_check()
+    elseif (pregame == true) then
+      test2Update(dt)
+      pausebutton_check()
     end
   elseif (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
     backgroundSound:play()
     if (paused == false) then
-      multiControls()
-      map_collide()
+      test2Update(dt)
       pausebutton_check()
-    elseif (paused == true) then
-      resumebutton_check()
-    end
-  end
-  
-  if gamestate == "playingHal" then
-    if (paused == false) then
-    ballL1P1X = ballL1P1X - (dt * ballspeed)
-    ballL1P1Y = ballL1P1Y + (dt * ballspeed)
-    ballL1P2X = ballL1P2X + (dt * ballspeed)
-    ballL1P2Y = ballL1P2Y - (dt * ballspeed)
-    pausebutton_check()
-    singleControls()
-    map_collide()
-    elseif (paused == true) then
-      resumebutton_check()
-    end
-  end
-  
-  if gamestate == "playingXmas" then
-    if (paused == false) then
-    ballL1P1X = ballL1P1X + (dt * ballspeed)
-    ballL1P1Y = ballL1P1Y + (dt * ballspeed)
-    ballL1P2X = ballL1P2X - (dt * ballspeed)
-    ballL1P2Y = ballL1P2Y - (dt * ballspeed)
-    pausebutton_check()
-    singleControls()
-    map_collide() 
     elseif (paused == true) then
       resumebutton_check()
     end
@@ -446,7 +311,6 @@ function love.update(dt)
   
   if gamestate == "game" then
     if (paused == false) then
-      test2ContorlMuilt(dt)
       test2Update(dt)
       pausebutton_check()
     elseif (paused == true) then
@@ -459,15 +323,6 @@ function love.update(dt)
   end
 end
 
-function love.keypressed(space)
-    --start balls moving
-  if gamestate == "xmasSingle" then
-    gamestate = "playingXmas"
-  elseif gamestate == "halloweenSingle" then
-    gamestate = "playingHal"
-  end
-end
-
 function love.draw() 
   
   if(paused == true) then
@@ -475,26 +330,20 @@ function love.draw()
     resumebutton_draw()
   elseif(paused == false) then    
     if gamestate == "halloweenMulti" then
-      xmasDraw()
+      test2Draw()
       pausebutton_draw()
     elseif gamestate == "levelSelectSingle" then
       levelSelectSingleDraw()
     elseif gamestate == "levelSelectMulti" then
       levelSelectMultiDraw()
     elseif gamestate == "xmasMulti" then
-      halDraw()
-      pausebutton_draw()
-    elseif gamestate == "playingHal" then
-      xmasDraw()
-      pausebutton_draw()
-    elseif gamestate == "playingXmas" then
-      halDraw()
+      test2Draw()
       pausebutton_draw()
     elseif gamestate == "halloweenSingle" then
-      xmasDraw()      
+      test2Draw()      
       pausebutton_draw()
     elseif gamestate == "xmasSingle" then
-      halDraw()
+      test2Draw()
       pausebutton_draw()
     elseif gamestate == "modeSelect" then
       modeSelectDraw()
@@ -504,7 +353,6 @@ function love.draw()
       optionsDraw()
     elseif gamestate == "results" then
       resultsDraw()
-      --winnerSound:setVolume(0.0)
     elseif gamestate == "pregame" then
       test2Draw()
     elseif gamestate == "game" then
@@ -518,13 +366,6 @@ function love.draw()
       restartbutton_draw()
     end 
   end
-end
-
-function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
-  return x1 < x2+w2 and
-        x2 < x1+w1 and
-        y1 < y2+h2 and
-        y2 < y1+h1
 end
 
 function menuDraw()
@@ -558,10 +399,12 @@ end
 
 function p1WinnerDraw()
   love.graphics.draw(winnerP1Background, winnerP1Quad, 0, 0)
+  love.graphics.print("Your Scored " .. player.points + player2.points, 20, 20)
 end
 
 function p2WinnerDraw()
   love.graphics.draw(winnerP2Background, winnerP2Quad, 0, 0)
+  love.graphics.print("Your Scored " .. player.points + player2.points, 20, 20)
 end
 
 function love.mousepressed(x,y)
@@ -576,57 +419,11 @@ function love.mousepressed(x,y)
     elseif gamestate == "levelSelectMulti" then
       multiButton_click(x,y)
     elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle" or gamestate == "halloweenMulti" or gamestate == "xmasMulti" or gamestate == "game") then
-    pausebutton_click(x,y)
-    resumebutton_click(x,y)
+      pausebutton_click(x,y)
+      resumebutton_click(x,y)
     elseif (gamestate == "p2Winner" or gamestate == "p1Winner") then
-    restartbutton_click(x,y)
+      restartbutton_click(x,y)
     end
-end
-
-function map_collide()
-  if ballL1P1X < 0 then      
-    ballL1P1X = ballL1P1X + 1.5        
-  elseif ballL1P1X > 340 then
-    ballL1P1X = ballL1P1X - 1.5
-  elseif ballL1P1Y < 0 then 
-    gamestate = "results"
-    winnerSound:play()
-  elseif ballL1P1Y > 620 then
-    gamestate = "results"
-    winnerSound:play()
-  elseif ballL2P1X < 0 then
-    ballL1P1X = ballL1P1X + 1.5
-  elseif ballL2P1X > 340 then
-    ballL1P1X = ballL1P1X - 1.5
-  elseif ballL2P1Y < 0 then
-    gamestate = "results"
-    winnerSound:play()
-  elseif ballL2P1Y > 620 then
-    gamestate = "results"
-    winnerSound:play()
-  end
-  
-  if ballL1P2X < 0 then
-    ballL1P2X = ballL1P2X + 1.5
-  elseif ballL1P2X > 340 then
-    ballL1P2X = ballL1P2X - 1.5
-  elseif ballL1P2Y < 0 then
-    gamestate = "results"
-    winnerSound:play()
-  elseif ballL1P2Y > 620 then 
-    gamestate = "results"
-    winnerSound:play()    
-  elseif ballL2P2X < 0 then
-    ballL1P2X = ballL1P2X + 1.5
-  elseif ballL2P2X > 340 then
-    ballL1P2X = ballL1P2X - 1.5
-  elseif ballL2P2Y < 0 then
-    gamestate = "results"
-    winnerSound:play()
-  elseif ballL2P2Y > 620 then
-    gamestate = "results"
-    winnerSound:play()
-  end
 end
 
 function math.angle(x1,y1, x2,y2) return math.atan2(y2-y1, x2-x1) end

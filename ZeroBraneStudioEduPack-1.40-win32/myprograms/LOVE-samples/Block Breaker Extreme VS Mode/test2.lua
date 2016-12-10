@@ -87,6 +87,7 @@ function test2Draw2()
   love.graphics.draw(ball1texture, ball.x - 10, ball.y - 10)
   love.graphics.draw(ball2texture, ball2.x - 10, ball2.y - 10)
 end
+
 function test2Update(dt)  
   winnerSound:setVolume(0.5)
     -- Hitbox for blocks
@@ -369,17 +370,24 @@ function test2Update(dt)
     --love.audio.play(bounce)
   end
   
-  -- Bounce ball off ceiling
-  if ball.y <= 0 or ball.y >= height then 
-    --gamestate = "menu"
-    --bounce() 
+  -- Ball off top or bottom
+  if ball.y <= 0 then 
+    gamestate = "p1Winner"
+    backgroundSound:stop()
+    winnerSound:play()
+  end
+  if ball2.y <= 0 then 
+    gamestate = "p1Winner"
+    backgroundSound:stop()
+    winnerSound:play()
+  end
+  
+  if ball.y >= height then 
     gamestate = "p2Winner"
     backgroundSound:stop()
     winnerSound:play()
   end
-  if ball2.y <= 0 or ball2.y >= height then 
-    --gamestate = "menu"
-    --bounce2() 
+  if ball2.y >= height then 
     gamestate = "p2Winner"
     backgroundSound:stop()
     winnerSound:play()
@@ -482,48 +490,53 @@ function test2Update(dt)
   elseif player2.x + player.width >= width then
     player2.x = player2.x - (dt * player.speed)
   end
-end
-
-function test2ContorlMuilt(dt)
-    -- Player 1 movement
-  if love.keyboard.isDown("right") then
-    player.x = player.x + (dt * player.speed)
-  elseif love.keyboard.isDown("left") then
-    player.x = player.x - (dt * player.speed)
+  
+  if (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
+    if love.keyboard.isDown("right") then
+      player.x = player.x + (dt * player.speed)
+    elseif love.keyboard.isDown("left") then
+      player.x = player.x - (dt * player.speed)
+    end
+  
+    if love.keyboard.isDown("d") then
+      player2.x = player2.x + (dt * player2.speed)
+    elseif love.keyboard.isDown("a") then
+      player2.x = player2.x - (dt * player2.speed) 
+    end
   end
   
-  -- Player 2 movement
-  if love.keyboard.isDown("d") then
-    player2.x = player2.x + (dt * player2.speed)
-  elseif love.keyboard.isDown("a") then
-    player2.x = player2.x - (dt * player2.speed) 
-  end
-end
-
-function test2ContorlSingle(dt)
-  -- Player1
-  if love.keyboard.isDown("right") then
-    player.x = player.x + (dt * player.speed)
-  elseif love.keyboard.isDown("left") then
-    player.x = player.x - (dt * player.speed)
-  end
+  if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
+    if love.keyboard.isDown("right") then
+      player.x = player.x + (dt * player.speed)
+    elseif love.keyboard.isDown("left") then
+      player.x = player.x - (dt * player.speed)
+    end
   
-  -- AI
-  if gamestate == "game" then
-    myAngle = math.angle(player2.x, player2.y, ball2.x, ball2.y)
-    --dx = math.cos(myAngle) * (dt * speed)
+    myAngle = math.angle(player2.x + 45, player2.y, ball2.x, ball2.y)
+    myAngle2 = math.angle(player2.x + 45, player2.y, ball.x, ball.y)
     dx = math.cos(myAngle) * (dt * player2.speed)
-    --paddleP1X = paddleP1X + dx
-    --paddleP1Y = paddleP1Y + (dx * 0)
-    if player2.x >= 0 and player2.x <= width then
-      if ball2.x <= player2.x - player2.width/2 then
-        player2.x = player2.x - dx --* (dt * player2.speed)
-      elseif ball2.x >= player2.x - player2.width/2 then
-        player2.x = player2.x + dx --* (dt * player2.speed)
+    dx2 = math.cos(myAngle2) * (dt * player2.speed)
+    if ball2.y <= ball.y then 
+      if player2.x >= 0 and player2.x <= width then
+        if ball2.x <= player2.x - player2.width/2 then
+          player2.x = player2.x - dx * 4
+        elseif ball2.x >= player2.x - player2.width/2 then
+          player2.x = player2.x + dx * 4
+        end
+      end
+    elseif ball.y <= ball2.y then 
+      if player2.x >= 0 and player2.x <= width then
+        if ball2.x <= player2.x - player2.width/2 then
+          player2.x = player2.x - dx2 * 4
+        elseif ball2.x >= player2.x - player2.width/2 then
+          player2.x = player2.x + dx2 * 4
+        end
       end
     end
   end
+  
 end
+
 function reLoad()
   player.width = 90
   player.height = 12
@@ -538,6 +551,8 @@ function reLoad()
   player2.y = 20
   player2.speed = 400
   player2.points = 0
+  
+  pregame = true
   
   column = 0; row = 1
     while 1 >= row do
