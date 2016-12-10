@@ -9,6 +9,7 @@ require "level_2"
 require "pause"
 require "resume"
 require "test2"
+require "restartButton"
 
 function love.load()
   
@@ -29,8 +30,10 @@ function love.load()
   xmasBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)  
   halBackground = love.graphics.newImage("sprites/Hal_Background.png")
   halBackgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
-  resultsBackground = love.graphics.newImage("sprites/results.png")
-  resultsQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  winnerP1Background = love.graphics.newImage("sprites/WINNER_P1.png")
+  winnerP1Quad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  winnerP2Background = love.graphics.newImage("sprites/WINNER_P2.png")
+  winnerP2Quad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
   
   blockHalLayer1_7 = love.graphics.newImage("sprites/orange_layer1_hal.png")
   blockHalLayer2_6 = love.graphics.newImage("sprites/purple_layer2_hal.png")
@@ -196,7 +199,7 @@ function love.load()
       block.width = 72
       block.height = 21
       block.x = column * (block.width )
-      block.y = (row * (block.height )) + 300
+      block.y = (row * (block.height )) + 225
       table.insert(blocks.draw, block)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -208,7 +211,7 @@ function love.load()
       block2.width = 72
       block2.height = 21
       block2.x = column * (block2.width )
-      block2.y = (row * (block2.height )) + 300
+      block2.y = (row * (block2.height )) + 225
       table.insert(blocks2.draw, block2)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -220,7 +223,7 @@ function love.load()
       block3.width = 72
       block3.height = 21
       block3.x = column * (block3.width )
-      block3.y = (row * (block3.height )) + 300
+      block3.y = (row * (block3.height )) + 225
       table.insert(blocks3.draw, block3)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -232,7 +235,7 @@ function love.load()
       block4.width = 72
       block4.height = 21
       block4.x = column * (block4.width )
-      block4.y = (row * (block4.height )) + 300
+      block4.y = (row * (block4.height )) + 225
       table.insert(blocks4.draw, block4)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -244,7 +247,7 @@ function love.load()
       block5.width = 72
       block5.height = 21
       block5.x = column * (block5.width )
-      block5.y = (row * (block5.height )) + 300
+      block5.y = (row * (block5.height )) +225
       table.insert(blocks5.draw, block5)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -256,7 +259,7 @@ function love.load()
       block6.width = 72
       block6.height = 21
       block6.x = column * (block6.width )
-      block6.y = (row * (block6.height )) + 300
+      block6.y = (row * (block6.height )) + 225
       table.insert(blocks6.draw, block6)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -268,7 +271,7 @@ function love.load()
       block7.width = 72
       block7.height = 21
       block7.x = column * (block7.width )
-      block7.y = (row * (block7.height )) + 300
+      block7.y = (row * (block7.height )) + 225
       table.insert(blocks7.draw, block7)
       column = column + 1
       if column == 10 then 
@@ -316,6 +319,8 @@ function love.load()
   pausebutton_spawn(0, 0, "Paused", "paused")
   resumebutton_spawn(140, 0, "Resume", "resume")
   button_spawn(140,550, "Test2", "test2")
+  restartbutton_spawn(120, 440, "Restart", "restart")
+  restartbutton_spawn(80, 470, "Return to Menu", "mainMenu")
   
   --if (gamestate == "xmasSingle" or gamestate == "xmasMulti") then
     --xmasLoad()
@@ -367,472 +372,17 @@ end
 function love.update(dt) 
   if love.keyboard.isDown("space") then
     gamestate = "game"
+     backgroundSound:play()
   end
   ------------------Test2Update--------------------
-  -- Player 1 movement
-  if love.keyboard.isDown("right") then
-    player.x = player.x + (dt * player.speed)
-  elseif love.keyboard.isDown("left") then
-    player.x = player.x - (dt * player.speed)
-  end
-  
-  -- Player 2 movement
-  if love.keyboard.isDown("d") then
-    player2.x = player2.x + (dt * player2.speed)
-  elseif love.keyboard.isDown("a") then
-    player2.x = player2.x - (dt * player2.speed) 
-  end
   
   if love.keyboard.isDown("r") then
     love.load()
   end
-    
-  -- Hitbox for player 1 ball 1
-  if ball.y >= player.y and ball.y <= height and ball.x >= player.x and
-    ball.x <= (player.x + player.width) then
-    if ball.x >= player.x and ball.x < (player.x + 10) then
-      ball.direction = "ull"
-    elseif ball.x >= (player.x + 10) and ball.x < (player.x + 20) then
-      ball.direction = "ul"
-    elseif ball.x >= (player.x + 20) and ball.x < (player.x + 30) then
-      ball.direction = "uul"
-    elseif ball.x >= (player.x + 30) and ball.x < (player.x + 40) then
-      ball.direction = "ul"
-    elseif ball.x >= (player.x + 40) and ball.x < (player.x + 50) then
-      ball.direction = "uur"
-    elseif ball.x >= (player.x + 50) and ball.x < (player.x + 60) then
-      ball.direction = "ur"
-    elseif ball.x >= (player.x + 60) and ball.x < (player.x + 70) then
-      ball.direction = "urr"
-    end
-    --love.audio.play(bounce)
-  end
-  
-  -- Hitbox for player 2 ball 1
-  if ball.y <= player2.y and ball.y <= height and ball.x >= player2.x and
-    ball.x <= (player2.x + player2.width) then
-    if ball.x >= player2.x and ball.x < (player2.x + 10) then
-      ball.direction = "ddl"
-    elseif ball.x >= (player2.x + 10) and ball.x < (player2.x + 20) then
-      ball.direction = "dl"
-    elseif ball.x >= (player2.x + 20) and ball.x < (player2.x + 30) then
-      ball.direction = "dll"
-    elseif ball.x >= (player2.x + 30) and ball.x < (player2.x + 40) then
-      ball.direction = "dr"
-    elseif ball.x >= (player2.x + 40) and ball.x < (player2.x + 50) then
-      ball.direction = "ddr"
-    elseif ball.x >= (player2.x + 50) and ball.x < (player2.x + 60) then
-      ball.direction = "dr"
-    elseif ball.x >= (player2.x + 60) and ball.x < (player2.x + 70) then
-      ball.direction = "drr"
-    end
-    --love.audio.play(bounce)
-  end
-  
-  -- Hitbox for player 1 ball 2
-  if ball2.y >= player.y and ball2.y <= height and ball2.x >= player.x and
-    ball2.x <= (player.x + player.width) then
-    if ball2.x >= player.x and ball2.x < (player.x + 10) then
-      ball2.direction = "dll2"
-    elseif ball2.x >= (player.x + 10) and ball2.x < (player.x + 20) then
-      ball2.direction = "dl2"
-    elseif ball2.x >= (player.x + 20) and ball2.x < (player.x + 30) then
-      ball2.direction = "ddl2"
-    elseif ball2.x >= (player.x + 30) and ball2.x < (player.x + 40) then
-      ball2.direction = "dl2"
-    elseif ball2.x >= (player.x + 40) and ball2.x < (player.x + 50) then
-      ball2.direction = "ddr2"
-    elseif ball2.x >= (player.x + 50) and ball2.x < (player.x + 60) then
-      ball2.direction = "dr2"
-    elseif ball2.x >= (player.x + 60) and ball2.x < (player.x + 70) then
-      ball2.direction = "drr2"
-    end
-    --love.audio.play(bounce)
-  end
-  
-  -- Hitbox for player 2 ball 2
-  if ball2.y <= player2.y and ball2.y <= height and ball2.x >= player2.x and
-    ball2.x <= (player2.x + player2.width) then
-    if ball2.x >= player2.x and ball2.x < (player2.x + 10) then
-      ball2.direction = "uur2" -- change r to l
-    elseif ball2.x >= (player2.x + 10) and ball2.x < (player2.x + 20) then
-      ball2.direction = "ur2"
-    elseif ball2.x >= (player2.x + 20) and ball2.x < (player2.x + 30) then
-      ball2.direction = "urr2"
-    elseif ball2.x >= (player2.x + 30) and ball2.x < (player2.x + 40) then
-      ball2.direction = "ur2"
-    elseif ball2.x >= (player2.x + 40) and ball2.x < (player2.x + 50) then
-      ball2.direction = "uul2"
-    elseif ball2.x >= (player2.x + 50) and ball2.x < (player2.x + 60) then
-      ball2.direction = "ul2"
-    elseif ball2.x >= (player2.x + 60) and ball2.x < (player2.x + 70) then
-      ball2.direction = "ull2"
-    end
-    --love.audio.play(bounce)
-  end
-
-  -- Hitbox for blocks
-  for i,v in ipairs(blocks.draw) do
-    if ball.y <= (v.y + v.height) and ball.y >= v.y then
-      if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        bounce()
-        --love.audio.play(hit)
-        table.remove(blocks.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks.draw) do
-    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
-      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        bounce2()
-        --love.audio.play(hit)
-        table.remove(blocks.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks2.draw) do
-    if ball.y <= (v.y + v.height) and ball.y >= v.y then
-      if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        bounce()
-        --love.audio.play(hit)
-        table.remove(blocks2.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks2.draw) do
-    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
-      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        bounce2()
-        --love.audio.play(hit)
-        table.remove(blocks2.draw, i)
-        player2.points = player2.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks3.draw) do
-    if ball.y <= (v.y + v.height) and ball.y >= v.y then
-      if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        bounce()
-        --love.audio.play(hit)
-        table.remove(blocks3.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks3.draw) do
-    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
-      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        bounce2()
-        --love.audio.play(hit)
-        table.remove(blocks3.draw, i)
-        player2.points = player2.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks4.draw) do
-    if ball.y <= (v.y + v.height) and ball.y >= v.y then
-      if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        bounce()
-        --love.audio.play(hit)
-        table.remove(blocks4.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks4.draw) do
-    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
-      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        bounce2()
-        --love.audio.play(hit)
-        table.remove(blocks4.draw, i)
-        player2.points = player2.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks5.draw) do
-    if ball.y <= (v.y + v.height) and ball.y >= v.y then
-      if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        bounce()
-        --love.audio.play(hit)
-        table.remove(blocks5.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks5.draw) do
-    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
-      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        bounce2()
-        --love.audio.play(hit)
-        table.remove(blocks5.draw, i)
-        player2.points = player2.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks6.draw) do
-    if ball.y <= (v.y + v.height) and ball.y >= v.y then
-      if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        bounce()
-        --love.audio.play(hit)
-        table.remove(blocks6.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks6.draw) do
-    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
-      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        bounce2()
-        --love.audio.play(hit)
-        table.remove(blocks6.draw, i)
-        player2.points = player2.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks7.draw) do
-    if ball.y <= (v.y + v.height) and ball.y >= v.y then
-      if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        bounce()
-        --love.audio.play(hit)
-        table.remove(blocks7.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks7.draw) do
-    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
-      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        bounce2()
-        --love.audio.play(hit)
-        table.remove(blocks7.draw, i)
-        player2.points = player2.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks2.draw) do
-    if ball.y <= (v.y + v.height) and ball.y >= v.y then
-      if ball.x <= (v.x + v.width) and ball.x >= v.x then
-        bounce()
-        --love.audio.play(hit)
-        table.remove(blocks2.draw, i)
-        player.points = player.points + 1
-      end
-    end
-  end
-  
-  for i,v in ipairs(blocks2.draw) do
-    if ball2.y <= (v.y + v.height) and ball2.y >= v.y then
-      if ball2.x <= (v.x + v.width) and ball2.x >= v.x then
-        bounce2()
-        --love.audio.play(hit)
-        table.remove(blocks2.draw, i)
-        player2.points = player2.points + 1
-      end
-    end
-  end
-
-  -- Bounces ball off walls
-  if (ball.x <= 0) or (ball.x >= width) then
-    if ball.direction == "uur" then ball.direction = "uul"
-    elseif ball.direction == "ur" then ball.direction = "ul"
-    elseif ball.direction == "urr" then ball.direction = "ull"
-    elseif ball.direction == "drr" then ball.direction = "dll"
-    elseif ball.direction == "dr" then ball.direction = "dl"
-    elseif ball.direction == "ddr" then ball.direction = "ddl"
-    elseif ball.direction == "ddl" then ball.direction = "ddr"
-    elseif ball.direction == "dl" then ball.direction = "dr"
-    elseif ball.direction == "dll" then ball.direction = "drr"
-    elseif ball.direction == "ull" then ball.direction = "urr"
-    elseif ball.direction == "ul" then ball.direction = "ur"
-    elseif ball.direction == "uul" then ball.direction = "uur"
-    end
-    --love.audio.play(bounce)
-  end
-  
-  if (ball2.x <= 0) or (ball2.x >= width) then
-    if ball2.direction == "uur2" then ball2.direction = "uul2"
-    elseif ball2.direction == "ur2" then ball2.direction = "ul2"
-    elseif ball2.direction == "urr2" then ball2.direction = "ull2"
-    elseif ball2.direction == "drr2" then ball2.direction = "dll2"
-    elseif ball2.direction == "dr2" then ball2.direction = "dl2"
-    elseif ball2.direction == "ddr2" then ball2.direction = "ddl2"
-    elseif ball2.direction == "ddl2" then ball2.direction = "ddr2"
-    elseif ball2.direction == "dl2" then ball2.direction = "dr2"
-    elseif ball2.direction == "dll2" then ball2.direction = "drr2"
-    elseif ball2.direction == "ull2" then ball2.direction = "urr2"
-    elseif ball2.direction == "ul2" then ball2.direction = "ur2"
-    elseif ball2.direction == "uul2" then ball2.direction = "uur2"
-    end
-    --love.audio.play(bounce)
-  end
-
-  -- Bounce ball off ceiling
-  if ball.y <= 0 or ball.y >= height then 
-    --gamestate = "menu"
-    bounce() 
-  end
-  if ball2.y <= 0 or ball2.y >= height then 
-    --gamestate = "menu"
-    bounce2() 
-  end
-
-  -- Move ball
-  if gamestate == "game" then
-    if ball.direction == "u" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-    elseif ball.direction == "uur" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-      ball.x = ball.x + 1 * (dt * ball.speed)
-    elseif ball.direction == "ur" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-      ball.x = ball.x + 2 * (dt * ball.speed)
-    elseif ball.direction == "urr" then
-      ball.y = ball.y - 1 * (dt * ball.speed)
-      ball.x = ball.x + 2 * (dt * ball.speed)
-    elseif ball.direction == "drr" then
-      ball.y = ball.y + 1 * (dt * ball.speed)
-      ball.x = ball.x + 2 * (dt * ball.speed)
-    elseif ball.direction == "dr" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-      ball.x = ball.x + 2 * (dt * ball.speed)
-    elseif ball.direction == "ddr" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-      ball.x = ball.x + 1 * (dt * ball.speed)
-    elseif ball.direction == "d" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-    elseif ball.direction == "ddl" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-      ball.x = ball.x - 1 * (dt * ball.speed)
-    elseif ball.direction == "dl" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-      ball.x = ball.x - 2 * (dt * ball.speed)
-    elseif ball.direction == "dll" then
-      ball.y = ball.y + 1 * (dt * ball.speed)
-      ball.x = ball.x - 2 * (dt * ball.speed)
-    elseif ball.direction == "ull" then
-      ball.y = ball.y - 1 * (dt * ball.speed)
-      ball.x = ball.x - 2 * (dt * ball.speed)
-    elseif ball.direction == "ul" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-      ball.x = ball.x - 2 * (dt * ball.speed)
-    elseif ball.direction == "uul" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-      ball.x = ball.x - 1 * (dt * ball.speed)
-    end
-  end
-  
-  -- Move ball 2
-  if gamestate == "game" then
-    if ball2.direction == "u2" then
-      ball2.y = ball.y + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "uur2" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x - 1 * (dt * ball2.speed)
-    elseif ball2.direction == "ur2" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "urr2" then
-      ball2.y = ball2.y + 1 * (dt * ball2.speed)
-      ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "drr2" then
-      ball2.y = ball2.y - 1 * (dt * ball2.speed)
-      ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "dr2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ddr2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x - 1 * (dt * ball2.speed)
-    elseif ball2.direction == "d2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ddl2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 1 * (dt * ball2.speed)
-    elseif ball2.direction == "dl2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "dll2" then
-      ball2.y = ball2.y - 1 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ull2" then
-      ball2.y = ball2.y + 1 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ul2" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "uul2" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 1 * (dt * ball2.speed)
-    end
-  end
-
-  if ball.y >= height then
-    --love.audio.play(loss)
-    ball.radius = 5
-    ball.x = width/2
-    ball.y = 550
-    ball.speed = 100
-    ball.direction = "d"
-  end
-  
-  if ball2.y >= height then
-    --love.audio.play(loss)
-    ball2.radius = 5
-    ball2.x = width/2
-    ball2.y = 50
-    ball2.speed = 100
-    ball2.direction = "d2"
-  end
-  
-  if player.x <= 0 then
-    player.x = player.x + (dt * player.speed)
-  elseif player.x + player.width >= width then
-    player.x = player.x - (dt * player.speed)
-  end
-  
-  if player2.x <= 0 then
-    player2.x = player2.x + (dt * player.speed)
-  elseif player2.x + player.width >= width then
-    player2.x = player2.x - (dt * player.speed)
-  end
-  
-  if gamestate == "game" then
-    myAngle = math.angle(player2.x, player2.y, ball2.x, ball2.y)
-    --dx = math.cos(myAngle) * (dt * speed)
-    dx = math.cos(myAngle) * (dt * player2.speed)
-    --paddleP1X = paddleP1X + dx
-    --paddleP1Y = paddleP1Y + (dx * 0)
-    if player2.x >= 0 and player2.x <= width then
-      if ball2.x <= player2.x - player2.width/2 then
-        player2.x = player2.x - dx --* (dt * player2.speed)
-      elseif ball2.x >= player2.x - player2.width/2 then
-        player2.x = player2.x + dx --* (dt * player2.speed)
-      end
-    end
-  end
   ------------------Test2Update--------------------
   
   mousex = love.mouse.getX()
-  mousey = love.mouse.getY()
-  
-  
+  mousey = love.mouse.getY() 
 
   if gamestate == "menu" then
     button_check()
@@ -845,8 +395,6 @@ function love.update(dt)
   elseif gamestate == "levelSelectMulti" then
     multiButton_check()
   end
-  
-  lastPostionBall1 = currentPostionBall1
 
   if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
     backgroundSound:play()
@@ -894,6 +442,20 @@ function love.update(dt)
     elseif (paused == true) then
       resumebutton_check()
     end
+  end
+  
+  if gamestate == "game" then
+    if (paused == false) then
+      test2ContorlMuilt(dt)
+      test2Update(dt)
+      pausebutton_check()
+    elseif (paused == true) then
+      resumebutton_check()
+    end
+  end
+  
+  if (gamestate == "p2Winner" or gamestate == "p1Winner") then
+    restartbutton_check()
   end
 end
 
@@ -946,7 +508,14 @@ function love.draw()
     elseif gamestate == "pregame" then
       test2Draw()
     elseif gamestate == "game" then
-      test2Draw2()
+      test2Draw2()      
+      pausebutton_draw()
+    elseif gamestate == "p2Winner" then
+      p2WinnerDraw()
+      restartbutton_draw()
+    elseif gamestate == "p1Winner" then
+      p1WinnerDraw()
+      restartbutton_draw()
     end 
   end
 end
@@ -987,6 +556,14 @@ function resultsDraw()
   love.graphics.draw(resultsBackground, resultsQuad, 0, 0)
 end
 
+function p1WinnerDraw()
+  love.graphics.draw(winnerP1Background, winnerP1Quad, 0, 0)
+end
+
+function p2WinnerDraw()
+  love.graphics.draw(winnerP2Background, winnerP2Quad, 0, 0)
+end
+
 function love.mousepressed(x,y)
     if gamestate == "menu" then
       button_click(x,y)
@@ -998,9 +575,11 @@ function love.mousepressed(x,y)
       singleButton_click(x,y)
     elseif gamestate == "levelSelectMulti" then
       multiButton_click(x,y)
-    elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle" or gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
+    elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle" or gamestate == "halloweenMulti" or gamestate == "xmasMulti" or gamestate == "game") then
     pausebutton_click(x,y)
     resumebutton_click(x,y)
+    elseif (gamestate == "p2Winner" or gamestate == "p1Winner") then
+    restartbutton_click(x,y)
     end
 end
 
@@ -1015,7 +594,6 @@ function map_collide()
   elseif ballL1P1Y > 620 then
     gamestate = "results"
     winnerSound:play()
-
   elseif ballL2P1X < 0 then
     ballL1P1X = ballL1P1X + 1.5
   elseif ballL2P1X > 340 then
@@ -1037,8 +615,7 @@ function map_collide()
     winnerSound:play()
   elseif ballL1P2Y > 620 then 
     gamestate = "results"
-    winnerSound:play()
-    
+    winnerSound:play()    
   elseif ballL2P2X < 0 then
     ballL1P2X = ballL1P2X + 1.5
   elseif ballL2P2X > 340 then
@@ -1050,7 +627,6 @@ function map_collide()
     gamestate = "results"
     winnerSound:play()
   end
-
 end
 
 function math.angle(x1,y1, x2,y2) return math.atan2(y2-y1, x2-x1) end

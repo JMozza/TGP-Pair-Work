@@ -32,11 +32,12 @@ function button_click(x,y)
               menuClick:play()
             end
             if v.id == "quit" then
-                love.event.push("quit")
-                menuClick:play()
+              love.event.push("quit")
+              menuClick:play()
             end
             if v.id == "test2" then
-                gamestate = "pregame"
+              gamestate = "pregame"
+              menuClick:play()
             end
             if v.id == "mute" then
               menuClick:setVolume(0.0)
