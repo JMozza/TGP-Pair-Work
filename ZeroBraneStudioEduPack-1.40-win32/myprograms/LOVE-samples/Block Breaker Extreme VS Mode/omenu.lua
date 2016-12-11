@@ -27,6 +27,19 @@ function obutton_click(x,y)
               gamestate = "menu"
               menuClick:play()
             end
+            if v.id == "+" then
+              volCount = volCount + 1
+            end
+            if v.id == "-" then
+              volCount = volCount - 1
+            end
+            if v.id == "mute" then
+              if volCount > 0 then
+                volCount = 0
+              elseif volCount == 0 then
+                volCount = volCount + 10
+              end
+            end
         end            
     end
 end

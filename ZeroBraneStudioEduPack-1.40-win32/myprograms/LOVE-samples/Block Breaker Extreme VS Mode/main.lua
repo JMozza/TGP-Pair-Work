@@ -66,6 +66,8 @@ function love.load()
   paddleBounce = love.audio.newSource("sounds/Paddle_Bounce.mp3", "static")
   winnerSound = love.audio.newSource("sounds/Winner.mp3", "static")
   backgroundSound = love.audio.newSource("sounds/Background.mp3")
+  
+  volCount = 10
   ------------------------
   
   -- Player 1 Setup (Bottom)
@@ -210,22 +212,23 @@ function love.load()
   
   --Menus--
   button_spawn(140,350,"Start", "start")
-  button_spawn(140,400,"Options", "options")
-  button_spawn(140,450,"Quit", "quit")
-  button_spawn(0,0, "Mute", "mute")
-  obutton_spawn(50,300,"Back", "back")
-  mbutton_spawn(110,350,"Single Player", "single")
-  mbutton_spawn(110,400,"Multi Player", "multi")
-  mbutton_spawn(110,450,"Back", "mback")
+  button_spawn(130,400,"Options", "options")
+  button_spawn(145,450,"Quit", "quit")
+  obutton_spawn(294,300, "Mute", "mute")
+  obutton_spawn(0,300,"Back", "back")
+  obutton_spawn(266,360,"+", "+")
+  obutton_spawn(266,380,"-", "-")
+  mbutton_spawn(100,350,"Single Player", "single")
+  mbutton_spawn(105,400,"Multi Player", "multi")
+  mbutton_spawn(140,450,"Back", "mback")
   singleButton_spawn(110,350,"Halloween", "halloweenSingle")
-  singleButton_spawn(110,400,"Xmas", "xmasSingle")
-  singleButton_spawn(110,450,"Back", "singleBack")
+  singleButton_spawn(135,400,"Xmas", "xmasSingle")
+  singleButton_spawn(135,450,"Back", "singleBack")
   multiButton_spawn(110,350,"Halloween", "halloweenMulti")
-  multiButton_spawn(110,400,"Xmas", "xmasMulti")
-  multiButton_spawn(110,450,"Back", "multiBack")
+  multiButton_spawn(135,400,"Xmas", "xmasMulti")
+  multiButton_spawn(135,450,"Back", "multiBack")
   pausebutton_spawn(0, 0, "Paused", "paused")
   resumebutton_spawn(140, 0, "Resume", "resume")
-  button_spawn(140,550, "Test2", "test2")
   restartbutton_spawn(120, 440, "Restart", "restart")
   restartbutton_spawn(80, 470, "Return to Menu", "mainMenu")
 end
@@ -281,6 +284,7 @@ function love.update(dt)
   elseif gamestate == "modeSelect" then
     mbutton_check()
   elseif gamestate == "options" then
+    volume()
     obutton_check()
   elseif gamestate == "levelSelectSingle" then
     singleButton_check()
@@ -321,6 +325,87 @@ function love.update(dt)
   if (gamestate == "p2Winner" or gamestate == "p1Winner") then
     restartbutton_check()
   end
+end
+
+function volume()
+  if volCount == 10 then
+      menuClick:setVolume(1.0)
+      levelStart:setVolume(1.0)
+      blockBounce:setVolume(1.0)
+      paddleBounce:setVolume(1.0)
+      winnerSound:setVolume(1.0)
+      backgroundSound:setVolume(1.0)
+    elseif volCount == 9 then
+      menuClick:setVolume(0.9)
+      levelStart:setVolume(0.9)
+      blockBounce:setVolume(0.9)
+      paddleBounce:setVolume(0.9)
+      winnerSound:setVolume(0.9)
+      backgroundSound:setVolume(0.9)
+    elseif volCount == 8 then
+      menuClick:setVolume(0.8)
+      levelStart:setVolume(0.8)
+      blockBounce:setVolume(0.8)
+      paddleBounce:setVolume(0.8)
+      winnerSound:setVolume(0.8)
+      backgroundSound:setVolume(0.8)
+    elseif volCount == 7 then
+      menuClick:setVolume(0.7)
+      levelStart:setVolume(0.7)
+      blockBounce:setVolume(0.7)
+      paddleBounce:setVolume(0.7)
+      winnerSound:setVolume(0.7)
+      backgroundSound:setVolume(0.7)
+    elseif volCount == 6 then
+      menuClick:setVolume(0.6)
+      levelStart:setVolume(0.6)
+      blockBounce:setVolume(0.6)
+      paddleBounce:setVolume(0.6)
+      winnerSound:setVolume(0.6)
+      backgroundSound:setVolume(0.6)
+    elseif volCount == 5 then
+      menuClick:setVolume(0.5)
+      levelStart:setVolume(0.5)
+      blockBounce:setVolume(0.5)
+      paddleBounce:setVolume(0.5)
+      winnerSound:setVolume(0.5)
+      backgroundSound:setVolume(0.5)
+    elseif volCount == 4 then
+      menuClick:setVolume(0.4)
+      levelStart:setVolume(0.4)
+      blockBounce:setVolume(0.4)
+      paddleBounce:setVolume(0.4)
+      winnerSound:setVolume(0.4)
+      backgroundSound:setVolume(0.4)
+    elseif volCount == 3 then
+      menuClick:setVolume(0.3)
+      levelStart:setVolume(0.3)
+      blockBounce:setVolume(0.3)
+      paddleBounce:setVolume(0.3)
+      winnerSound:setVolume(0.3)
+      backgroundSound:setVolume(0.3)
+    elseif volCount == 2 then
+      menuClick:setVolume(0.2)
+      levelStart:setVolume(0.2)
+      blockBounce:setVolume(0.2)
+      paddleBounce:setVolume(0.2)
+      winnerSound:setVolume(0.2)
+      backgroundSound:setVolume(0.2)
+    elseif volCount == 1 then
+      menuClick:setVolume(0.1)
+      levelStart:setVolume(0.1)
+      blockBounce:setVolume(0.1)
+      paddleBounce:setVolume(0.1)
+      winnerSound:setVolume(0.1)
+      backgroundSound:setVolume(0.1)
+    elseif volCount == 0 then
+      menuClick:setVolume(0.0)
+      levelStart:setVolume(0.0)
+      blockBounce:setVolume(0.0)
+      paddleBounce:setVolume(0.0)
+      winnerSound:setVolume(0.0)
+      backgroundSound:setVolume(0.0)
+    end
 end
 
 function love.draw() 

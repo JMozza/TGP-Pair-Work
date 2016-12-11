@@ -35,18 +35,6 @@ function button_click(x,y)
               love.event.push("quit")
               menuClick:play()
             end
-            if v.id == "test2" then
-              gamestate = "pregame"
-              menuClick:play()
-            end
-            if v.id == "mute" then
-              menuClick:setVolume(0.0)
-              levelStart:setVolume(0.0)
-              blockBounce:setVolume(0.0)
-              paddleBounce:setVolume(0.0)
-              winnerSound:setVolume(0.0)
-              backgroundSound:setVolume(0.0)                
-            end
         end            
     end
 end
