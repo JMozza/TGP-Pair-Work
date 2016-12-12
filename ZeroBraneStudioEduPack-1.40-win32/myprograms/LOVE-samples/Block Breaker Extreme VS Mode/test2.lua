@@ -1,7 +1,5 @@
-function test2Draw()
+function test2DrawSingle()
   love.graphics.draw(halBackground, halBackgroundQuad, 0, 0)
-  
-  love.graphics.print("Get ready!", width/2, height/3)
 
   -- Points/Lives
   love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
@@ -41,12 +39,12 @@ function test2Draw()
 
   -- Draw Balls
   love.graphics.draw(ball1texture, ball.x - 10, ball.y - 10)
-  love.graphics.draw(ball2texture, ball2.x - 10, ball2.y - 10)
+  love.graphics.draw(ball1texture, ball2.x - 10, ball2.y - 10)
   
 end
 
-function test2Draw2()
-  love.graphics.draw(halBackground, halBackgroundQuad, 0, 0)
+function test2DrawMuilt()
+  love.graphics.draw(xmasBackground, xmasBackgroundQuad, 0, 0)
   -- Points/Lives
   love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
   
@@ -56,15 +54,15 @@ function test2Draw2()
 
   -- Draw blocks
   for _,v in pairs(blocks.draw) do
-    love.graphics.draw(blockHalLayer1_7, v.x, v.y)
+    love.graphics.draw(blockXmasLayer1_7, v.x, v.y)
   end
   
   for _,v in pairs(blocks2.draw) do
-    love.graphics.draw(blockHalLayer2_6, v.x, v.y)
+    love.graphics.draw(blockXmasLayer2_6, v.x, v.y)
   end
   
   for _,v in pairs(blocks3.draw) do
-    love.graphics.draw(blockHalLayer3_5, v.x, v.y)
+    love.graphics.draw(blockXmasLayer3_5, v.x, v.y)
   end
   
   for _,v in pairs(blocks4.draw) do
@@ -72,20 +70,20 @@ function test2Draw2()
   end
   
   for _,v in pairs(blocks5.draw) do
-    love.graphics.draw(blocklayer5fliped, v.x, v.y)
+    love.graphics.draw(blockXmasLayer3_5, v.x, v.y)
   end
   
   for _,v in pairs(blocks6.draw) do
-    love.graphics.draw(blocklayer6fliped, v.x, v.y)
+    love.graphics.draw(blockXmasLayer2_6, v.x, v.y)
   end
   
   for _,v in pairs(blocks7.draw) do
-    love.graphics.draw(blocklayer7fliped, v.x, v.y)
+    love.graphics.draw(blockXmasLayer1_7, v.x, v.y)
   end
   
   -- Draw Balls
   love.graphics.draw(ball1texture, ball.x - 10, ball.y - 10)
-  love.graphics.draw(ball2texture, ball2.x - 10, ball2.y - 10)
+  love.graphics.draw(ball1texture, ball2.x - 10, ball2.y - 10)
 end
 
 function test2Update(dt)  
@@ -251,17 +249,17 @@ function test2Update(dt)
       blockBounce:play()
     if ball.x >= player.x and ball.x < (player.x + 10) then
       ball.direction = "ull"
-    elseif ball.x >= (player.x + 10) and ball.x < (player.x + 20) then
+    elseif ball.x >= (player.x + 15) and ball.x < (player.x + 25) then
       ball.direction = "ul"
-    elseif ball.x >= (player.x + 20) and ball.x < (player.x + 30) then
-      ball.direction = "uul"
     elseif ball.x >= (player.x + 30) and ball.x < (player.x + 40) then
+      ball.direction = "uul"
+    elseif ball.x >= (player.x + 45) and ball.x < (player.x + 55) then
       ball.direction = "ul"
-    elseif ball.x >= (player.x + 40) and ball.x < (player.x + 50) then
-      ball.direction = "uur"
-    elseif ball.x >= (player.x + 50) and ball.x < (player.x + 60) then
-      ball.direction = "ur"
     elseif ball.x >= (player.x + 60) and ball.x < (player.x + 70) then
+      ball.direction = "uur"
+    elseif ball.x >= (player.x + 75) and ball.x < (player.x + 85) then
+      ball.direction = "ur"
+    elseif ball.x >= (player.x + 90) and ball.x < (player.x + 100) then
       ball.direction = "urr"
     end
     --love.audio.play(bounce)
@@ -273,17 +271,17 @@ function test2Update(dt)
       blockBounce:play()
     if ball.x >= player2.x and ball.x < (player2.x + 10) then
       ball.direction = "ddl"
-    elseif ball.x >= (player2.x + 10) and ball.x < (player2.x + 20) then
+    elseif ball.x >= (player2.x + 15) and ball.x < (player2.x + 25) then
       ball.direction = "dl"
-    elseif ball.x >= (player2.x + 20) and ball.x < (player2.x + 30) then
-      ball.direction = "dll"
     elseif ball.x >= (player2.x + 30) and ball.x < (player2.x + 40) then
-      ball.direction = "dr"
-    elseif ball.x >= (player2.x + 40) and ball.x < (player2.x + 50) then
-      ball.direction = "ddr"
-    elseif ball.x >= (player2.x + 50) and ball.x < (player2.x + 60) then
+      ball.direction = "dll"
+    elseif ball.x >= (player2.x + 45) and ball.x < (player2.x + 55) then
       ball.direction = "dr"
     elseif ball.x >= (player2.x + 60) and ball.x < (player2.x + 70) then
+      ball.direction = "ddr"
+    elseif ball.x >= (player2.x + 75) and ball.x < (player2.x + 85) then
+      ball.direction = "dr"
+    elseif ball.x >= (player2.x + 90) and ball.x < (player2.x + 100) then
       ball.direction = "drr"
     end
     --love.audio.play(bounce)
@@ -371,26 +369,50 @@ function test2Update(dt)
   end
   
   -- Ball off top or bottom
-  if ball.y <= 0 then 
-    gamestate = "p1Winner"
-    backgroundSound:stop()
-    winnerSound:play()
-  end
-  if ball2.y <= 0 then 
-    gamestate = "p1Winner"
-    backgroundSound:stop()
-    winnerSound:play()
-  end
-  
-  if ball.y >= height then 
-    gamestate = "p2Winner"
-    backgroundSound:stop()
-    winnerSound:play()
-  end
-  if ball2.y >= height then 
-    gamestate = "p2Winner"
-    backgroundSound:stop()
-    winnerSound:play()
+  if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
+    if ball.y <= 0 then 
+      gamestate = "p1WinnerSingle"
+      backgroundSound:stop()
+      winnerSound:play()
+    end
+    if ball2.y <= 0 then 
+      gamestate = "p1WinnerSingle"
+      backgroundSound:stop()
+      winnerSound:play()
+    end
+    
+    if ball.y >= height then 
+      gamestate = "p2WinnerSingle"
+      backgroundSound:stop()
+      winnerSound:play()
+    end
+    if ball2.y >= height then 
+      gamestate = "p2WinnerSingle"
+      backgroundSound:stop()
+      winnerSound:play()
+    end
+  elseif (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
+    if ball.y <= 0 then 
+      gamestate = "p1WinnerMulti"
+      backgroundSound:stop()
+      winnerSound:play()
+    end
+    if ball2.y <= 0 then 
+      gamestate = "p1WinnerMulti"
+      backgroundSound:stop()
+      winnerSound:play()
+    end
+    
+    if ball.y >= height then 
+      gamestate = "p2WinnerMulti"
+      backgroundSound:stop()
+      winnerSound:play()
+    end
+    if ball2.y >= height then 
+      gamestate = "p2WinnerMulti"
+      backgroundSound:stop()
+      winnerSound:play()
+    end
   end
 
   -- Move ball

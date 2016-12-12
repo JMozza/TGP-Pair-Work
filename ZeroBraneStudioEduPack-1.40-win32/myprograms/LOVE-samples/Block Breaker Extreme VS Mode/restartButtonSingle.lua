@@ -1,11 +1,11 @@
-restartbutton = {}
+restartbuttonSingle = {}
 
-function restartbutton_spawn(x,y,text,id)
-    table.insert(restartbutton, {x = x, y = y, text = text, id = id, mouseovertext = false})
+function restartbuttonSingle_spawn(x,y,text,id)
+    table.insert(restartbuttonSingle, {x = x, y = y, text = text, id = id, mouseovertext = false})
 end
 
-function restartbutton_draw()
-  for i,v in ipairs(restartbutton) do
+function restartbuttonSingle_draw()
+  for i,v in ipairs(restartbuttonSingle) do
     if v.mouseovertext == true then
       love.graphics.setFont(big)
     end
@@ -17,8 +17,8 @@ function restartbutton_draw()
     love.graphics.setColor(255,255,255)
   end
 
-function restartbutton_click(x,y)
-    for i,v in ipairs(restartbutton) do
+function restartbuttonSingle_click(x,y)
+    for i,v in ipairs(restartbuttonSingle) do
         if x > v.x and
         x < v.x + medium:getWidth(v.text) and
         y > v.y and
@@ -39,8 +39,8 @@ function restartbutton_click(x,y)
     end
 end
 
-function restartbutton_check()
-  for i,v in ipairs(restartbutton) do
+function restartbuttonSingle_check()
+  for i,v in ipairs(restartbuttonSingle) do
     if mousex > v.x and
     mousex < v.x + medium:getWidth(v.text) and
     mousey > v.y and

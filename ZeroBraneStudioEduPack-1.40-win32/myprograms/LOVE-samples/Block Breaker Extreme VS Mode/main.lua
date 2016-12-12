@@ -9,7 +9,8 @@ require "level_2"
 require "pause"
 require "resume"
 require "test2"
-require "restartButton"
+require "restartButtonSingle"
+require "restartButtonMulit"
 
 function love.load()
   
@@ -57,6 +58,8 @@ function love.load()
   
   medium = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 20)
   big = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 25)
+  pauseMedium = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 40)
+  pauseBig = love.graphics.newFont("fonts/wallpoet/Wallpoet-Regular.ttf", 45)
   love.graphics.setColor(1,1,1)
   
   ----------Audio---------
@@ -227,10 +230,12 @@ function love.load()
   multiButton_spawn(110,350,"Halloween", "halloweenMulti")
   multiButton_spawn(135,400,"Xmas", "xmasMulti")
   multiButton_spawn(135,450,"Back", "multiBack")
-  pausebutton_spawn(0, 0, "Paused", "paused")
-  resumebutton_spawn(140, 0, "Resume", "resume")
-  restartbutton_spawn(120, 440, "Restart", "restart")
-  restartbutton_spawn(80, 470, "Return to Menu", "mainMenu")
+  pausebutton_spawn(0, 0, "Pause", "paused")
+  resumebutton_spawn(120, 350, "Resume", "resume")
+  restartbuttonSingle_spawn(120, 440, "Restart", "restart")
+  restartbuttonSingle_spawn(80, 470, "Return to Menu", "mainMenu")
+  restartbuttonMulti_spawn(120, 440, "Restart", "restart")
+  restartbuttonMulti_spawn(80, 470, "Return to Menu", "mainMenu")
 end
 
   -- Bounce
@@ -322,8 +327,12 @@ function love.update(dt)
     end
   end
   
-  if (gamestate == "p2Winner" or gamestate == "p1Winner") then
-    restartbutton_check()
+  if (gamestate == "p2WinnerSingle" or gamestate == "p1WinnerSingle") then
+    restartbuttonSingle_check()
+  end
+  
+  if (gamestate == "p2WinnerMulti" or gamestate == "p1WinnerMulti") then
+    restartbuttonMulti_check()
   end
 end
 
@@ -415,20 +424,20 @@ function love.draw()
     resumebutton_draw()
   elseif(paused == false) then    
     if gamestate == "halloweenMulti" then
-      test2Draw()
+      test2DrawMuilt()
       pausebutton_draw()
     elseif gamestate == "levelSelectSingle" then
       levelSelectSingleDraw()
     elseif gamestate == "levelSelectMulti" then
       levelSelectMultiDraw()
     elseif gamestate == "xmasMulti" then
-      test2Draw()
+      test2DrawMuilt()
       pausebutton_draw()
     elseif gamestate == "halloweenSingle" then
-      test2Draw()      
+      test2DrawSingle()      
       pausebutton_draw()
     elseif gamestate == "xmasSingle" then
-      test2Draw()
+      test2DrawSingle()
       pausebutton_draw()
     elseif gamestate == "modeSelect" then
       modeSelectDraw()
@@ -440,15 +449,18 @@ function love.draw()
       resultsDraw()
     elseif gamestate == "pregame" then
       test2Draw()
-    elseif gamestate == "game" then
-      test2Draw2()      
-      pausebutton_draw()
-    elseif gamestate == "p2Winner" then
+    elseif gamestate == "p2WinnerSingle" then
       p2WinnerDraw()
-      restartbutton_draw()
-    elseif gamestate == "p1Winner" then
+      restartbuttonSingle_draw()
+    elseif gamestate == "p1WinnerSingle" then
       p1WinnerDraw()
-      restartbutton_draw()
+      restartbuttonSingle_draw()
+    elseif gamestate == "p2WinnerMulti" then
+      p2WinnerDraw()
+      restartbuttonMulti_draw()
+    elseif gamestate == "p1WinnerMulti" then
+      p1WinnerDraw()
+      restartbuttonMulti_draw()
     end 
   end
 end
@@ -506,8 +518,10 @@ function love.mousepressed(x,y)
     elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle" or gamestate == "halloweenMulti" or gamestate == "xmasMulti" or gamestate == "game") then
       pausebutton_click(x,y)
       resumebutton_click(x,y)
-    elseif (gamestate == "p2Winner" or gamestate == "p1Winner") then
-      restartbutton_click(x,y)
+    elseif (gamestate == "p2WinnerMulti" or gamestate == "p1WinnerMulti") then
+      restartbuttonSingle_click(x,y)
+    elseif (gamestate == "p2WinnerMulti" or gamestate == "p1WinnerMulti") then
+      restartbuttonMulti_click(x,y)
     end
 end
 
