@@ -211,7 +211,6 @@ function love.load()
   
   paused = false
   gamestate = "menu"
-  pregame = true
   
   --Menus--
   button_spawn(140,350,"Start", "start")
@@ -239,41 +238,6 @@ function love.load()
 end
 
   -- Bounce
-function bounce()
-  if ball.direction == "ull"      then ball.direction = "dll"
-  elseif ball.direction == "ul"   then ball.direction = "dl"
-  elseif ball.direction == "uul"  then ball.direction = "ddl"
-  elseif ball.direction == "u"    then ball.direction = "d"
-  elseif ball.direction == "uur"  then ball.direction = "ddr"
-  elseif ball.direction == "ur"   then ball.direction = "dr"
-  elseif ball.direction == "urr"  then ball.direction = "drr"
-  elseif ball.direction == "dll"  then ball.direction = "ull"
-  elseif ball.direction == "dl"   then ball.direction = "ul"
-  elseif ball.direction == "ddl"  then ball.direction = "uul"
-  elseif ball.direction == "d"    then ball.direction = "u"
-  elseif ball.direction == "ddr"  then ball.direction = "uur"
-  elseif ball.direction == "dr"   then ball.direction = "ur"
-  elseif ball.direction == "drr"  then ball.direction = "urr"
-  end
-end
-
-function bounce2()
-  if ball2.direction == "dll2"      then ball2.direction = "ull2"
-  elseif ball2.direction == "dl2"   then ball2.direction = "ul2"
-  elseif ball2.direction == "ddl2"  then ball2.direction = "uul2"
-  elseif ball2.direction == "d2"    then ball2.direction = "u2"
-  elseif ball2.direction == "ddr2"  then ball2.direction = "uur2"
-  elseif ball2.direction == "dr2"   then ball2.direction = "ur2"
-  elseif ball2.direction == "drr2"  then ball2.direction = "urr2"
-  elseif ball2.direction == "ull2"  then ball2.direction = "dll2"
-  elseif ball2.direction == "ul2"   then ball2.direction = "dl2"
-  elseif ball2.direction == "uul2"  then ball2.direction = "ddl2"
-  elseif ball2.direction == "u2"    then ball2.direction = "d2"
-  elseif ball2.direction == "uur2"  then ball2.direction = "ddr2"
-  elseif ball2.direction == "ur2"   then ball2.direction = "dr2"
-  elseif ball2.direction == "urr2"  then ball2.direction = "drr2"
-  end
-end
 
 function love.update(dt) 
   
@@ -297,36 +261,30 @@ function love.update(dt)
     multiButton_check()
   end
 
-  if (gamestate == "halloweenSingle" or gamestate == "xmasSingle") then
-    backgroundSound:play()
-    if (paused == false) and (pregame == false) then
-      test2Update(dt)
-      pausebutton_check()
-    elseif (paused == true) then
-      resumebutton_check()
-    elseif (pregame == true) then
-      test2Update(dt)
-      pausebutton_check()
-    end
-  elseif (gamestate == "halloweenMulti" or gamestate == "xmasMulti") then
+  if (gamestate == "Single" ) then
     backgroundSound:play()
     if (paused == false) then
+      blockBounceingSingle()
       test2Update(dt)
+      controlsingle(dt)
       pausebutton_check()
     elseif (paused == true) then
       resumebutton_check()
     end
   end
   
-  if gamestate == "game" then
+  if (gamestate == "Multi" ) then
+    backgroundSound:play()
     if (paused == false) then
+      blockBounceingMulti()
       test2Update(dt)
-      pausebutton_check()
-    elseif (paused == true) then
+      controlmulti(dt)
+      pausebutton_check()   
+      elseif (paused == true) then
       resumebutton_check()
     end
   end
-  
+   
   if (gamestate == "p2WinnerSingle" or gamestate == "p1WinnerSingle") then
     restartbuttonSingle_check()
   end
@@ -423,21 +381,15 @@ function love.draw()
     love.graphics.draw(pauseBackground, pauseQuad, 0, 0)
     resumebutton_draw()
   elseif(paused == false) then    
-    if gamestate == "halloweenMulti" then
+    if gamestate == "Multi" then
       test2DrawMuilt()
       pausebutton_draw()
     elseif gamestate == "levelSelectSingle" then
       levelSelectSingleDraw()
     elseif gamestate == "levelSelectMulti" then
       levelSelectMultiDraw()
-    elseif gamestate == "xmasMulti" then
-      test2DrawMuilt()
-      pausebutton_draw()
-    elseif gamestate == "halloweenSingle" then
+    elseif gamestate == "Single" then
       test2DrawSingle()      
-      pausebutton_draw()
-    elseif gamestate == "xmasSingle" then
-      test2DrawSingle()
       pausebutton_draw()
     elseif gamestate == "modeSelect" then
       modeSelectDraw()
@@ -447,8 +399,6 @@ function love.draw()
       optionsDraw()
     elseif gamestate == "results" then
       resultsDraw()
-    elseif gamestate == "pregame" then
-      test2Draw()
     elseif gamestate == "p2WinnerSingle" then
       p2WinnerDraw()
       restartbuttonSingle_draw()
@@ -515,10 +465,10 @@ function love.mousepressed(x,y)
       singleButton_click(x,y)
     elseif gamestate == "levelSelectMulti" then
       multiButton_click(x,y)
-    elseif (gamestate == "halloweenSingle" or gamestate == "xmasSingle" or gamestate == "halloweenMulti" or gamestate == "xmasMulti" or gamestate == "game") then
+    elseif (gamestate == "Single" or gamestate == "Multi") then
       pausebutton_click(x,y)
       resumebutton_click(x,y)
-    elseif (gamestate == "p2WinnerMulti" or gamestate == "p1WinnerMulti") then
+    elseif (gamestate == "p2WinnerSingle" or gamestate == "p1WinnerSingle") then
       restartbuttonSingle_click(x,y)
     elseif (gamestate == "p2WinnerMulti" or gamestate == "p1WinnerMulti") then
       restartbuttonMulti_click(x,y)

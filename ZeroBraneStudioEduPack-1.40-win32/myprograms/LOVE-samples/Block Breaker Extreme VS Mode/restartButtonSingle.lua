@@ -24,7 +24,7 @@ function restartbuttonSingle_click(x,y)
         y > v.y and
         y < v.y + medium:getHeight() then
             if v.id == "restart" then
-              gamestate = "halloweenSingle"
+              gamestate = "Single"
               reLoad()
               menuClick:play()
               winnerSound:stop()

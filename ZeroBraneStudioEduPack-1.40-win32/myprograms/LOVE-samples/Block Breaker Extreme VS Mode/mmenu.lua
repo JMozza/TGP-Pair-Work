@@ -24,11 +24,11 @@ function mbutton_click(x,y)
         y > v.y and
         y < v.y + medium:getHeight() then
             if v.id == "single" then
-              gamestate = "levelSelectSingle"
+              gamestate = "Single"
               menuClick:play()
             end
             if v.id == "multi" then
-              gamestate = "levelSelectMulti"
+              gamestate = "Multi"
               menuClick:play()
             end
             if v.id == "mback" then
