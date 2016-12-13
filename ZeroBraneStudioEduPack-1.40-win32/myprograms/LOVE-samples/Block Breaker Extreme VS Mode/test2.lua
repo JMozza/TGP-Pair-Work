@@ -813,8 +813,8 @@ function reLoad()
       block = {}
       block.width = 72
       block.height = 21
-      block.x = column * (block.width )
-      block.y = (row * (block.height )) + 225
+      block.x = column * (block.width)
+      block.y = (row * (block.height)) + 225
       table.insert(blocks.draw, block)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -825,8 +825,8 @@ function reLoad()
       block2 = {}
       block2.width = 72
       block2.height = 21
-      block2.x = column * (block2.width )
-      block2.y = (row * (block2.height )) + 225
+      block2.x = column * (block2.width)
+      block2.y = (row * (block2.height)) + 225
       table.insert(blocks2.draw, block2)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -837,8 +837,8 @@ function reLoad()
       block3 = {}
       block3.width = 72
       block3.height = 21
-      block3.x = column * (block3.width )
-      block3.y = (row * (block3.height )) + 225
+      block3.x = column * (block3.width)
+      block3.y = (row * (block3.height)) + 225
       table.insert(blocks3.draw, block3)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -849,8 +849,8 @@ function reLoad()
       block4 = {}
       block4.width = 72
       block4.height = 21
-      block4.x = column * (block4.width )
-      block4.y = (row * (block4.height )) + 225
+      block4.x = column * (block4.width)
+      block4.y = (row * (block4.height)) + 225
       table.insert(blocks4.draw, block4)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -861,8 +861,8 @@ function reLoad()
       block5 = {}
       block5.width = 72
       block5.height = 21
-      block5.x = column * (block5.width )
-      block5.y = (row * (block5.height )) +225
+      block5.x = column * (block5.width)
+      block5.y = (row * (block5.height)) +225
       table.insert(blocks5.draw, block5)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end
@@ -873,8 +873,8 @@ function reLoad()
       block6 = {}
       block6.width = 72
       block6.height = 21
-      block6.x = column * (block6.width )
-      block6.y = (row * (block6.height )) + 225
+      block6.x = column * (block6.width)
+      block6.y = (row * (block6.height)) + 225
       table.insert(blocks6.draw, block6)
       column = column + 1
       if column == 10 then column = 0; row = row + 1 end

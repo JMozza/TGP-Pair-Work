@@ -4,8 +4,6 @@ require "mmenu"
 require "single"
 require "multi"
 require "controls"
-require "level_1"
-require "level_2"
 require "pause"
 require "resume"
 require "test2"
@@ -261,7 +259,7 @@ function love.update(dt)
     multiButton_check()
   end
 
-  if (gamestate == "Single" ) then
+  if (gamestate == "Single") then
     backgroundSound:play()
     if (paused == false) then
       blockBounceingSingle()
@@ -273,7 +271,7 @@ function love.update(dt)
     end
   end
   
-  if (gamestate == "Multi" ) then
+  if (gamestate == "Multi") then
     backgroundSound:play()
     if (paused == false) then
       blockBounceingMulti()
