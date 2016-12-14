@@ -2,7 +2,7 @@ function test2DrawSingle()
   love.graphics.draw(halBackground, halBackgroundQuad, 0, 0)
 
   -- Points/Lives
-  love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
+  love.graphics.print("Points: " .. player.points + player2.points, 10, height - 50)
   
   -- Draw Paddles
   love.graphics.draw(paddleP1, player.x, player.y)
@@ -46,7 +46,7 @@ end
 function test2DrawMuilt()
   love.graphics.draw(xmasBackground, xmasBackgroundQuad, 0, 0)
   -- Points/Lives
-  love.graphics.print("Points: " .. player.points + player2.points, 10, height - 30)
+  love.graphics.print("Points: " .. player.points + player2.points, 10, height - 50)
   
   -- Draw Paddles
   love.graphics.draw(paddleP1, player.x, player.y)
@@ -115,7 +115,7 @@ function blockBounceingSingle()
         bounce()
         blockBounce:play()
         table.remove(blocks2.draw, i)
-        player.points = player.points + 1
+        player.points = player.points + 3
       end
     end
   end
@@ -126,7 +126,7 @@ function blockBounceingSingle()
         bounce2()
         blockBounce:play()
         table.remove(blocks2.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points + 3
       end
     end
   end
@@ -137,7 +137,7 @@ function blockBounceingSingle()
         bounce()
         blockBounce:play()
         table.remove(blocks3.draw, i)
-        player.points = player.points + 1
+        player.points = player.points + 5
       end
     end
   end
@@ -148,7 +148,7 @@ function blockBounceingSingle()
         bounce2()
         blockBounce:play()
         table.remove(blocks3.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points + 5
       end
     end
   end
@@ -159,7 +159,7 @@ function blockBounceingSingle()
         bounce()
         blockBounce:play()
         table.remove(blocks4.draw, i)
-        player.points = player.points + 1
+        player.points = player.points * 3
       end
     end
   end
@@ -170,7 +170,7 @@ function blockBounceingSingle()
         bounce2()
         blockBounce:play()
         table.remove(blocks4.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points * 3
       end
     end
   end
@@ -181,7 +181,7 @@ function blockBounceingSingle()
         bounce()
         blockBounce:play()
         table.remove(blocks5.draw, i)
-        player.points = player.points + 1
+        player.points = player.points + 5
       end
     end
   end
@@ -192,7 +192,7 @@ function blockBounceingSingle()
         bounce2()
         blockBounce:play()
         table.remove(blocks5.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points + 5
       end
     end
   end
@@ -203,7 +203,7 @@ function blockBounceingSingle()
         bounce()
         blockBounce:play()
         table.remove(blocks6.draw, i)
-        player.points = player.points + 1
+        player.points = player.points + 3
       end
     end
   end
@@ -214,7 +214,7 @@ function blockBounceingSingle()
         bounce2()
         blockBounce:play()
         table.remove(blocks6.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points + 3
       end
     end
   end
@@ -271,7 +271,7 @@ function blockBounceingMulti()
         bounce()
         blockBounce:play()
         table.remove(blocks2.draw, i)
-        player.points = player.points + 1
+        player.points = player.points + 3
       end
     end
   end
@@ -282,7 +282,7 @@ function blockBounceingMulti()
         bounce2()
         blockBounce:play()
         table.remove(blocks2.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points + 3
       end
     end
   end
@@ -293,7 +293,7 @@ function blockBounceingMulti()
         bounce()
         blockBounce:play()
         table.remove(blocks3.draw, i)
-        player.points = player.points + 1
+        player.points = player.points + 5
       end
     end
   end
@@ -304,7 +304,7 @@ function blockBounceingMulti()
         bounce2()
         blockBounce:play()
         table.remove(blocks3.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points + 5
       end
     end
   end
@@ -315,7 +315,7 @@ function blockBounceingMulti()
         bounce()
         blockBounce:play()
         table.remove(blocks4.draw, i)
-        player.points = player.points + 1
+        player.points = player.points * 3
       end
     end
   end
@@ -326,7 +326,7 @@ function blockBounceingMulti()
         bounce2()
         blockBounce:play()
         table.remove(blocks4.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points * 3
       end
     end
   end
@@ -337,7 +337,7 @@ function blockBounceingMulti()
         bounce()
         blockBounce:play()
         table.remove(blocks5.draw, i)
-        player.points = player.points + 1
+        player.points = player.points + 5
       end
     end
   end
@@ -348,7 +348,7 @@ function blockBounceingMulti()
         bounce2()
         blockBounce:play()
         table.remove(blocks5.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points + 5
       end
     end
   end
@@ -359,7 +359,7 @@ function blockBounceingMulti()
         bounce()
         blockBounce:play()
         table.remove(blocks6.draw, i)
-        player.points = player.points + 1
+        player.points = player.points + 3
       end
     end
   end
@@ -370,7 +370,7 @@ function blockBounceingMulti()
         bounce2()
         blockBounce:play()
         table.remove(blocks6.draw, i)
-        player2.points = player2.points + 1
+        player2.points = player2.points + 3
       end
     end
   end
@@ -420,7 +420,6 @@ function test2Update(dt)
     elseif ball.x >= (player.x + 90) and ball.x < (player.x + 100) then
       ball.direction = "urr"
     end
-    --love.audio.play(bounce)
   end
   
   -- Hitbox for player 2 ball 1
@@ -442,7 +441,6 @@ function test2Update(dt)
     elseif ball.x >= (player2.x + 90) and ball.x < (player2.x + 100) then
       ball.direction = "drr"
     end
-    --love.audio.play(bounce)
   end
   
   -- Hitbox for player 1 ball 2
@@ -464,7 +462,6 @@ function test2Update(dt)
     elseif ball2.x >= (player.x + 90) and ball2.x < (player.x + 100) then
       ball2.direction = "drr2"
     end
-    --love.audio.play(bounce)
   end
   
   -- Hitbox for player 2 ball 2
@@ -486,11 +483,10 @@ function test2Update(dt)
     elseif ball2.x >= (player2.x + 90) and ball2.x < (player2.x + 100) then
       ball2.direction = "ull2"
     end
-    --love.audio.play(bounce)
   end
 
-  -- Bounces ball off walls
-  if (ball.x <= 0) or (ball.x >= width) then
+  -- Bounce ball off walls
+  if (ball.x <= 5) or (ball.x >= width - 5) then
     blockBounce:play()
     if ball.direction == "uur" then ball.direction = "uul"
     elseif ball.direction == "ur" then ball.direction = "ul"
@@ -505,10 +501,9 @@ function test2Update(dt)
     elseif ball.direction == "ul" then ball.direction = "ur"
     elseif ball.direction == "uul" then ball.direction = "uur"
     end
-    --love.audio.play(bounce)
   end
   
-  if (ball2.x <= 0) or (ball2.x >= width) then
+  if (ball2.x <= 5) or (ball2.x >= width - 5) then
     blockBounce:play()
     if ball2.direction == "uur2" then ball2.direction = "uul2"
     elseif ball2.direction == "ur2" then ball2.direction = "ul2"
@@ -523,7 +518,6 @@ function test2Update(dt)
     elseif ball2.direction == "ul2" then ball2.direction = "ur2"
     elseif ball2.direction == "uul2" then ball2.direction = "uur2"
     end
-    --love.audio.play(bounce)
   end
   
   -- Ball off top or bottom
@@ -572,91 +566,147 @@ function test2Update(dt)
   end
 
   -- Move ball
-    if ball.direction == "u" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-    elseif ball.direction == "uur" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-      ball.x = ball.x + 1 * (dt * ball.speed)
-    elseif ball.direction == "ur" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-      ball.x = ball.x + 2 * (dt * ball.speed)
-    elseif ball.direction == "urr" then
-      ball.y = ball.y - 1 * (dt * ball.speed)
-      ball.x = ball.x + 2 * (dt * ball.speed)
-    elseif ball.direction == "drr" then
-      ball.y = ball.y + 1 * (dt * ball.speed)
-      ball.x = ball.x + 2 * (dt * ball.speed)
-    elseif ball.direction == "dr" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-      ball.x = ball.x + 2 * (dt * ball.speed)
-    elseif ball.direction == "ddr" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-      ball.x = ball.x + 1 * (dt * ball.speed)
-    elseif ball.direction == "d" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-    elseif ball.direction == "ddl" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-      ball.x = ball.x - 1 * (dt * ball.speed)
-    elseif ball.direction == "dl" then
-      ball.y = ball.y + 2 * (dt * ball.speed)
-      ball.x = ball.x - 2 * (dt * ball.speed)
-    elseif ball.direction == "dll" then
-      ball.y = ball.y + 1 * (dt * ball.speed)
-      ball.x = ball.x - 2 * (dt * ball.speed)
-    elseif ball.direction == "ull" then
-      ball.y = ball.y - 1 * (dt * ball.speed)
-      ball.x = ball.x - 2 * (dt * ball.speed)
-    elseif ball.direction == "ul" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-      ball.x = ball.x - 2 * (dt * ball.speed)
-    elseif ball.direction == "uul" then
-      ball.y = ball.y - 2 * (dt * ball.speed)
-      ball.x = ball.x - 1 * (dt * ball.speed)
+  if ball.direction == "u" then
+    ball.y = ball.y - 2 * (dt * ball.speed)
+  elseif ball.direction == "uur" then
+    ball.y = ball.y - 2 * (dt * ball.speed)
+    ball.x = ball.x + 1 * (dt * ball.speed)
+  elseif ball.direction == "ur" then
+    ball.y = ball.y - 2 * (dt * ball.speed)
+    ball.x = ball.x + 2 * (dt * ball.speed)
+  elseif ball.direction == "urr" then
+    ball.y = ball.y - 1 * (dt * ball.speed)
+    ball.x = ball.x + 2 * (dt * ball.speed)
+  elseif ball.direction == "drr" then
+    ball.y = ball.y + 1 * (dt * ball.speed)
+    ball.x = ball.x + 2 * (dt * ball.speed)
+  elseif ball.direction == "dr" then
+    ball.y = ball.y + 2 * (dt * ball.speed)
+    ball.x = ball.x + 2 * (dt * ball.speed)
+  elseif ball.direction == "ddr" then
+    ball.y = ball.y + 2 * (dt * ball.speed)
+    ball.x = ball.x + 1 * (dt * ball.speed)
+  elseif ball.direction == "d" then
+    ball.y = ball.y + 2 * (dt * ball.speed)
+  elseif ball.direction == "ddl" then
+    ball.y = ball.y + 2 * (dt * ball.speed)
+    ball.x = ball.x - 1 * (dt * ball.speed)
+  elseif ball.direction == "dl" then
+    ball.y = ball.y + 2 * (dt * ball.speed)
+    ball.x = ball.x - 2 * (dt * ball.speed)
+  elseif ball.direction == "dll" then
+    ball.y = ball.y + 1 * (dt * ball.speed)
+    ball.x = ball.x - 2 * (dt * ball.speed)
+  elseif ball.direction == "ull" then
+    ball.y = ball.y - 1 * (dt * ball.speed)
+    ball.x = ball.x - 2 * (dt * ball.speed)
+  elseif ball.direction == "ul" then
+    ball.y = ball.y - 2 * (dt * ball.speed)
+    ball.x = ball.x - 2 * (dt * ball.speed)
+  elseif ball.direction == "uul" then
+    ball.y = ball.y - 2 * (dt * ball.speed)
+    ball.x = ball.x - 1 * (dt * ball.speed)
   end
   
   -- Move ball 2
   if ball2.direction == "u2" then
-      ball2.y = ball.y + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "uur2" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x - 1 * (dt * ball2.speed)
-    elseif ball2.direction == "ur2" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "urr2" then
-      ball2.y = ball2.y + 1 * (dt * ball2.speed)
-      ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "drr2" then
-      ball2.y = ball2.y - 1 * (dt * ball2.speed)
-      ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "dr2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ddr2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x - 1 * (dt * ball2.speed)
-    elseif ball2.direction == "d2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ddl2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 1 * (dt * ball2.speed)
-    elseif ball2.direction == "dl2" then
-      ball2.y = ball2.y - 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "dll2" then
-      ball2.y = ball2.y - 1 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ull2" then
-      ball2.y = ball2.y + 1 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "ul2" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 2 * (dt * ball2.speed)
-    elseif ball2.direction == "uul2" then
-      ball2.y = ball2.y + 2 * (dt * ball2.speed)
-      ball2.x = ball2.x + 1 * (dt * ball2.speed)
+    ball2.y = ball.y + 2 * (dt * ball2.speed)
+  elseif ball2.direction == "uur2" then
+    ball2.y = ball2.y + 2 * (dt * ball2.speed)
+    ball2.x = ball2.x - 1 * (dt * ball2.speed)
+  elseif ball2.direction == "ur2" then
+    ball2.y = ball2.y + 2 * (dt * ball2.speed)
+    ball2.x = ball2.x - 2 * (dt * ball2.speed)
+  elseif ball2.direction == "urr2" then
+    ball2.y = ball2.y + 1 * (dt * ball2.speed)
+    ball2.x = ball2.x - 2 * (dt * ball2.speed)
+  elseif ball2.direction == "drr2" then
+    ball2.y = ball2.y - 1 * (dt * ball2.speed)
+    ball2.x = ball2.x - 2 * (dt * ball2.speed)
+  elseif ball2.direction == "dr2" then
+    ball2.y = ball2.y - 2 * (dt * ball2.speed)
+    ball2.x = ball2.x - 2 * (dt * ball2.speed)
+  elseif ball2.direction == "ddr2" then
+    ball2.y = ball2.y - 2 * (dt * ball2.speed)
+    ball2.x = ball2.x - 1 * (dt * ball2.speed)
+  elseif ball2.direction == "d2" then
+    ball2.y = ball2.y - 2 * (dt * ball2.speed)
+  elseif ball2.direction == "ddl2" then
+    ball2.y = ball2.y - 2 * (dt * ball2.speed)
+    ball2.x = ball2.x + 1 * (dt * ball2.speed)
+  elseif ball2.direction == "dl2" then
+    ball2.y = ball2.y - 2 * (dt * ball2.speed)
+    ball2.x = ball2.x + 2 * (dt * ball2.speed)
+  elseif ball2.direction == "dll2" then
+    ball2.y = ball2.y - 1 * (dt * ball2.speed)
+    ball2.x = ball2.x + 2 * (dt * ball2.speed)
+  elseif ball2.direction == "ull2" then
+    ball2.y = ball2.y + 1 * (dt * ball2.speed)
+    ball2.x = ball2.x + 2 * (dt * ball2.speed)
+  elseif ball2.direction == "ul2" then
+    ball2.y = ball2.y + 2 * (dt * ball2.speed)
+    ball2.x = ball2.x + 2 * (dt * ball2.speed)
+  elseif ball2.direction == "uul2" then
+    ball2.y = ball2.y + 2 * (dt * ball2.speed)
+    ball2.x = ball2.x + 1 * (dt * ball2.speed)
+  end
+end
+
+function controlsingle(dt)
+  if love.keyboard.isDown("right") then
+    player.x = player.x + (dt * player.speed)
+  elseif love.keyboard.isDown("left") then
+    player.x = player.x - (dt * player.speed)
   end
   
+  if player.x <= 0 then
+    player.x = player.x + (dt * player.speed)
+  elseif player.x + player.width >= width then
+    player.x = player.x - (dt * player.speed)
+  end
+  
+  if player2.x <= 0 then
+    player2.x = player2.x + dx * (dt * player2.speed)
+  elseif player2.x - player2.width >= width then
+    player2.x = player2.x - dx * (dt * player2.speed)
+  end
+  
+  myAngle = math.angle(player2.x + 45, player2.y, ball2.x, ball2.y)
+  myAngle2 = math.angle(player2.x + 45, player2.y, ball.x, ball.y)
+  dx = math.cos(myAngle) * (dt * aispeed)
+  dx2 = math.cos(myAngle2) * (dt * aispeed)
+  if ball2.y <= ball.y then 
+    if player2.x >= -10 and player2.x <= width + 10 then
+      if ball2.x <= player2.x - player2.width/2 then
+        player2.x = player2.x - dx * (dt * player2.speed)
+      elseif ball2.x >= player2.x - player2.width/2 then
+        player2.x = player2.x + dx * (dt * player2.speed)
+      end
+    end
+  elseif ball.y <= ball2.y then 
+    if player2.x >= -10 and player2.x <= width + 10 then
+      if ball2.x <= player2.x - player2.width/2 then
+        player2.x = player2.x - dx2 * (dt * player2.speed)
+      elseif ball2.x >= player2.x - player2.width/2 then
+        player2.x = player2.x + dx2 * (dt * player2.speed)
+      end
+    end
+  end
+end
+
+function controlmulti(dt)
+  if love.keyboard.isDown("right") then
+    player.x = player.x + (dt * player.speed)
+  elseif love.keyboard.isDown("left") then
+    player.x = player.x - (dt * player.speed)
+  end
+  
+  if love.keyboard.isDown("d") then
+    player2.x = player2.x + (dt * player2.speed)
+  elseif love.keyboard.isDown("a") then
+    player2.x = player2.x - (dt * player2.speed) 
+  end
+    
   if player.x <= 0 then
     player.x = player.x + (dt * player.speed)
   elseif player.x + player.width >= width then
@@ -668,50 +718,6 @@ function test2Update(dt)
   elseif player2.x + player.width >= width then
     player2.x = player2.x - (dt * player.speed)
   end
-end
-
-function controlsingle(dt)
-      if love.keyboard.isDown("right") then
-      player.x = player.x + (dt * player.speed)
-    elseif love.keyboard.isDown("left") then
-      player.x = player.x - (dt * player.speed)
-    end
-  
-    myAngle = math.angle(player2.x + 45, player2.y, ball2.x, ball2.y)
-    myAngle2 = math.angle(player2.x + 45, player2.y, ball.x, ball.y)
-    dx = math.cos(myAngle) * (dt * player2.speed)
-    dx2 = math.cos(myAngle2) * (dt * player2.speed)
-    if ball2.y <= ball.y then 
-      if player2.x >= 0 and player2.x <= width then
-        if ball2.x <= player2.x - player2.width/2 then
-          player2.x = player2.x - dx * 4
-        elseif ball2.x >= player2.x - player2.width/2 then
-          player2.x = player2.x + dx * 4
-        end
-      end
-    elseif ball.y <= ball2.y then 
-      if player2.x >= 0 and player2.x <= width then
-        if ball2.x <= player2.x - player2.width/2 then
-          player2.x = player2.x - dx2 * 4
-        elseif ball2.x >= player2.x - player2.width/2 then
-          player2.x = player2.x + dx2 * 4
-        end
-      end
-    end
-end
-
-function controlmulti(dt)
-    if love.keyboard.isDown("right") then
-      player.x = player.x + (dt * player.speed)
-    elseif love.keyboard.isDown("left") then
-      player.x = player.x - (dt * player.speed)
-    end
-  
-    if love.keyboard.isDown("d") then
-      player2.x = player2.x + (dt * player2.speed)
-    elseif love.keyboard.isDown("a") then
-      player2.x = player2.x - (dt * player2.speed) 
-    end
 end
 
 
@@ -790,98 +796,110 @@ function reLoad()
   table.remove(blocks4.draw, 4)
   table.remove(blocks4.draw, 5)
   
-    table.remove(blocks5.draw, 1)
+  table.remove(blocks5.draw, 1)
   table.remove(blocks5.draw, 2)
   table.remove(blocks5.draw, 3)
   table.remove(blocks5.draw, 4)
   table.remove(blocks5.draw, 5)
   
-    table.remove(blocks6.draw, 1)
+  table.remove(blocks6.draw, 1)
   table.remove(blocks6.draw, 2)
   table.remove(blocks6.draw, 3)
   table.remove(blocks6.draw, 4)
   table.remove(blocks6.draw, 5)
   
-    table.remove(blocks7.draw, 1)
+  table.remove(blocks7.draw, 1)
   table.remove(blocks7.draw, 2)
   table.remove(blocks7.draw, 3)
   table.remove(blocks7.draw, 4)
   table.remove(blocks7.draw, 5)
   
   column = 0; row = 1
-    while 1 >= row do
-      block = {}
-      block.width = 72
-      block.height = 21
-      block.x = column * (block.width)
-      block.y = (row * (block.height)) + 225
-      table.insert(blocks.draw, block)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  while 1 >= row do
+    block = {}
+    block.width = 72
+    block.height = 21
+    block.x = column * (block.width)
+    block.y = (row * (block.height)) + 225
+    table.insert(blocks.draw, block)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
     end
+  end
   
   column = 0; row = 2
-    while 2 >= row do
-      block2 = {}
-      block2.width = 72
-      block2.height = 21
-      block2.x = column * (block2.width)
-      block2.y = (row * (block2.height)) + 225
-      table.insert(blocks2.draw, block2)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  while 2 >= row do
+    block2 = {}
+    block2.width = 72
+    block2.height = 21
+    block2.x = column * (block2.width)
+    block2.y = (row * (block2.height)) + 225
+    table.insert(blocks2.draw, block2)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
     end
+  end
     
-    column = 0; row = 3
-    while 3 >= row do
-      block3 = {}
-      block3.width = 72
-      block3.height = 21
-      block3.x = column * (block3.width)
-      block3.y = (row * (block3.height)) + 225
-      table.insert(blocks3.draw, block3)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  column = 0; row = 3
+  while 3 >= row do
+    block3 = {}
+    block3.width = 72
+    block3.height = 21
+    block3.x = column * (block3.width)
+    block3.y = (row * (block3.height)) + 225
+    table.insert(blocks3.draw, block3)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
     end
+  end
     
-    column = 0; row = 4
-    while 4 >= row do
-      block4 = {}
-      block4.width = 72
-      block4.height = 21
-      block4.x = column * (block4.width)
-      block4.y = (row * (block4.height)) + 225
-      table.insert(blocks4.draw, block4)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  column = 0; row = 4
+  while 4 >= row do
+    block4 = {}
+    block4.width = 72
+    block4.height = 21
+    block4.x = column * (block4.width)
+    block4.y = (row * (block4.height)) + 225
+    table.insert(blocks4.draw, block4)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
     end
+  end
     
-    column = 0; row = 5
-    while 5 >= row do
-      block5 = {}
-      block5.width = 72
-      block5.height = 21
-      block5.x = column * (block5.width)
-      block5.y = (row * (block5.height)) +225
-      table.insert(blocks5.draw, block5)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
-    end   
+  column = 0; row = 5
+  while 5 >= row do
+    block5 = {}
+    block5.width = 72
+    block5.height = 21
+    block5.x = column * (block5.width)
+    block5.y = (row * (block5.height)) +225
+    table.insert(blocks5.draw, block5)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
+    end
+  end   
     
-    column = 0; row = 6
-    while 6 >= row do
-      block6 = {}
-      block6.width = 72
-      block6.height = 21
-      block6.x = column * (block6.width)
-      block6.y = (row * (block6.height)) + 225
+  column = 0; row = 6
+  while 6 >= row do
+    block6 = {}
+    block6.width = 72
+    block6.height = 21
+    block6.x = column * (block6.width)
+    block6.y = (row * (block6.height)) + 225
       table.insert(blocks6.draw, block6)
       column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+      if column == 10 then 
+        column = 0; row = row + 1 
+      end
     end
 
   column = 0; row = 7
-    while 7 >= row do
+  while 7 >= row do
       block7 = {}
       block7.width = 72
       block7.height = 21
@@ -897,12 +915,12 @@ function reLoad()
     ball.radius = 10
     ball.x = width/2
     ball.y = 540
-    ball.speed = 50
+    ball.speed = 100
     ball.direction = "d"
     
     ball2.radius = 10
     ball2.x = width/2
     ball2.y = 80
-    ball2.speed = 50
+    ball2.speed = 100
     ball2.direction = "d2"
 end

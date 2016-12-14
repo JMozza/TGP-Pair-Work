@@ -27,6 +27,11 @@ function resumebutton_click(x,y)
               paused = false
               menuClick:play()
             end
+            if v.id == "return" then
+              paused = false
+              gamestate = "menu"
+              menuClick:play()
+            end
         end            
     end
 end

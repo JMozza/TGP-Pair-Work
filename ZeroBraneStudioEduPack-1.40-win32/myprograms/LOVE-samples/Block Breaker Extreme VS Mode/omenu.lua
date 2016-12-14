@@ -28,10 +28,18 @@ function obutton_click(x,y)
               menuClick:play()
             end
             if v.id == "+" then
-              volCount = volCount + 1
+              if volCount < 10 then
+                volCount = volCount + 1
+              elseif volCount == 10 then
+                volCount = volCount
+              end
             end
             if v.id == "-" then
-              volCount = volCount - 1
+              if volCount > 0 then
+                volCount = volCount - 1
+              elseif volCount < 1 then
+                volCount = volCount
+              end
             end
             if v.id == "mute" then
               if volCount > 0 then

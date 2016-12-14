@@ -3,7 +3,6 @@ require "omenu"
 require "mmenu"
 require "single"
 require "multi"
-require "controls"
 require "pause"
 require "resume"
 require "test2"
@@ -73,23 +72,25 @@ function love.load()
   
   -- Player 1 Setup (Bottom)
   player = {}
-    player.width = 90
-    player.height = 12
-    player.x = width/2 - player.width/2
-    player.y = 620
-    player.speed = 400
-    player.points = 0
+  player.width = 90
+  player.height = 12
+  player.x = width/2 - player.width/2
+  player.y = 620
+  player.speed = 400
+  player.points = 0
 
   -- Player 2 Setup (Top)
   player2 = {}
-    player2.width = 90
-    player2.height = 12
-    player2.x = width/2 - player2.width/2
-    player2.y = 20
-    player2.speed = 400
-    player2.points = 0
+  player2.width = 90
+  player2.height = 12
+  player2.x = width/2 - player2.width/2
+  player2.y = 20
+  player2.speed = 400
+  player2.points = 0
+  
+  aispeed = 100
 
-  -- Blocks
+  -- Block setup
   blocks = {}
   blocks.draw = {}
   blocks2 = {}
@@ -105,107 +106,120 @@ function love.load()
   blocks7 = {}
   blocks7.draw = {}
 
+  -- Block positions
   column = 0; row = 1
-    while 1 >= row do
-      block = {}
-      block.width = 72
-      block.height = 21
-      block.x = column * (block.width )
-      block.y = (row * (block.height )) + 225
-      table.insert(blocks.draw, block)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  while 1 >= row do
+    block = {}
+    block.width = 72
+    block.height = 21
+    block.x = column * (block.width )
+    block.y = (row * (block.height )) + 225
+    table.insert(blocks.draw, block)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
     end
+  end
   
   column = 0; row = 2
-    while 2 >= row do
-      block2 = {}
-      block2.width = 72
-      block2.height = 21
-      block2.x = column * (block2.width )
-      block2.y = (row * (block2.height )) + 225
-      table.insert(blocks2.draw, block2)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  while 2 >= row do
+    block2 = {}
+    block2.width = 72
+    block2.height = 21
+    block2.x = column * (block2.width )
+    block2.y = (row * (block2.height )) + 225
+    table.insert(blocks2.draw, block2)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1
     end
+  end
     
   column = 0; row = 3
-    while 3 >= row do
-      block3 = {}
-      block3.width = 72
-      block3.height = 21
-      block3.x = column * (block3.width )
-      block3.y = (row * (block3.height )) + 225
-      table.insert(blocks3.draw, block3)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  while 3 >= row do
+    block3 = {}
+    block3.width = 72
+    block3.height = 21
+    block3.x = column * (block3.width )
+    block3.y = (row * (block3.height )) + 225
+    table.insert(blocks3.draw, block3)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
     end
+  end
     
   column = 0; row = 4
-    while 4 >= row do
-      block4 = {}
-      block4.width = 72
-      block4.height = 21
-      block4.x = column * (block4.width )
-      block4.y = (row * (block4.height )) + 225
-      table.insert(blocks4.draw, block4)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  while 4 >= row do
+    block4 = {}
+    block4.width = 72
+    block4.height = 21
+    block4.x = column * (block4.width )
+    block4.y = (row * (block4.height )) + 225
+    table.insert(blocks4.draw, block4)
+    column = column + 1
+    if column == 10 then
+      column = 0; row = row + 1 
     end
+  end
     
   column = 0; row = 5
-    while 5 >= row do
-      block5 = {}
-      block5.width = 72
-      block5.height = 21
-      block5.x = column * (block5.width )
-      block5.y = (row * (block5.height )) +225
-      table.insert(blocks5.draw, block5)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
-    end   
+  while 5 >= row do
+    block5 = {}
+    block5.width = 72
+    block5.height = 21
+    block5.x = column * (block5.width )
+    block5.y = (row * (block5.height )) +225
+    table.insert(blocks5.draw, block5)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
+    end
+  end   
     
   column = 0; row = 6
-    while 6 >= row do
-      block6 = {}
-      block6.width = 72
-      block6.height = 21
-      block6.x = column * (block6.width )
-      block6.y = (row * (block6.height )) + 225
-      table.insert(blocks6.draw, block6)
-      column = column + 1
-      if column == 10 then column = 0; row = row + 1 end
+  while 6 >= row do
+    block6 = {}
+    block6.width = 72
+    block6.height = 21
+    block6.x = column * (block6.width )
+    block6.y = (row * (block6.height )) + 225
+    table.insert(blocks6.draw, block6)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
     end
+  end
 
   column = 0; row = 7
-    while 7 >= row do
-      block7 = {}
-      block7.width = 72
-      block7.height = 21
-      block7.x = column * (block7.width )
-      block7.y = (row * (block7.height )) + 225
-      table.insert(blocks7.draw, block7)
-      column = column + 1
-      if column == 10 then 
-        column = 0; row = row + 1 
-      end
+  while 7 >= row do
+    block7 = {}
+    block7.width = 72
+    block7.height = 21
+    block7.x = column * (block7.width )
+    block7.y = (row * (block7.height )) + 225
+    table.insert(blocks7.draw, block7)
+    column = column + 1
+    if column == 10 then 
+      column = 0; row = row + 1 
     end
+  end
 
   -- Ball 1 (Bottom)
   ball = {}
-    ball.radius = 10
-    ball.x = width/2
-    ball.y = 540
-    ball.speed = 50
-    ball.direction = "d"
+  ball.radius = 10
+  ball.x = width/2
+  ball.y = 540
+  ball.speed = 100
+  ball.direction = "d"
     
     -- Ball 2 (Top)
   ball2 = {}
-    ball2.radius = 10
-    ball2.x = width/2
-    ball2.y = 80
-    ball2.speed = 50
-    ball2.direction = "d2"
+  ball2.radius = 10
+  ball2.x = width/2
+  ball2.y = 80
+  ball2.speed = 100
+  ball2.direction = "d2"
   
   paused = false
   gamestate = "menu"
@@ -227,15 +241,14 @@ function love.load()
   multiButton_spawn(110,350,"Halloween", "halloweenMulti")
   multiButton_spawn(135,400,"Xmas", "xmasMulti")
   multiButton_spawn(135,450,"Back", "multiBack")
-  pausebutton_spawn(0, 0, "Pause", "paused")
+  pausebutton_spawn(0, 20, "Pause", "paused")
   resumebutton_spawn(120, 350, "Resume", "resume")
+  resumebutton_spawn(75, 390, "Return to Menu", "return")
   restartbuttonSingle_spawn(120, 440, "Restart", "restart")
   restartbuttonSingle_spawn(80, 470, "Return to Menu", "mainMenu")
   restartbuttonMulti_spawn(120, 440, "Restart", "restart")
   restartbuttonMulti_spawn(80, 470, "Return to Menu", "mainMenu")
 end
-
-  -- Bounce
 
 function love.update(dt) 
   
@@ -266,6 +279,9 @@ function love.update(dt)
       test2Update(dt)
       controlsingle(dt)
       pausebutton_check()
+      if love.keyboard.isDown("p") then
+        paused = true
+      end
     elseif (paused == true) then
       resumebutton_check()
     end
@@ -277,8 +293,11 @@ function love.update(dt)
       blockBounceingMulti()
       test2Update(dt)
       controlmulti(dt)
-      pausebutton_check()   
-      elseif (paused == true) then
+      pausebutton_check()
+      if love.keyboard.isDown("p") then
+        paused = true
+      end
+    elseif (paused == true) then
       resumebutton_check()
     end
   end
@@ -292,8 +311,14 @@ function love.update(dt)
   end
 end
 
+function love.keypressed(key)
+  if paused == true and key == "p" then
+    paused = false
+  end
+end
+
 function volume()
-  if volCount == 10 then
+    if volCount == 10 then
       menuClick:setVolume(1.0)
       levelStart:setVolume(1.0)
       blockBounce:setVolume(1.0)
@@ -404,11 +429,11 @@ function love.draw()
       p1WinnerDraw()
       restartbuttonSingle_draw()
     elseif gamestate == "p2WinnerMulti" then
+      restartbuttonMulti_draw()
       p2WinnerDraw()
-      restartbuttonMulti_draw()
     elseif gamestate == "p1WinnerMulti" then
-      p1WinnerDraw()
       restartbuttonMulti_draw()
+      p1WinnerDraw()
     end 
   end
 end
